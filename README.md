@@ -1,5 +1,6 @@
 # VARIMAmodel
-# Members:
+# Members: Arthur van Der Spuy, Nicholas Baard, Michael Vogt, Andrew Plakas,
+# Rushil Patel
 
 
 #CircleCi Badge
