@@ -1,0 +1,101 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="337177078" file="C:\Users\Dr Ritesh Ajoodha\Dropbox\Personal Folder\20180530 Consulting Company\energyforecast_longterm_econometrics\VectorAutoregression.prj" location="C:\Users\Dr Ritesh Ajoodha\Dropbox\Personal Folder\20180530 Consulting Company\energyforecast_longterm_econometrics" name="VectorAutoregression" target="target.mlapps" target-name="Package App">
+    <param.appname>VectorAutoregression</param.appname>
+    <param.authnamewatermark>Dr. Ritesh Ajoodha</param.authnamewatermark>
+    <param.email>ritesh.ajoodha@wits.ac.za</param.email>
+    <param.company>The University of the Witwatersrand (WITS)</param.company>
+    <param.icon />
+    <param.icons />
+    <param.summary>A vector autoregression (VAR) app for predicting return on shares. VARs capture the linear interdependencies over evolving time-series.</param.summary>
+    <param.description>A vector autoregression (VAR) app for predicting return on shares. VARs capture the linear interdependencies over evolving time-series.</param.description>
+    <param.screenshot>C:\Users\Dr Ritesh Ajoodha\AppData\Local\Temp\tp7c312551_c461_4e2a_af53_63d7b9d35492.png</param.screenshot>
+    <param.version>1.1</param.version>
+    <param.products.name>
+      <item>Statistics and Machine Learning Toolbox</item>
+    </param.products.name>
+    <param.products.id>
+      <item>19</item>
+    </param.products.id>
+    <param.products.version>
+      <item>11.3</item>
+    </param.products.version>
+    <param.platforms />
+    <param.output>C:\Users\Dr Ritesh Ajoodha\Dropbox\Personal Folder\20180530 Consulting Company\energyforecast_longterm_econometrics</param.output>
+    <param.guid>2a02878c-0681-4751-971a-7f1ed3564180</param.guid>
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\VectorAutoregression.mlapp</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}\dynamicDateTicks.m</file>
+      <file>${PROJECT_ROOT}\ProcessedStandardised.mat</file>
+    </fileset.depfun>
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="C:\Users\Dr Ritesh Ajoodha\Dropbox\Personal Folder\20180530 Consulting Company" name="energyforecast_longterm_econometrics" optional="false">C:\Users\Dr Ritesh Ajoodha\Dropbox\Personal Folder\20180530 Consulting Company\energyforecast_longterm_econometrics</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2018a</root>
+      <toolboxes>
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabcoder" />
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="embeddedcoder" />
+        <toolbox name="gpucoder" />
+        <toolbox name="polyspacebugfinder" />
+      </toolboxes>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
+        <gpucoder>
+          <enabled>true</enabled>
+        </gpucoder>
+      </toolbox>
+      <toolbox>
+        <polyspacebugfinder>
+          <enabled>true</enabled>
+        </polyspacebugfinder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
