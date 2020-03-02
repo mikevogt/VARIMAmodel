@@ -1,0 +1,3 @@
+As a customer, I expect a streamlined User Graphical Interface that is intuitive and easy to use.
+I expect good use to the data provided to make accurate predictions of stock prices using the
+VARIMA Model.
