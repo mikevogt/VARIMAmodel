@@ -1,6 +1,7 @@
 # VARIMAmodel
 # Members: Arthur van Der Spuy, Nicholas Baard, Michael Vogt, Andrew Plakas,
 # Rushil Patel
+# VARIMA Model for predicting the future return on stocks
 
 
 #CircleCi Badge
