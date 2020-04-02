@@ -1,4 +1,5 @@
 User Stories:
+
 1.	As a user of the app, I want to be able to login with a password protection in order to keep the information safe as well as not allow anyone to use the app.
 
 -	Create login page
@@ -15,6 +16,7 @@ User Stories:
 
 -	Create a button that lists all features that were used in the model
 -	Create a page that has a list of all features with explanations
+
 4.	As a user, I want to be able to see a graphical representation of historic up to present return on share to see the previous trends of the stock.
 
 -	Initialize a graph that is labeled that plots a line graph of historic return on share up to the present date (not sure how far back we have to go.)
@@ -35,7 +37,6 @@ User Stories:
 
 -	Create two buttons to import the different data
 -	Store it correctly for it to be used in the VARIMA model
-
 
 8.	As a user, I want to be able to choose the ‘p-value’ of the VARIMA model to adjust how well the model fits to the data.
 -	Create a text box for ‘p-value’ input to be used in the model
