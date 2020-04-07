@@ -12,6 +12,15 @@ from matplotlib.backends.backend_qt5agg import FigureCanvas
 #This is a test comment. I have added it whilst in the varButtonBranch
 #Now this has been added locally whilst git was closed.
 
+'''QCheckBox:indicator{
+
+							border-width: 1px;
+    						border-style: ridge;
+   							border-color: rgb(42,130,218);
+   							border-radius: 4px;
+
+}'''
+
 class MyWindow(QMainWindow):
 	def __init__(self):#Dont understand how this line works
 		
@@ -49,7 +58,14 @@ class MyWindow(QMainWindow):
 		comboBox.addItem("foo")
 		comboBox.addItem("bar")
 		comboBox.addItem("Liverpool")
-		gridTopLeft.addWidget(comboBox,2,0,1,4)
+		comboBox.addItem("JSC")
+		comboBox.addItem("LON")
+		comboBox.addItem("MTA")
+		comboBox.addItem("OLG")
+		comboBox.addItem("NHM")
+		comboBox.addItem("NPK")
+		comboBox.addItem("NTC")
+		gridTopLeft.addWidget(comboBox,1,1,1,3)
 
 		#Features scroll area is now made
 		#innerGroupBox is made first. This will have a VBoxLayout containing list of hello worlds. 
@@ -70,7 +86,7 @@ class MyWindow(QMainWindow):
 		scrollVLayout=QVBoxLayout()	
 		featureList=[]
 
-		for i in range(0,20):
+		for i in range(0,35):
 			
 			featureList.append(QtWidgets.QLabel("Hello World "+str(i)))
 			scrollVLayout.addWidget(featureList[i])
@@ -85,7 +101,7 @@ class MyWindow(QMainWindow):
 		outerGroupBoxLayout=QtWidgets.QVBoxLayout()
 		outerGroupBoxLayout.addWidget(scrollArea)
 		groupBoxOuterScroll.setLayout(outerGroupBoxLayout)
-		gridTopLeft.addWidget(groupBoxOuterScroll,3,0,2,4)
+		gridTopLeft.addWidget(groupBoxOuterScroll,2,0,4,4)
 		
 
 		#label2 = QtWidgets.QLabel("Features")
@@ -98,11 +114,46 @@ class MyWindow(QMainWindow):
 		bottomLeft.setFrameShape(QFrame.Panel)
 		bottomLeft.setFrameShadow(QFrame.Raised)
 
+		#P value label and line edit created
+		pValLabel=QtWidgets.QLabel("p-val: ")
+		pValLineEdit = QtWidgets.QLineEdit()
+
 		#Var button created
-		varButton = QtWidgets.QPushButton("VAR")
+		varButton = QtWidgets.QPushButton("Estimate using VAR")
 		varButton.clicked.connect(self.varButtonClicker)
+		
+		#Calculating errors label created
+		calculatingErrorsLabel=QtWidgets.QLabel("Calculating Errors")
+
+		slidingWindowCheckBox = QtWidgets.QCheckBox("Sliding Window")
+		checkBoxLineEdit = QtWidgets.QLineEdit()
+		#Start value label and line edit created
+		startLabel = QtWidgets.QLabel("Start...")
+		startLabelLineEdit = QtWidgets.QLineEdit()
+		#no of forecast label and line edit created
+		noForecastLabel = QtWidgets.QLabel("No. Forecast P...")
+		noForecastLineEdit = QtWidgets.QLineEdit()
+		#backTest button created
+		backTestButton = QtWidgets.QPushButton("Back test for VARM")
+		backTestButton.clicked.connect(self.backTestButtonClicker)
+
+
+
+
 		bottomLeftGridLayout= QGridLayout()
-		bottomLeftGridLayout.addWidget(varButton,0,0)
+		bottomLeftGridLayout.addWidget(pValLabel,0,0,1,1)
+		bottomLeftGridLayout.addWidget(pValLineEdit,0,1,1,3)
+		bottomLeftGridLayout.addWidget(varButton,1,0,1,4)
+		bottomLeftGridLayout.addWidget(calculatingErrorsLabel,2,0,1,4)
+		bottomLeftGridLayout.addWidget(slidingWindowCheckBox,3,0,1,1)
+		bottomLeftGridLayout.addWidget(checkBoxLineEdit,3,1,1,3)
+		bottomLeftGridLayout.addWidget(startLabel,4,0,1,1)
+		bottomLeftGridLayout.addWidget(startLabelLineEdit,4,1,1,3)
+		bottomLeftGridLayout.addWidget(noForecastLabel,5,0,1,1)
+		bottomLeftGridLayout.addWidget(noForecastLineEdit,5,1,1,3)
+		bottomLeftGridLayout.addWidget(backTestButton,6,0,2,4)
+		
+		
 		bottomLeft.setLayout(bottomLeftGridLayout)
 
 
@@ -113,6 +164,7 @@ class MyWindow(QMainWindow):
 		right.setFrameShadow(QFrame.Raised)
 		self.rightFrameGridLayout=QGridLayout()
 		right.setLayout(self.rightFrameGridLayout)
+
 		
 
 
@@ -141,6 +193,7 @@ class MyWindow(QMainWindow):
 			ax.plot(x,y,linewidth=4,color='#BF1AED')
 
 			ax.patch.set_facecolor('#323232')
+			ax.grid(linestyle="--")
 			fig.patch.set_facecolor('#191919')
 			#fig.patch.set_alpha(0.0)
 			#ax.patch.set_alpha(0.0)
@@ -164,6 +217,10 @@ class MyWindow(QMainWindow):
 			'''
 		
 		
+	def backTestButtonClicker (self):
+
+		print("Back test button clicked successfully")
+
 
 	def button1Clicker (self):
 
@@ -205,12 +262,37 @@ def window() :
 
 						}
 						QPushButton {
-							font-size: 12px
+							font-size: 15px
 
 						}
+						QLabel{
+
+							font-size: 12px
+						}
+						QCheckBox{
+
+							font-size: 12px
+						}
+
+						QLineEdit {
+
+							border-width: 1px;
+    						border-style: ridge;
+   							border-color: rgb(42,130,218);
+   							border-radius: 4px;
+							
+						}
+
+						
+
+						
 						''')
+	#border-width: 1px
+							#border-style: outset
+	#rgb(60,208,228)
 	win=MyWindow()
 	win.showMaximized()
 	sys.exit(app.exec_())#executes the main loop
 
 window()
+
