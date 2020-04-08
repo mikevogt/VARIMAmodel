@@ -4,10 +4,12 @@ from PyQt5.QtWidgets import (QWidget, QHBoxLayout, QFrame,QGridLayout,
     QSplitter, QStyleFactory, QApplication,QVBoxLayout)
 from PyQt5.QtCore import Qt
 import sys
+
 from PyQt5.QtGui import QPalette
 from PyQt5.QtGui import QColor
 from matplotlib import pyplot as plt
 import numpy as np
+import pandas as pd
 from matplotlib.backends.backend_qt5agg import FigureCanvas 
 #This is a test comment. I have added it whilst in the varButtonBranch
 #Now this has been added locally whilst git was closed.
@@ -21,10 +23,12 @@ from matplotlib.backends.backend_qt5agg import FigureCanvas
 
 }'''
 
+
 class MyWindow(QMainWindow):
 	def __init__(self):#Dont understand how this line works
 		
 		super(MyWindow,self).__init__()# or this one but this can be written as super().__init__() i think
+		self.data =pd.read_csv('ProcessedStandardised.csv',';')
 		self.initUi()
 
 	def initUi(self):
@@ -42,6 +46,7 @@ class MyWindow(QMainWindow):
 		#import button made first
 		buttonImport= QtWidgets.QPushButton("Click herer",objectName="Button1")
 		buttonImport.setText("Import Data")
+		buttonImport.clicked.connect(self.buttonImportFunction)
 		gridTopLeft.addWidget(buttonImport,0,0,1,4)
 
 		#Shares label is now made
@@ -49,40 +54,21 @@ class MyWindow(QMainWindow):
 		gridTopLeft.addWidget(label1,1,0)
 
 		#comboBox is now made and added to gridTopLeft
-		comboBox= QtWidgets.QComboBox()
-		comboBox.addItem("MTN")
-		comboBox.addItem("Nokia")
-		comboBox.addItem("Apple")
-		comboBox.addItem("Microsoft")
-		comboBox.addItem("Hp")
-		comboBox.addItem("foo")
-		comboBox.addItem("bar")
-		comboBox.addItem("Liverpool")
-		comboBox.addItem("JSC")
-		comboBox.addItem("LON")
-		comboBox.addItem("MTA")
-		comboBox.addItem("OLG")
-		comboBox.addItem("NHM")
-		comboBox.addItem("NPK")
-		comboBox.addItem("NTC")
-		gridTopLeft.addWidget(comboBox,1,1,1,3)
+
+		shareNames = {}
+		self.comboBox= QtWidgets.QComboBox()
+		for share in self.data.Ticker.unique():
+
+			self.comboBox.addItem(share)
+
+
+		gridTopLeft.addWidget(self.comboBox,1,1,1,3)
 
 		#Features scroll area is now made
 		#innerGroupBox is made first. This will have a VBoxLayout containing list of hello worlds. 
 		#it will then be added to a scrollarea via setWidget
-		innerGroupBox=QtWidgets.QGroupBox(objectName="featureBox")
-		'''groupBox.setStyleSheet(''QGroupBox {
-    							border: 1px solid gray;
-   								border-radius: 9px;
-   								margin-top: 0.5em;
-								}
+		'''innerGroupBox=QtWidgets.QGroupBox(objectName="featureBox")
 
-								QGroupBox::title {
-   								subcontrol-origin: margin;
-    							left: 10px;
-   								padding: 0 3px 0 3px;
-								}'')'''
-		#VLayout for inner group box created and populated in the for loop below
 		scrollVLayout=QVBoxLayout()	
 		featureList=[]
 
@@ -101,7 +87,20 @@ class MyWindow(QMainWindow):
 		outerGroupBoxLayout=QtWidgets.QVBoxLayout()
 		outerGroupBoxLayout.addWidget(scrollArea)
 		groupBoxOuterScroll.setLayout(outerGroupBoxLayout)
-		gridTopLeft.addWidget(groupBoxOuterScroll,2,0,4,4)
+'''
+		self.featuresListWidget = QtWidgets.QListWidget()
+		self.featuresListWidget.setAlternatingRowColors(True)
+
+		for column in self.data.columns:
+			
+			self.featuresListWidget.addItem(column)
+
+
+		listWidgetGroupBox=QtWidgets.QGroupBox("Features")
+		listWidgetGroupBoxLayout=QtWidgets.QVBoxLayout()
+		listWidgetGroupBoxLayout.addWidget(self.featuresListWidget)
+		listWidgetGroupBox.setLayout(listWidgetGroupBoxLayout)
+		gridTopLeft.addWidget(listWidgetGroupBox,2,0,4,4)
 		
 
 		#label2 = QtWidgets.QLabel("Features")
@@ -179,18 +178,29 @@ class MyWindow(QMainWindow):
 		widgetBox = QWidget(self)
 		widgetBox.setLayout(grid)
 		self.setCentralWidget(widgetBox)
-		self.setGeometry(0,0,900,600)
+		self.setGeometry(0,0,1500,900)
 		self.setWindowTitle("Varima Model")
+
+	def buttonImportFunction(self):
+		
+		#self.data =pd.read_csv('ProcessedNonStandardised.csv',';')
+		print("button import pressed")
 		
 	def varButtonClicker(self):
 		
+
+		print(self.comboBox.currentText())
+		print(self.featuresListWidget.currentItem().text())
+
 		if self.rightFrameGridLayout.itemAt(0) == None :
 			print("ENTERED")
-			x=np.linspace(0,2*np.pi,100)
-			y=np.sin(x)
+			shareData = self.data[self.data.Ticker == self.comboBox.currentText()]
+			y= shareData[shareData.columns[3]]			
+			#y= shareData[shareData.columns[4]]
+
 			fig, ax =plt.subplots()
 			#color='#1AB1ED' for blue
-			ax.plot(x,y,linewidth=4,color='#BF1AED')
+			ax.plot(y,linewidth=3,color='#BF1AED')
 
 			ax.patch.set_facecolor('#323232')
 			ax.grid(linestyle="--")
@@ -204,6 +214,10 @@ class MyWindow(QMainWindow):
 			ax.spines['left'].set_color('#ffffff')
 			ax.tick_params(axis='x', colors='#ffffff')
 			ax.tick_params(axis='y', colors='#ffffff')
+			ax.set_xlabel("Date")
+			ax.set_ylabel("Returns")
+			ax.yaxis.label.set_color('white')
+			ax.xaxis.label.set_color('white')
 			#fig.savefig('temp.png', transparent=True)
 
 			self.plotWidget = FigureCanvas(fig)
@@ -212,15 +226,50 @@ class MyWindow(QMainWindow):
 			'''
 			self.widgetTest = QtWidgets.QPushButton("hello world")
 			self.rightFrameGridLayout.replaceWidget(self.plotWidget,self.widgetTest)
-			self.plotWidget.deleteLater()
+			
 			self.plotWidget=None
 			'''
-		
-		
+		else :
+
+			self.plotWidget.deleteLater()
+			
+			print("ENTERED 2")
+			shareData = self.data[self.data.Ticker == self.comboBox.currentText()]
+			y= shareData[shareData.columns[3]]#Need to change this so that columns[self.featuresListWidget.currentItem] is taken into account			
+			#y= shareData[shareData.columns[4]]
+
+			fig, ax =plt.subplots()
+			#color='#1AB1ED' for blue
+			ax.plot(y,linewidth=4,color='#BF1AED')
+
+			ax.patch.set_facecolor('#323232')
+			ax.grid(linestyle="--")
+			fig.patch.set_facecolor('#191919')
+			#fig.patch.set_alpha(0.0)
+			#ax.patch.set_alpha(0.0)
+
+			ax.spines['bottom'].set_color('#ffffff')
+			ax.spines['top'].set_color('#ffffff') 
+			ax.spines['right'].set_color('#ffffff')
+			ax.spines['left'].set_color('#ffffff')
+			ax.tick_params(axis='x', colors='#ffffff')
+			ax.tick_params(axis='y', colors='#ffffff')
+
+			ax.set_xlabel("Date")
+			ax.set_ylabel("Returns")
+			ax.yaxis.label.set_color('white')
+			ax.xaxis.label.set_color('white')
+			#fig.savefig('temp.png', transparent=True)
+
+			self.plotWidget = FigureCanvas(fig)
+			self.rightFrameGridLayout.addWidget(self.plotWidget)
+			#right.setLayout(self.rightFrameGridLayout)
 	def backTestButtonClicker (self):
 
 		print("Back test button clicked successfully")
-
+		
+		self.next=Login()
+		self.close()
 
 	def button1Clicker (self):
 
@@ -229,7 +278,76 @@ class MyWindow(QMainWindow):
 		print("button1 clicked")
 
 
+class Login(QMainWindow):
 
+	def __init__(self):
+		super().__init__()
+		self.initUi()
+
+	def initUi(self) :
+
+		print("hello login")
+		outerFrame = QtWidgets.QFrame()
+		outerFrame.setFrameShape(QFrame.Panel)
+		outerFrame.setFrameShadow(QFrame.Raised)
+		outerFrameLayout = QVBoxLayout()
+		outerFrameLayout.setSpacing(10)
+		outerFrameLayout.setContentsMargins(500,20,500,20)# Left top right then bottom
+		#Still need to try set innerframes minimum size to prevent it from being squashed when minimized
+
+		innerFrame = QtWidgets.QFrame()
+		innerFrame.setFrameShape(QFrame.Panel)
+		innerFrame.setFrameShadow(QFrame.Raised)
+		innerFrameLayout= QGridLayout(
+			)
+		innerFrameLayout.setSpacing(1)
+		innerFrameLayout.setContentsMargins(10,200,10,200)
+		innerFrame.setLayout(innerFrameLayout)
+
+		loginLabel= QtWidgets.QLabel("Login",objectName="loginLabel")
+		innerFrameLayout.addWidget(loginLabel,0,0,1,2)
+
+		userNameLabel = QtWidgets.QLabel("Username")
+		innerFrameLayout.addWidget(userNameLabel,1,0,1,2)
+
+		usernameLineEdit = QtWidgets.QLineEdit("Please enter your username here")
+		innerFrameLayout.addWidget(usernameLineEdit,2,0,1,2)
+
+
+		passwordLabel = QtWidgets.QLabel("Password")
+		innerFrameLayout.addWidget(passwordLabel,3,0,1,2)
+
+		passwordLineEdit=QtWidgets.QLineEdit("Type your Password here")
+		innerFrameLayout.addWidget(passwordLineEdit,4,0,1,2)
+
+		loginButton = QtWidgets.QPushButton("Login")
+		loginButton.clicked.connect(self.loginButtonFunction)
+		innerFrameLayout.addWidget(loginButton,5,0,1,2,Qt.AlignCenter)
+
+
+
+		outerFrameLayout.addWidget(innerFrame)
+		outerFrame.setLayout(outerFrameLayout)
+
+		mainGrid = QGridLayout()
+		mainGrid.setSpacing(10)
+		mainGrid.addWidget(outerFrame)
+
+
+		outerWidgetBox=QtWidgets.QWidget()
+		outerWidgetBox.setLayout(mainGrid)
+		
+		self.setCentralWidget(outerWidgetBox)
+		self.setGeometry(0,0,1500,900)
+		self.setWindowTitle("Login")
+		
+		self.showMaximized()
+
+	def loginButtonFunction(self):
+
+		self.next=MyWindow()
+		self.next.showMaximized()
+		self.close()
 
 def window() :
 	app=QApplication(sys.argv)#required for all GUIs
@@ -273,6 +391,10 @@ def window() :
 
 							font-size: 12px
 						}
+						QLabel:loginLabel{
+
+							font-size: 30px
+						}
 
 						QLineEdit {
 
@@ -290,9 +412,8 @@ def window() :
 	#border-width: 1px
 							#border-style: outset
 	#rgb(60,208,228)
-	win=MyWindow()
+	win=Login()#Worked when this was min=MyWindow()
 	win.showMaximized()
 	sys.exit(app.exec_())#executes the main loop
 
 window()
-
