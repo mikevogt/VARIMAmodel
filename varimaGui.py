@@ -404,6 +404,10 @@ def window() :
    							border-radius: 4px;
 							
 						}
+						QGroupBox {
+
+							font-size: 20px
+						}
 
 						
 
