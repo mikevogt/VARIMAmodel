@@ -16,6 +16,7 @@ import datetime
 
 from statsmodels.tsa.ar_model import AR
 from statsmodels.tsa.arima_model import ARIMA
+import math
 #from sklearn.metrics import mean_squared_error
 
 
@@ -137,46 +138,99 @@ class MyWindow(QMainWindow):
 		bottomLeft.setLayout(bottomLeftGridLayout)
 
 		#Next, each item in the bottom left frame is created without adding it to the layout just yet
-		#P value label and line edit created
-		pValLabel=QtWidgets.QLabel("p-val: ")
-		pValLineEdit = QtWidgets.QLineEdit()
-
-		#Var button created
-		varButton = QtWidgets.QPushButton("Estimate using VAR")
-		varButton.clicked.connect(self.varButtonClicker)
 		
-		#Calculating errors label created
-		calculatingErrorsLabel=QtWidgets.QLabel("Calculating Errors")
+		labelPlotCustomize = QtWidgets.QLabel("Customize Main Plot line:")
 
-		#Check box  and line edit for sliding window created. The check box needs to be fixed so that it has a border around it. maybe use stylesheets to fix this
-		slidingWindowCheckBox = QtWidgets.QCheckBox("Sliding Window")
-		checkBoxLineEdit = QtWidgets.QLineEdit()
+		labelPlotColour = QtWidgets.QLabel("Plot line colour:")
 
-		#Start value label and line edit created
-		startLabel = QtWidgets.QLabel("Start...")
-		startLabelLineEdit = QtWidgets.QLineEdit()
+		self.radioButtonGreen = QtWidgets.QRadioButton("Green")
+		self.radioButtonPurple = QtWidgets.QRadioButton("Purple")
+		self.radioButtonOrange = QtWidgets.QRadioButton("Orange")
 
-		#no of forecast label and line edit created
-		noForecastLabel = QtWidgets.QLabel("No. Forecast P...")
-		noForecastLineEdit = QtWidgets.QLineEdit()
 
-		#backTest button created
-		backTestButton = QtWidgets.QPushButton("Back test for VARM")
-		backTestButton.clicked.connect(self.backTestButtonClicker)
+		labelPlotWidth = QtWidgets.QLabel("Plot line width:")
+		lineEditPlotWidth = QtWidgets.QLineEdit()
+		
+		buttonPlot = QtWidgets.QPushButton("Plot Data")
+		
+
+		labelArimaCustomize = QtWidgets.QLabel("Customize Arima Variables")
+
+		labelPval= QtWidgets.QLabel("P-Value: ")
+		lineEditPval = QtWidgets.QLineEdit()
+
+		labelDval= QtWidgets.QLabel("D-Value: ")
+		lineEditDval = QtWidgets.QLineEdit()
+
+		labelFval= QtWidgets.QLabel("F-Value: ")
+		lineEditFval = QtWidgets.QLineEdit()
+
+		labelForecastLength = QtWidgets.QLabel("ForecastLength: ")
+		lineEditForecastLength = QtWidgets.QLineEdit()
+		
+		dial = QtWidgets.QDial()	
+		dial.setMinimum(7)
+		dial.setMaximum(37)
+		dial.setValue(27)
+		dial.setNotchesVisible(True)
+
+		slider = QtWidgets.QSlider(Qt.Horizontal)
+		slider.setMinimum(10)
+		slider.setMaximum(30)
+		slider.setValue(20)
+		slider.setTickPosition(3)
+		slider.setTickInterval(5)
+
+
+		
+
+		buttonArima = QtWidgets.QPushButton("Estimate using ARIMA")
+		buttonArima.clicked.connect(self.varButtonClicker)
+
+
+
+
+
+
+
+		
+		
+		
+
+		
 
 		#Now each item created above is added to the grid layout for the bottom left frame
 		
-		bottomLeftGridLayout.addWidget(pValLabel,0,0,1,1)
-		bottomLeftGridLayout.addWidget(pValLineEdit,0,1,1,3)
-		bottomLeftGridLayout.addWidget(varButton,1,0,1,4)
-		bottomLeftGridLayout.addWidget(calculatingErrorsLabel,2,0,1,4)
-		bottomLeftGridLayout.addWidget(slidingWindowCheckBox,3,0,1,1)
-		bottomLeftGridLayout.addWidget(checkBoxLineEdit,3,1,1,3)
-		bottomLeftGridLayout.addWidget(startLabel,4,0,1,1)
-		bottomLeftGridLayout.addWidget(startLabelLineEdit,4,1,1,3)
-		bottomLeftGridLayout.addWidget(noForecastLabel,5,0,1,1)
-		bottomLeftGridLayout.addWidget(noForecastLineEdit,5,1,1,3)
-		bottomLeftGridLayout.addWidget(backTestButton,6,0,2,4)
+		bottomLeftGridLayout.addWidget(labelPlotCustomize,0,0,1,4)
+
+		bottomLeftGridLayout.addWidget(labelPlotColour,1,0,1,1)
+		bottomLeftGridLayout.addWidget(self.radioButtonPurple,1,1,1,1)
+		bottomLeftGridLayout.addWidget(self.radioButtonGreen,1,2,1,1)
+		bottomLeftGridLayout.addWidget(self.radioButtonOrange,1,3,1,1)
+
+		bottomLeftGridLayout.addWidget(labelPlotWidth,2,0,1,1)
+		bottomLeftGridLayout.addWidget(lineEditPlotWidth,2,1,1,3)
+		
+		bottomLeftGridLayout.addWidget(buttonPlot,3,0,1,4)
+		
+		bottomLeftGridLayout.addWidget(labelArimaCustomize,4,0,1,4)
+		
+		bottomLeftGridLayout.addWidget(labelPval,5,0,1,4)
+		bottomLeftGridLayout.addWidget(lineEditPval,5,1,1,3)
+		
+		bottomLeftGridLayout.addWidget(labelDval,6,0,1,4)
+		bottomLeftGridLayout.addWidget(lineEditDval,6,1,1,3)
+		
+		bottomLeftGridLayout.addWidget(labelFval,7,0,1,4)
+		bottomLeftGridLayout.addWidget(lineEditFval,7,1,1,3)
+		
+		bottomLeftGridLayout.addWidget(labelForecastLength,8,0,1,2)
+		
+		bottomLeftGridLayout.addWidget(dial,8,2,1,2)
+		
+		bottomLeftGridLayout.addWidget(slider,9,0,1,4)
+		bottomLeftGridLayout.addWidget(buttonArima,10,0,1,4)
+		
 		
 		
 		############################################################################################################################################
@@ -208,12 +262,36 @@ class MyWindow(QMainWindow):
 		print("button import pressed")
 		
 
+	def rootMeanSquareError(self,forecastValues,actualValues): # Havent tested if this gives the correct output yet
+
+		sum =0.0
+		
+		for i in range(0,7):
+
+			sum = sum +(forecastValues[i]-actualValues[len(actualValues)-7+i])**2
+
+		rMSE =math.sqrt(sum/7)
+
+		return rMSE
+
 
 	#Currently, this function does not perform a varima model on the selected stock and feature but rather plots the selected stock and feature
 	def varButtonClicker(self):
 		
 		#self.featuresListWidget.currentItem().text() is the text of the item selected in the featuresList widget
 		#self.comboBox.currentText() is the text of the item selected in the drop down list. namely the share
+
+		colourString = "#BF1AED" #Default purple
+		if self.radioButtonPurple.isChecked():
+
+			colourString = "#BF1AED"
+		elif self.radioButtonGreen.isChecked():
+			colourString = "#00E600"
+
+		else :
+			
+			colourString = "#E46B3C"	
+
 
 		if(self.featuresListWidget.currentItem() == None):
 			#Makes sure a feature is selected. should maybe have this open an alert box instead of printing to the console
@@ -225,7 +303,6 @@ class MyWindow(QMainWindow):
 
 		if self.rightFrameGridLayout.itemAt(0) == None : #Checks if there is a plot already there
 			
-
 			shareData = self.data[self.data.Ticker == self.comboBox.currentText()] #Stores a dataFrame of all shares with the selected ticker
 
 			
@@ -239,7 +316,7 @@ class MyWindow(QMainWindow):
 
 			dateDelta = pythonDateList[len(pythonDateList)-1]-pythonDateList[len(pythonDateList)-2]# this date difference varies throughout each share date set and hence 
 																									#may lead to problems
-
+			pythonDateListLast7 =pythonDateList[-7:]																					
 			pythonDateListFuture =[]
 			inDate = pythonDateList[len(pythonDateList)-1]
 			for i in range(0,20):
@@ -247,7 +324,10 @@ class MyWindow(QMainWindow):
 				pythonDateListFuture.append(inDate)
 				inDate=inDate+dateDelta
 
+			pythonForecastDateList = pythonDateListLast7+pythonDateListFuture
 
+			print("python last 7:")
+			print(pythonDateListLast7)
 			print("DateDelta:")
 			print(dateDelta)
 			print("dateList original")
@@ -255,30 +335,40 @@ class MyWindow(QMainWindow):
 			print("datelist future")
 			print(pythonDateListFuture)
 
+
+
 			#Now we convert all the python datetime objects into matplotlib date format
 			dates = matplotlib.dates.date2num(pythonDateList)
 			datesInFuture = matplotlib.dates.date2num(pythonDateListFuture)
-			#We then access the selected feature column and copy its entire row into y.
+			forcastDates = matplotlib.dates.date2num(pythonForecastDateList)
+			#We then access the selected feature column and copy its entire column into y.
 			string =self.featuresListWidget.currentItem().text()
 			y= shareData[string]
 
 			xValArray = shareData[string].values
 			print(xValArray)
-			train = xValArray[0:len(xValArray)-1]#This may yield an array index out of bounds error if xValArray is size<5 so try fix it later
+			train = xValArray[0:len(xValArray)-7]#This may yield an array index out of bounds error if xValArray is size<5 so try fix it later
 			#test= xValArray[26:]
 
 			model_arima = ARIMA(train,order=(2,1,1))
 			model_arima_fit = model_arima.fit()
 
 			forcasted=[]
-			forcasted= model_arima_fit.forecast(steps=20)[0]           #What is this zero here meant to signify
+			forcasted= model_arima_fit.forecast(steps=27)[0]           #What is this zero here meant to signify
 			
+			rmse = self.rootMeanSquareError(forcasted,xValArray)
+			print("RMSE calculated:")
+			print(rmse)
 			#Plot of y vs dates is now created below
 			fig, ax =plt.subplots()
 			#color='#1AB1ED' for blue
 			#ax.plot(y,linewidth=3,color='#BF1AED')
-			ax.plot_date(dates,y,linewidth = 3,color='#BF1AED',fmt='-', label ="Actual")
-			ax.plot_date(datesInFuture,forcasted,linewidth = 3,color='#1AB1ED',fmt='-', label="Forecasted")
+			forecastUpperError = forcasted + rmse
+			forecastLowerError = forcasted - rmse
+			ax.plot_date(dates,y,linewidth = 3,color=colourString,fmt='-', label ="Actual")
+			ax.plot_date(forcastDates,forcasted,linewidth = 3,color='#1AB1ED',fmt='-', label="Forecasted")
+			ax.plot_date(forcastDates,forecastUpperError,linewidth = 2,color='#ff0066',fmt='--', label="Error")
+			ax.plot_date(forcastDates,forecastLowerError,linewidth = 2, color='#ff0066', fmt='--')
 			plt.legend(loc="upper right")
 			ax.grid(linestyle="--")
 			ax.patch.set_facecolor('#323232')
@@ -326,14 +416,18 @@ class MyWindow(QMainWindow):
 																									#may lead to problems
 
 			pythonDateListFuture =[]
+			pythonDateListLast7 =pythonDateList[-7:]
+
 			inDate = pythonDateList[len(pythonDateList)-1]
 			for i in range(0,20):
 				
 				pythonDateListFuture.append(inDate)
 				inDate=inDate+dateDelta
+
+			pythonForecastDateList = pythonDateListLast7+pythonDateListFuture
 			#Now we convert all the python datetime objects into matplotlib date format
 			dates = matplotlib.dates.date2num(pythonDateList)
-			datesInFuture = matplotlib.dates.date2num(pythonDateListFuture)
+			forecastDates = matplotlib.dates.date2num(pythonForecastDateList)
 
 
 
@@ -343,21 +437,27 @@ class MyWindow(QMainWindow):
 
 			xValArray = shareData[string].values
 			print(xValArray)
-			train = xValArray[0:len(xValArray)-1]#This may yield an array index out of bounds error if xValArray is size<5 so try fix it later
+			train = xValArray[0:len(xValArray)-7]#This may yield an array index out of bounds error if xValArray is size<5 so try fix it later
 			#test= xValArray[26:]
 
 			model_arima = ARIMA(train,order=(2,1,1))
 			model_arima_fit = model_arima.fit()
 
 			forcasted=[]
-			forcasted= model_arima_fit.forecast(steps=20)[0]           #What is this zero here meant to signify
+			forcasted= model_arima_fit.forecast(steps=27)[0]           #What is this zero here meant to signify
+			
+			rmse = self.rootMeanSquareError(forcasted,xValArray)
+			forecastUpperError = forcasted + rmse
+			forecastLowerError = forcasted - rmse
 			
 			#Plot of y vs dates is now created below
 			fig, ax =plt.subplots()#Fig must be deleted  later so as not consume memory
 			#color='#1AB1ED' for blue
 			#ax.plot(y,linewidth=4,color='#BF1AED')
-			ax.plot_date(dates,y,linewidth = 3,color='#BF1AED',fmt='-',label="Actual Data")
-			ax.plot_date(datesInFuture,forcasted,linewidth = 3,color='#1AB1ED',fmt='-', label="Forecasted")
+			ax.plot_date(dates,y,linewidth = 3,color=colourString,fmt='-',label="Actual Data")
+			ax.plot_date(forecastDates,forcasted,linewidth = 3,color='#1AB1ED',fmt='-', label="Forecasted")
+			ax.plot_date(forecastDates,forecastUpperError,linewidth = 3,color='#ff0066',fmt='--', label="Error")
+			ax.plot_date(forecastDates,forecastLowerError,linewidth = 3, color='#ff0066', fmt='--')
 			plt.legend(loc="upper right")
 			ax.grid(linestyle="--")
 			ax.patch.set_facecolor('#323232')			
@@ -470,7 +570,7 @@ def window() :
 	dark_palette = QPalette()
 	dark_palette.setColor(QPalette.Window, QColor(53, 53, 53))
 	dark_palette.setColor(QPalette.WindowText, Qt.white)
-	dark_palette.setColor(QPalette.Base, QColor(25, 25, 25))
+	dark_palette.setColor(QPalette.Base, QColor(25,25,25))
 	dark_palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
 	dark_palette.setColor(QPalette.ToolTipBase, Qt.white)
 	dark_palette.setColor(QPalette.ToolTipText, Qt.white)
@@ -480,7 +580,7 @@ def window() :
 	dark_palette.setColor(QPalette.BrightText, Qt.red)
 	dark_palette.setColor(QPalette.Link, QColor(42, 130, 218))
 	dark_palette.setColor(QPalette.Highlight, QColor(42, 130, 218))
-	dark_palette.setColor(QPalette.HighlightedText, Qt.black)
+	dark_palette.setColor(QPalette.HighlightedText,Qt.black )#Was initially Qt.Black
 
 	app.setPalette(dark_palette)
 
