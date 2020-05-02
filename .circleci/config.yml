@@ -1,5 +1,8 @@
 version: 2.1 # Use version 2.1 to enable orb usage.
 
+- name: Coveralls GitHub Action
+  uses: coverallsapp/github-action@v1.1.1
+
 orbs:
   win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
 
