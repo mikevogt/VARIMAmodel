@@ -5,14 +5,15 @@ orbs:
 
 jobs:
   build-and-test:
-    executor: python/default
+    docker:
+      - image: circleci/python:3.6.4
     steps:
       - checkout
       - python/load-cache
       - python/install-deps
       - python/save-cache
       - run:
-          command: ./manage.py test
+          command: ./ArimaModelGui.py test
           name: Test
 
 workflows:
