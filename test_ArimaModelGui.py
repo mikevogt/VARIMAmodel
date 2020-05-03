@@ -14,7 +14,7 @@ class TestMyWindow(unittest.TestCase):
         forecastValues = [0.0, 0.5, 0.0, 0.5, 0.0, 0.4, 0.9]
         actualValues = [0.2, 0.4, 0.1, 0.6, 0.2, 0.1, 0.6]
         result = ArimaModelGui.MyWindow.rootMeanSquareError(forecastValues,actualValues)
-        self.assert_(result, 0.24083189157584592)
+        self.assertEqual(result, 0.24083189157584592)
 
 if __name__ == '__main__':
     unittest.main()
