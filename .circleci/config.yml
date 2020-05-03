@@ -1,17 +1,17 @@
 version: 2.1 # Use version 2.1 to enable orb usage.
-  jobs:
-    build:
+jobs:
+  build:
 
-      working_directory: ~/VARIMAmodel
-      docker:
-        -image: circleci/python:3.6.4
+    working_directory: ~/VARIMAmodel
+    docker:
+      -image: circleci/python:3.6.4
 
-      steps:
-        - checkout
-        - run:
-          command: |
-            sudo pip install pipenv
-            pipenv install
-        - run:
-          command: |
-            pipenv run python ArimaModelGui.py
+    steps:
+      - checkout
+      - run:
+        command: |
+          sudo pip install pipenv
+          pipenv install
+      - run:
+        command: |
+          pipenv run python ArimaModelGui.py
