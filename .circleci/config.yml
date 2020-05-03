@@ -6,6 +6,9 @@ jobs:
   steps:
     - checkout
     - run:
-      command: |
-            sudo pip install pipenv
-            pipenv install
+        command: |
+          sudo pip install pipenv
+          pipenv install
+    - run:
+        command: |
+          pipenv run python manage.py test
