@@ -1,22 +1,22 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtWidgets import (QWidget, QHBoxLayout, QFrame,QGridLayout, 
-    QSplitter, QStyleFactory, QApplication,QVBoxLayout)
+from PyQt5.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QFrame,QGridLayout, 
+    QSplitter, QStyleFactory, QApplication,QVBoxLayout,QStyle)
 from PyQt5.QtCore import Qt
-import sys
-
 from PyQt5.QtGui import QPalette
 from PyQt5.QtGui import QColor
-from matplotlib import pyplot as plt
+
+import sys
+import math
+import datetime
 import matplotlib
+from matplotlib import pyplot as plt
+from matplotlib.backends.backend_qt5agg import FigureCanvas
 import numpy as np
 import pandas as pd
-from matplotlib.backends.backend_qt5agg import FigureCanvas
-import datetime
 
 from statsmodels.tsa.ar_model import AR
 from statsmodels.tsa.arima_model import ARIMA
-import math
+
 #from sklearn.metrics import mean_squared_error
 
 
@@ -26,7 +26,12 @@ class MyWindow(QMainWindow):
 		
 		super(MyWindow,self).__init__()#This can be written as super().__init__() i think which would make more sense but leave it as is for now
 		self.data =pd.read_csv('ProcessedStandardised.csv',';')#Reads in the standardized data from ProcessedStandardised.csv. This file must be in the same directory as varimaGui.py
+		self.pVal=2
+		self.dVal=1
+		self.qVal=1
+		self.forecastlength=27
 		self.initUi()
+
 
 	def initUi(self):
 		
@@ -144,8 +149,11 @@ class MyWindow(QMainWindow):
 		labelPlotColour = QtWidgets.QLabel("Plot line colour:")
 
 		self.radioButtonGreen = QtWidgets.QRadioButton("Green")
+		self.radioButtonGreen.setStyle(QStyleFactory.create('windows'))
 		self.radioButtonPurple = QtWidgets.QRadioButton("Purple")
+		self.radioButtonPurple.setStyle(QStyleFactory.create('windows'))
 		self.radioButtonOrange = QtWidgets.QRadioButton("Orange")
+		self.radioButtonOrange.setStyle(QStyleFactory.create('windows'))
 
 
 		labelPlotWidth = QtWidgets.QLabel("Plot line width:")
@@ -153,26 +161,71 @@ class MyWindow(QMainWindow):
 		
 		buttonPlot = QtWidgets.QPushButton("Plot Data")
 		
+		
 
 		labelArimaCustomize = QtWidgets.QLabel("Customize Arima Variables")
 
 		labelPval= QtWidgets.QLabel("P-Value: ")
 		lineEditPval = QtWidgets.QLineEdit()
+		self.sliderPval = QtWidgets.QSlider(Qt.Horizontal)
+		self.sliderPval.setMinimum(1)
+		self.sliderPval.setMaximum(10)
+		self.sliderPval.setValue(2)
+		self.sliderPval.setTickPosition(3)
+		self.sliderPval.setTickInterval(1)
+		self.sliderPval.valueChanged.connect(self.sliderChangedPvalue)
+
+		self.pValSpinBox = QtWidgets.QSpinBox()
+		self.pValSpinBox.setValue(2)
+		self.pValSpinBox.valueChanged.connect(self.spinboxChangedPvalue)
+
+
+
+
+
 
 		labelDval= QtWidgets.QLabel("D-Value: ")
 		lineEditDval = QtWidgets.QLineEdit()
+		self.sliderDval = QtWidgets.QSlider(Qt.Horizontal)
+		self.sliderDval.setMinimum(1)
+		self.sliderDval.setMaximum(10)
+		self.sliderDval.setValue(1)
+		self.sliderDval.setTickPosition(3)
+		self.sliderDval.setTickInterval(1)
+		self.sliderDval.valueChanged.connect(self.sliderChangedDvalue)
 
-		labelFval= QtWidgets.QLabel("F-Value: ")
-		lineEditFval = QtWidgets.QLineEdit()
+		self.dValSpinBox = QtWidgets.QSpinBox()
+		self.dValSpinBox.setValue(1)
+		self.dValSpinBox.valueChanged.connect(self.spinboxChangedDvalue)
+
+		labelQval= QtWidgets.QLabel("Q-Value: ")
+		lineEditQval = QtWidgets.QLineEdit()
+		self.sliderQval = QtWidgets.QSlider(Qt.Horizontal)
+		self.sliderQval.setMinimum(1)
+		self.sliderQval.setMaximum(10)
+		self.sliderQval.setValue(1)
+		self.sliderQval.setTickPosition(QtWidgets.QSlider.TicksBothSides)
+		self.sliderQval.setFocusPolicy(Qt.StrongFocus)
+		self.sliderQval.setTickInterval(1)
+		self.sliderQval.setSingleStep(1)
+		self.sliderQval.valueChanged.connect(self.sliderChangedQvalue)
+		
+
+		self.qValSpinBox = QtWidgets.QSpinBox()
+		self.qValSpinBox.setValue(1)
+		self.qValSpinBox.valueChanged.connect(self.spinboxChangedQvalue)
 
 		labelForecastLength = QtWidgets.QLabel("ForecastLength: ")
 		lineEditForecastLength = QtWidgets.QLineEdit()
 		
+		
+		dialSpinBox = QtWidgets.QSpinBox()
 		dial = QtWidgets.QDial()	
 		dial.setMinimum(7)
 		dial.setMaximum(37)
 		dial.setValue(27)
 		dial.setNotchesVisible(True)
+		dial.setStyle(QStyleFactory.create('Plastique'))
 
 		slider = QtWidgets.QSlider(Qt.Horizontal)
 		slider.setMinimum(10)
@@ -201,35 +254,38 @@ class MyWindow(QMainWindow):
 
 		#Now each item created above is added to the grid layout for the bottom left frame
 		
-		bottomLeftGridLayout.addWidget(labelPlotCustomize,0,0,1,4)
+		bottomLeftGridLayout.addWidget(labelPlotCustomize,0,0,1,7)
 
 		bottomLeftGridLayout.addWidget(labelPlotColour,1,0,1,1)
-		bottomLeftGridLayout.addWidget(self.radioButtonPurple,1,1,1,1)
-		bottomLeftGridLayout.addWidget(self.radioButtonGreen,1,2,1,1)
-		bottomLeftGridLayout.addWidget(self.radioButtonOrange,1,3,1,1)
+		bottomLeftGridLayout.addWidget(self.radioButtonPurple,1,1,1,2)
+		bottomLeftGridLayout.addWidget(self.radioButtonGreen,1,3,1,2)
+		bottomLeftGridLayout.addWidget(self.radioButtonOrange,1,5,1,2)
 
 		bottomLeftGridLayout.addWidget(labelPlotWidth,2,0,1,1)
-		bottomLeftGridLayout.addWidget(lineEditPlotWidth,2,1,1,3)
+		bottomLeftGridLayout.addWidget(lineEditPlotWidth,2,1,1,6)
 		
-		bottomLeftGridLayout.addWidget(buttonPlot,3,0,1,4)
+		bottomLeftGridLayout.addWidget(buttonPlot,3,0,1,7)
 		
-		bottomLeftGridLayout.addWidget(labelArimaCustomize,4,0,1,4)
+		bottomLeftGridLayout.addWidget(labelArimaCustomize,4,0,1,7)
 		
-		bottomLeftGridLayout.addWidget(labelPval,5,0,1,4)
-		bottomLeftGridLayout.addWidget(lineEditPval,5,1,1,3)
+		bottomLeftGridLayout.addWidget(labelPval,5,0,1,1)
+		bottomLeftGridLayout.addWidget(self.pValSpinBox,5,1,1,1)
+		bottomLeftGridLayout.addWidget(self.sliderPval,5,2,1,5)
 		
-		bottomLeftGridLayout.addWidget(labelDval,6,0,1,4)
-		bottomLeftGridLayout.addWidget(lineEditDval,6,1,1,3)
+		bottomLeftGridLayout.addWidget(labelDval,6,0,1,1)
+		bottomLeftGridLayout.addWidget(self.dValSpinBox,6,1,1,1)
+		bottomLeftGridLayout.addWidget(self.sliderDval,6,2,1,5)
 		
-		bottomLeftGridLayout.addWidget(labelFval,7,0,1,4)
-		bottomLeftGridLayout.addWidget(lineEditFval,7,1,1,3)
+		bottomLeftGridLayout.addWidget(labelQval,7,0,1,1)
+		bottomLeftGridLayout.addWidget(self.qValSpinBox,7,1,1,1)
+		bottomLeftGridLayout.addWidget(self.sliderQval,7,2,1,5)
 		
-		bottomLeftGridLayout.addWidget(labelForecastLength,8,0,1,2)
+		bottomLeftGridLayout.addWidget(labelForecastLength,8,0,1,1)	
+		bottomLeftGridLayout.addWidget(dialSpinBox,8,1,1,5)	
+		bottomLeftGridLayout.addWidget(dial,8,6,1,1)
 		
-		bottomLeftGridLayout.addWidget(dial,8,2,1,2)
-		
-		bottomLeftGridLayout.addWidget(slider,9,0,1,4)
-		bottomLeftGridLayout.addWidget(buttonArima,10,0,1,4)
+		bottomLeftGridLayout.addWidget(slider,9,0,1,7)
+		bottomLeftGridLayout.addWidget(buttonArima,10,0,1,7)
 		
 		
 		
@@ -255,6 +311,39 @@ class MyWindow(QMainWindow):
 		grid.addWidget(right,0,1,3,3)
 
 		#Now each on-button-click function is created
+
+
+
+	def sliderChangedPvalue(self):
+
+
+		self.pValSpinBox.setValue(self.sliderPval.value())
+		self.pVal =self.sliderPval.value()
+	
+	def sliderChangedDvalue(self):
+
+		self.dValSpinBox.setValue(self.sliderDval.value())
+		self.dVal =self.sliderDval.value()
+
+	def sliderChangedQvalue(self):
+
+		self.qValSpinBox.setValue(self.sliderQval.value())
+		self.qVal =self.sliderQval.value()
+
+	def spinboxChangedPvalue(self):
+		self.sliderPval.setValue(self.pValSpinBox.value())
+		self.pVal = self.pValSpinBox.value()
+
+	def spinboxChangedDvalue(self):
+
+		self.sliderDval.setValue(self.dValSpinBox.value())
+		self.dVal = self.dValSpinBox.value()
+
+	def spinboxChangedQvalue(self):	
+
+		self.sliderQval.setValue(self.qValSpinBox.value())
+		self.qVal = self.qValSpinBox.value()
+
 
 	def buttonImportFunction(self):
 		#So far there is no purpose to this button however we may be able to think of one or replace it etc
@@ -303,6 +392,7 @@ class MyWindow(QMainWindow):
 
 		if self.rightFrameGridLayout.itemAt(0) == None : #Checks if there is a plot already there
 			
+			plt.clf()
 			shareData = self.data[self.data.Ticker == self.comboBox.currentText()] #Stores a dataFrame of all shares with the selected ticker
 
 			
@@ -351,11 +441,12 @@ class MyWindow(QMainWindow):
 			#test= xValArray[26:]
 
 			model_arima = ARIMA(train,order=(2,1,1))
+			print("got past Arima(train,order=(2,1,1))")
 			model_arima_fit = model_arima.fit()
-
+			print("got past model_arima.fit()")
 			forcasted=[]
 			forcasted= model_arima_fit.forecast(steps=27)[0]           #What is this zero here meant to signify
-			
+			print("got past forecast")
 			rmse = self.rootMeanSquareError(forcasted,xValArray)
 			print("RMSE calculated:")
 			print(rmse)
@@ -394,6 +485,7 @@ class MyWindow(QMainWindow):
 			
 		else :# This is entered if there is a plot already in the frame
 
+			plt.clf()
 			self.plotWidget.deleteLater() #existing plot widget is initially deleted. not sure if this actually works or not. TEst later. Also, the
 											#existing figure should be deleted here as well. Not quite sure how to do this though but i think making 
 											#ax and fig into class variables and then calling plt.clf() should do it.
@@ -440,13 +532,23 @@ class MyWindow(QMainWindow):
 			train = xValArray[0:len(xValArray)-7]#This may yield an array index out of bounds error if xValArray is size<5 so try fix it later
 			#test= xValArray[26:]
 
+
+
+
+
+
 			model_arima = ARIMA(train,order=(2,1,1))
+			print("got past Arima(train,order=(2,1,1))")
 			model_arima_fit = model_arima.fit()
+			print("got past model_arima.fit()")
 
 			forcasted=[]
 			forcasted= model_arima_fit.forecast(steps=27)[0]           #What is this zero here meant to signify
-			
+			print("got past forecast")
+
 			rmse = self.rootMeanSquareError(forcasted,xValArray)
+			print("RMSE calculated:")
+			print(rmse)
 			forecastUpperError = forcasted + rmse
 			forecastLowerError = forcasted - rmse
 			
