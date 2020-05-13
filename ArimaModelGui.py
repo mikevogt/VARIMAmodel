@@ -116,7 +116,7 @@ class MyWindow(QMainWindow):
 		self.featuresListWidget = QtWidgets.QListWidget()
 		self.featuresListWidget.setAlternatingRowColors(True)
 
-		for column in self.data.columns:#For loop that iterates through all column names in data populating the featuresListWidget
+		for column in self.data.columns[3:]:#For loop that iterates through all column names in data populating the featuresListWidget
 			#Still need to fix this so that it does not add the first 3 column names (namely DateStamps, Shares and Ticker) to the features list
 			self.featuresListWidget.addItem(column)
 
