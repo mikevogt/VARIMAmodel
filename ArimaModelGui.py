@@ -17,6 +17,9 @@ import pandas as pd
 from statsmodels.tsa.ar_model import AR
 from statsmodels.tsa.arima_model import ARIMA
 
+import mysql.connector
+from sshtunnel import SSHTunnelForwarder
+
 #from sklearn.metrics import mean_squared_error
 
 
@@ -593,6 +596,130 @@ class MyWindow(QMainWindow):
 		self.close()
 
 #This is the class for the login page. This is the first page that is created when the app runs and quite obviously it still needs proper designing.
+class Register(QMainWindow):
+
+	def __init__(self):
+		super().__init__()
+		self.initUi()
+
+	def initUi(self):
+
+		outerFrame = QtWidgets.QFrame()
+		outerFrame.setFrameShape(QFrame.Panel)
+		outerFrame.setFrameShadow(QFrame.Raised)
+		outerFrameLayout = QVBoxLayout()
+		outerFrameLayout.setSpacing(10)
+		outerFrameLayout.setContentsMargins(500,20,500,20)# Left top right then bottom
+		#Still need to try set innerframes minimum size to prevent it from being squashed when minimized
+
+		innerFrame = QtWidgets.QFrame()
+		innerFrame.setFrameShape(QFrame.Panel)
+		innerFrame.setFrameShadow(QFrame.Raised)
+		innerFrameLayout= QGridLayout(
+			)
+		innerFrameLayout.setSpacing(1)
+		innerFrameLayout.setContentsMargins(10,200,10,200)
+		innerFrame.setLayout(innerFrameLayout)
+
+		loginLabel= QtWidgets.QLabel("Create your desired account")
+		innerFrameLayout.addWidget(loginLabel,0,0,1,2)
+
+		userNameLabel = QtWidgets.QLabel("Desired Username")
+		innerFrameLayout.addWidget(userNameLabel,1,0,1,2)
+
+		self.usernameLineEdit = QtWidgets.QLineEdit("Please enter your username here")
+		innerFrameLayout.addWidget(self.usernameLineEdit,2,0,1,2)
+
+
+		passwordLabel = QtWidgets.QLabel("Desired Password")
+		innerFrameLayout.addWidget(passwordLabel,3,0,1,2)
+
+		self.passwordLineEdit=QtWidgets.QLineEdit("Type your Password here")
+		innerFrameLayout.addWidget(self.passwordLineEdit,4,0,1,2)
+
+		registerButton = QtWidgets.QPushButton("Register")
+		registerButton.clicked.connect(self.registerButtonFunction)
+		innerFrameLayout.addWidget(registerButton,5,0,1,2,Qt.AlignCenter)
+
+
+
+		outerFrameLayout.addWidget(innerFrame)
+		outerFrame.setLayout(outerFrameLayout)
+
+		mainGrid = QGridLayout()
+		mainGrid.setSpacing(10)
+		mainGrid.addWidget(outerFrame)
+
+
+		outerWidgetBox=QtWidgets.QWidget()
+		outerWidgetBox.setLayout(mainGrid)
+		
+		self.setCentralWidget(outerWidgetBox)
+		self.setGeometry(0,0,1500,900)
+		self.setWindowTitle("Register")
+		
+		self.showMaximized()
+
+	def registerButtonFunction(self):
+
+		inUserName= self.usernameLineEdit.text()
+		inUserPassword = self.passwordLineEdit.text()
+
+		server = SSHTunnelForwarder(
+    		'146.141.21.92',
+    		ssh_username='s1533169',
+    		ssh_password='*******',
+    		remote_bind_address=('127.0.0.1', 3306)
+		)
+		server.start()
+
+		print("Got here")
+
+
+		mydb =mysql.connector.connect(host="localhost",user="s1533169",passwd="*********" ,port=server.local_bind_port)
+		mycursor= mydb.cursor()
+
+		mycursor.execute("USE d1533169")
+		print(inUserName)
+		print(":::test")
+		mycursor.execute("SELECT * FROM ARIMA_USERS WHERE USERNAME=%s",(inUserName.strip(),))
+		myresult=mycursor.fetchall()
+		print("fetchall result")
+		print(myresult)
+
+		if(len(myresult)==0):
+			
+			sqlInsertCommand ="INSERT INTO ARIMA_USERS VALUES(%s,%s)"
+			usernamePasswordPair=(inUserName,inUserPassword)
+			mycursor.execute(sqlInsertCommand,usernamePasswordPair)
+
+			mydb.commit()
+
+			print("got past create table")
+			mydb.close()
+			print("got past mydb.close")
+			server.close()
+
+
+			self.next=MyWindow()
+			self.next.showMaximized()
+			self.close()
+		else:
+
+			print("UserName already exists, Please try another")
+			print("got past create table")
+			mydb.close()
+			print("got past mydb.close")
+			server.close()
+
+		
+
+		
+
+
+
+
+
 class Login(QMainWindow):
 
 	def __init__(self):#Constructor for the login page. All the construction takes place in self.initUi()
@@ -624,19 +751,24 @@ class Login(QMainWindow):
 		userNameLabel = QtWidgets.QLabel("Username")
 		innerFrameLayout.addWidget(userNameLabel,1,0,1,2)
 
-		usernameLineEdit = QtWidgets.QLineEdit("Please enter your username here")
-		innerFrameLayout.addWidget(usernameLineEdit,2,0,1,2)
+		self.usernameLineEditLogin = QtWidgets.QLineEdit("Please enter your username here")
+		innerFrameLayout.addWidget(self.usernameLineEditLogin,2,0,1,2)
 
 
 		passwordLabel = QtWidgets.QLabel("Password")
 		innerFrameLayout.addWidget(passwordLabel,3,0,1,2)
 
-		passwordLineEdit=QtWidgets.QLineEdit("Type your Password here")
-		innerFrameLayout.addWidget(passwordLineEdit,4,0,1,2)
+		self.passwordLineEditLogin=QtWidgets.QLineEdit("Type your Password here")
+		self.passwordLineEditLogin.setEchoMode(2)
+		innerFrameLayout.addWidget(self.passwordLineEditLogin,4,0,1,2)
 
 		loginButton = QtWidgets.QPushButton("Login")
 		loginButton.clicked.connect(self.loginButtonFunction)
 		innerFrameLayout.addWidget(loginButton,5,0,1,2,Qt.AlignCenter)
+
+		goRegisterButton = QtWidgets.QPushButton("Create new Account")
+		goRegisterButton.clicked.connect(self.goRegisterButtonFunction)
+		innerFrameLayout.addWidget(goRegisterButton,6,0,1,2,Qt.AlignCenter)
 
 
 
@@ -659,7 +791,65 @@ class Login(QMainWindow):
 
 	def loginButtonFunction(self):
 
-		self.next=MyWindow()
+		inUserName= self.usernameLineEditLogin.text()
+		inUserPassword = self.passwordLineEditLogin.text()
+
+		server = SSHTunnelForwarder(
+    		'146.141.21.92',
+    		ssh_username='s1533169',
+    		ssh_password='dingun123',
+    		remote_bind_address=('127.0.0.1', 3306)
+		)
+		server.start()
+
+		print("Got here")
+
+
+		mydb =mysql.connector.connect(host="localhost",user="s1533169",passwd="dingun123" ,port=server.local_bind_port)
+		mycursor= mydb.cursor()
+
+		mycursor.execute("USE d1533169")
+		print(inUserName)
+		print(":::test")
+		mycursor.execute("SELECT * FROM ARIMA_USERS WHERE USERNAME=%s",(inUserName.strip(),))
+		myresult=mycursor.fetchall()
+		print("fetchall result")
+		print(myresult)
+
+		if(len(myresult)==0):
+			
+			print("The account you entered does not exist, Please try again")
+
+
+			print("got past create table")
+			mydb.close()
+			print("got past mydb.close")
+			server.close()
+
+
+			
+		else:
+
+			if(myresult[0][1]==inUserPassword):
+				mydb.close()
+
+				server.close()
+				self.next=MyWindow()
+				self.next.showMaximized()
+				self.close()
+
+			else:
+
+				print("incorrect password, please try again")
+				mydb.close()
+				server.close()
+
+
+		
+
+	def goRegisterButtonFunction(self):
+
+		self.next=Register()
 		self.next.showMaximized()
 		self.close()
 
