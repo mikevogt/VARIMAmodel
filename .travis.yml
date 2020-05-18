@@ -1,3 +1,4 @@
+language: shell
 matrix:
   include:
     - name: "Python 3.5.4 on Windows"
