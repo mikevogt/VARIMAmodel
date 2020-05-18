@@ -1,12 +1,12 @@
-language: python
-matrix:
-  include:
-    - os: windows
-      language: sh
-      python: "3.7"
-      before_install:
-        - choco install python3
-        - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
-        - python -m pip install -r requirements-test.txt
-
-script: pytest
+language: python            # this works for Linux but is an error on macOS or Windows
+python:
+  - 3.6
+before_install:
+  - python --version
+  - pip install -U pip # because you always have to work with the most updated pip. Some builds will fail without this
+  - pip install -U pytest
+  - pip install codecov
+install:
+    - pip install -r requirements.txt
+script:
+    - python test_ArimaModelGui.py
