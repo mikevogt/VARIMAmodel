@@ -9,7 +9,7 @@ class TestMyWindow(unittest.TestCase):
     def setUp(self):
         self.app = ArimaModelGui.app.test_client()
         self.app.testing = True
-        
+
     def test_button_import_function(self):
         check = ArimaModelGui.MyWindow.buttonImportFunction()
         self.assertEqual(check == "button import pressed")
