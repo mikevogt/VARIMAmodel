@@ -10,7 +10,7 @@ before_install:
 install:
     - pip install -r requirements.txt
 script:
-    - test_ArimaModelGui.py
+    - python test_ArimaModelGui.py
 #language: python
 #matrix:
 #  include:
