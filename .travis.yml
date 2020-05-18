@@ -1,6 +1,6 @@
 language: python            # this works for Linux but is an error on macOS or Windows
 python:
-  - 3.6
+  - 3.7
 before_install:
   - python --version
   - pip install -U pip # because you always have to work with the most updated pip. Some builds will fail without this
