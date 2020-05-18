@@ -6,7 +6,7 @@ before_install:
   - pip install -U pip # because you always have to work with the most updated pip. Some builds will fail without this
   - pip install -U pytest
   - pip install codecov
-  - export QT_DEBUG_PLUGINS=1
+  - QT_QPA_PLATFORM=minimal go test -v -race
 install:
     - pip install -r requirements.txt
 script:
