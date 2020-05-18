@@ -7,3 +7,4 @@
   mysql-connector-python == 8.0.11
   sshtunnel == 0.1.5
   pip == 20.1
+  wheel == 0.33.6
