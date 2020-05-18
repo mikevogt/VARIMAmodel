@@ -1,7 +1,7 @@
 language: python
 matrix:
   - os: windows
-    language: 3.7
+    language: 3.6
     before_install:
     - choco install python3
     - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
