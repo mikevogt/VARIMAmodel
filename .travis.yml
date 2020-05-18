@@ -1,10 +1,16 @@
-language: python
-script: pytest
-# notifications:
-#    email:
-#        - [your email addres here without brackets and uncomment lines]
 
-#
+language: python            # this works for Linux but is an error on macOS or Windows
+python:
+  - 3.6
+before_install:
+  - python --version
+  - pip install -U pip # because you always have to work with the most updated pip. Some builds will fail without this
+  - pip install -U pytest
+  - pip install codecov
+install:
+    - pip install -r requirements.txt
+script:
+    - pytest
 #language: python
 #matrix:
 #  include:
@@ -19,13 +25,3 @@ script: pytest
 #        - pip install -r requirements.txt
 #        script:
 #          - pytest
-
-
-#language: python            # this works for Linux but is an error on macOS or Windows
-#python:
-#  - 3.6
-#before_install:
-#  - python --version
-#  - pip install -U pip # because you always have to work with the most updated pip. Some builds will fail without this
-#  - pip install -U pytest
-#  - pip install codecov
