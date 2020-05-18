@@ -2,8 +2,8 @@
   numpy == 1.16.5
   matplotlib == 3.2.1
   PyQt5 == 5.14.2
-  pandas == 0.25.1
+  pandas == 1.0.3
   statsmodels == 0.11.1
   mysql-connector-python == 8.0.11
   sshtunnel == 0.1.5
-  pip == 18.1
+  pip == 20.1
