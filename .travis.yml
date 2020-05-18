@@ -1,14 +1,14 @@
 language: python
 matrix:
-  - os: windows
-    language: 3.6
-    before_install:
-    - choco install python3
-    - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
-    - python --version
-    - pip install -U pip
-    - pip install -U pytest
-    - pip install codecov
+  include:
+    - os: windows
+      language: sh
+      python: "3.7"
+      before_install:
+        - choco install python3
+        - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
+        - virtualenv $HOME/venv
+        - source $HOME/venv/Scripts/activate
 
 install: pip install -r requirements.txt
 
