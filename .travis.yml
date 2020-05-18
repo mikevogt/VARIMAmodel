@@ -1,19 +1,19 @@
 language: python
 matrix:
   include:
+    - python: 3.7
     - os: windows
-    language: shell
-    python: 3.7
-    before_install:
-      - choco install python3
-      - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
-      - python --version
-      - python -m pip install --upgrade pip
-      - python -m pip install -r requirements-test.txt
-      - pip3 install --upgrade pytest
-      - pip3 install codecov
+    - language: shell
+before_install:
+  - choco install python3
+  - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
+  - python --version
+  - python -m pip install --upgrade pip
+  - python -m pip install -r requirements-test.txt
+  - pip3 install --upgrade pytest
+  - pip3 install codecov
 install:
   - pip install -r requirements.txt
-script: python test_ArimaModelGui.py # run tests
+script: pytest # run tests
 after_success:
   - codecov # submit coverage
