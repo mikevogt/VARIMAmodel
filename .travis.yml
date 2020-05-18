@@ -1,4 +1,4 @@
-os: windows
+#os: windows
 language: python            # this works for Linux but is an error on macOS or Windows
 python:
   - 3.6
