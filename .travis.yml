@@ -1,20 +1,54 @@
-language: python
-matrix:
-  include:
-    - name: "Python 3.5.4 on Windows"
-      os: windows           # Windows 10.0.17134 N/A Build 17134
-      language: shell       # 'language: python' is an error on Travis CI Windows
-      before_install:
-        - choco install python --version 3.5.4
-        - python --version
-        - python -m pip install --upgrade pip
-        - pip3 install --upgrade pytest
-        - pip3 install codecov
-      env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
-      install:
-        - pip install -r requirements.txt
-        script:
-          - pytest
+
+# ref : Anaconda Inc., Using conda with Travis CI, Conda documentation, https://conda.io/docs/user-guide/tasks/use-conda-with-travis-ci.html
+#       CodeChat, .travis.yml - Travis CI configuration, https://pythonhosted.org/CodeChat/.travis.yml.html
+#       Travis CI, Python example (unsupported languages), https://docs.travis-ci.com/user/multi-os/#python-example-unsupported-languages
+#       Kalderimis & Nagy, Windows is Available (Early Release), Oct 10 2018, https://blog.travis-ci.com/2018-10-11-windows-early-release
+#       Miniconda (Python 3) 4.5.11, Chocolatey Gallery, https://chocolatey.org/packages/miniconda3
+#       The Windows Build Environment, https://docs.travis-ci.com/user/reference/windows/
+#       Minimal .travis.yml file to run the current Python 3.7 on Linux, macOS, and Windows, https://github.com/cclauss/Travis-CI-Python-on-three-OSes
+
+language : shell
+
+env:
+  - CONDA_PYTHON=3.6
+  - CONDA_PYTHON=3.7
+  - CONDA_PYTHON=2018.12
+  - CONDA_PYTHON=2019.03
+  - CONDA_PYTHON=2019.07
+  - CONDA_PYTHON=nightly
+
+os:
+  - linux
+  - windows
+  - osx
+
+before_install:
+  - source ./tests/before_install_nix_win.sh
+
+install:
+  - source ./tests/install_nix_win.sh
+
+script:
+  - conda --version && python --version && pip --version;
+# notifications:
+#    email:
+#        - [your email addres here without brackets and uncomment lines]
+
+#
+#language: python
+#matrix:
+#  include:
+#    - name: "Python 3.5.4 on Windows"
+#    before_install:
+#        - choco install python --version 3.5.4
+#        - python --version
+#        - python -m pip install --upgrade pip
+#        - pip3 install codecov
+#      env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
+#      install:
+#        - pip install -r requirements.txt
+#        script:
+#          - pytest
 
 
 #language: python            # this works for Linux but is an error on macOS or Windows
