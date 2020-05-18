@@ -6,9 +6,9 @@ matrix:
     - python: 3.7
 before_install:
   - python --version
-  - pip install -U pip # because you always have to work with the most updated pip. Some builds will fail without this
-  - pip install -U pytest
-  - pip install codecov
+  - python -m pip install --upgrade pip
+  - pip3 install --upgrade pytest
+  - pip3 install codecov
 install:
     - pip install -r requirements.txt
 script:
