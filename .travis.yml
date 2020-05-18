@@ -1,27 +1,14 @@
-
-language: python            # this works for Linux but is an error on macOS or Windows
-python:
-  - 3.6
-before_install:
-  - python --version
-  - pip install -U pip # because you always have to work with the most updated pip. Some builds will fail without this
-  - pip install -U pytest
-  - pip install codecov
-install:
-    - pip install -r requirements.txt
-script:
-    - python test_ArimaModelGui.py
-#language: python
-#matrix:
-#  include:
-#    - name: "Python 3.5.4 on Windows"
-#    before_install:
-#        - choco install python --version 3.5.4
-#        - python --version
-#        - python -m pip install --upgrade pip
-#        - pip3 install codecov
-#      env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
-#      install:
-#        - pip install -r requirements.txt
-#        script:
-#          - pytest
+language: python
+matrix:
+  include:
+    - name: "Python 3.7.4 on Windows"
+    before_install:
+        - choco install python --version 3.7.4
+        - python --version
+        - python -m pip install --upgrade pip
+        - pip3 install codecov
+      env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
+      install:
+        - pip install -r requirements.txt
+        script:
+          - pytest
