@@ -1,13 +1,11 @@
+language: python
 matrix:
-  include:
-    - name: "Python 3.7.4 on Windows"
+  - os: windows
+    language: minimal
     before_install:
-        - choco install python --version 3.7.4
-        - python --version
-        - python -m pip install --upgrade pip
-        - pip3 install codecov
-      env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
-      install:
-        - pip install -r requirements.txt
-        script:
-          - pytest
+    - choco install python3
+    - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
+
+install: pip install -e .[tests]
+
+script: pytest
