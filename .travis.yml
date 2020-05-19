@@ -9,9 +9,8 @@ jobs:
         - python -m pip install --upgrade pip
         - python -m pip install -r requirements.txt
       env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
-install:
-  - pip3 install --upgrade pip
-  - pip3 install -r requirements.txt
+install: pip3 install -r requirements.txt
+  #- pip3 install --upgrade pip
 # all three OSes agree about 'pip3'
 # 'python' points to Python 2.7 on macOS but points to Python 3.7 on Linux and Windows
 # 'python3' is a 'command not found' error on Windows but 'py' works on Windows only
