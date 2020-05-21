@@ -783,10 +783,20 @@ class Register(QMainWindow):
 		inUserName= self.usernameLineEdit.text()
 		inUserPassword = self.passwordLineEdit.text()
 
+		if(len(inUserPassword)==0 or len(inUserName)==0):
+
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Registration Failed")
+			alertMessage.setText("Please enter a username, password and email address to register.")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("testImage.ico")) 					
+			x=alertMessage.exec_()
+			return
+
 		server = SSHTunnelForwarder(
     		'146.141.21.92',
     		ssh_username='s1533169',
-    		ssh_password='*******',
+    		ssh_password='dingun123',
     		remote_bind_address=('127.0.0.1', 3306)
 		)
 		server.start()
@@ -794,7 +804,7 @@ class Register(QMainWindow):
 		print("Got here")
 
 
-		mydb =mysql.connector.connect(host="localhost",user="s1533169",passwd="*********" ,port=server.local_bind_port)
+		mydb =mysql.connector.connect(host="localhost",user="s1533169",passwd="dingun123" ,port=server.local_bind_port)
 		mycursor= mydb.cursor()
 
 		mycursor.execute("USE d1533169")
@@ -824,11 +834,17 @@ class Register(QMainWindow):
 			self.close()
 		else:
 
+			mydb.close()
+			server.close()
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Registration Failed")
+			alertMessage.setText("The username you have requested already exists. Please try another one.")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("testImage.ico")) 					
+			x=alertMessage.exec_()
 			print("UserName already exists, Please try another")
 			print("got past create table")
-			mydb.close()
-			print("got past mydb.close")
-			server.close()
+			
 		
 	def returnButtonClicked(self):
 
@@ -879,7 +895,7 @@ class Login(QMainWindow):
 
 		loginLabel= QtWidgets.QLabel("Welcome!",objectName="loginLabel")
 		loginLabel.setAlignment(Qt.AlignCenter)
-		loginLabel.setStyleSheet("""font-size: 80px;""")
+		loginLabel.setStyleSheet("""font-size: 100px;""")
 		loginLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)
 		loginLabel.setSizePolicy(loginLabelSizePolicy)
 
@@ -1018,6 +1034,8 @@ class Login(QMainWindow):
 
 		if(len(myresult)==0):
 			
+			mydb.close()
+			server.close()
 			alertMessage=QMessageBox()
 			alertMessage.setWindowTitle("Login Failed")
 			alertMessage.setText("The username or password you entered is incorrect.")
@@ -1026,21 +1044,24 @@ class Login(QMainWindow):
 			x=alertMessage.exec_()
 			print("The account you entered does not exist, Please try again")
 			
-			mydb.close()
-			server.close()
+			
 
 			
 		else:
 
 			if(myresult[0][1]==inUserPassword):
+				
 				mydb.close()
-
 				server.close()
+
 				self.next=MyWindow()
 				self.next.showMaximized()
 				self.close()
 
 			else:
+
+				mydb.close()
+				server.close()
 				alertMessage=QMessageBox()
 				alertMessage.setWindowTitle("Login Failed")
 				alertMessage.setText("The username or password you entered is incorrect.")
@@ -1048,8 +1069,7 @@ class Login(QMainWindow):
 				alertMessage.setWindowIcon(QIcon("testImage.ico"))				
 				x=alertMessage.exec_()
 				print("incorrect password, please try again")
-				mydb.close()
-				server.close()
+				
 
 
 		
