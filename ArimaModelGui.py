@@ -1,8 +1,8 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QFrame,QGridLayout, 
-    QSplitter, QStyleFactory, QApplication,QVBoxLayout,QStyle, QSizePolicy,QSpacerItem)
+    QSplitter, QStyleFactory, QApplication,QVBoxLayout,QStyle, QSizePolicy,QSpacerItem,QMessageBox)
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import (QPalette,QColor,QPixmap)
+from PyQt5.QtGui import (QPalette,QColor,QPixmap,QIcon)
 
 
 
@@ -30,6 +30,7 @@ class MyWindow(QMainWindow):
 	def __init__(self):
 		
 		super(MyWindow,self).__init__()#This can be written as super().__init__() i think which would make more sense but leave it as is for now
+		self.setWindowIcon(QIcon("testImage.ico")) 
 		self.data =pd.read_csv('ProcessedStandardised.csv',';')#Reads in the standardized data from ProcessedStandardised.csv. This file must be in the same directory as varimaGui.py
 		self.pVal=2
 		self.dVal=1
@@ -118,7 +119,7 @@ class MyWindow(QMainWindow):
 		self.featuresListWidget = QtWidgets.QListWidget()
 		self.featuresListWidget.setAlternatingRowColors(True)
 
-		for column in self.data.columns[3:]:#For loop that iterates through all column names in data populating the featuresListWidget
+		for column in self.data.columns[3:-2]:#For loop that iterates through all column names in data populating the featuresListWidget
 			#Still need to fix this so that it does not add the first 3 column names (namely DateStamps, Shares and Ticker) to the features list
 			self.featuresListWidget.addItem(column)
 
@@ -605,9 +606,24 @@ class MyWindow(QMainWindow):
 			except LinAlgError as err:
 				
 				print(err)
+				
+				alertMessage=QMessageBox()
+				alertMessage.setWindowTitle("Data Invalid")
+				alertMessage.setText("The Singular Value Decomposition(SVG) did not converge.\nPlease choose a different model order or data set")
+				alertMessage.setIcon(QMessageBox.Warning)
+				alertMessage.setWindowIcon(QIcon("testImage.ico")) 	
+				x=alertMessage.exec_()
+
 				self.plotEmptyAxis()
 
 			except ValueError as err:
+				
+				alertMessage=QMessageBox()
+				alertMessage.setWindowTitle("Data Invalid")
+				alertMessage.setText("The Singular Value Decomposition(SVG) did not converge.\nPlease choose a different model order or data set")
+				alertMessage.setIcon(QMessageBox.Warning)
+				alertMessage.setWindowIcon(QIcon("testImage.ico")) 				
+				x=alertMessage.exec_()
 
 				self.plotEmptyAxis()
 				print(err)
@@ -626,6 +642,7 @@ class Register(QMainWindow):
 
 	def __init__(self):
 		super().__init__()
+		self.setWindowIcon(QIcon("testImage.ico")) 
 		self.setStyleSheet('''
 						QMainWindow{
 						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
@@ -826,6 +843,7 @@ class Login(QMainWindow):
 
 	def __init__(self):#Constructor for the login page. All the construction takes place in self.initUi()
 		super().__init__()
+		self.setWindowIcon(QIcon("testImage.ico")) 
 		self.setStyleSheet('''
 						QMainWindow{
 						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
@@ -906,6 +924,7 @@ class Login(QMainWindow):
 		goRegisterButton.clicked.connect(self.goRegisterButtonFunction)
 
 		quitProgramButton = QtWidgets.QPushButton("Quit Program")
+		quitProgramButton.clicked.connect(self.quitButtonClicked)
 
 		formBlock = QtWidgets.QWidget()
 		formBlockSizePolicy =QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
@@ -963,6 +982,18 @@ class Login(QMainWindow):
 		inUserName= self.usernameLineEditLogin.text()
 		inUserPassword = self.passwordLineEditLogin.text()
 
+		if(len(inUserPassword)==0 or len(inUserName)==0):
+
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Login Failed")
+			alertMessage.setText("Please enter both a username and password to login.")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("testImage.ico")) 					
+			x=alertMessage.exec_()
+			return
+
+
+
 		server = SSHTunnelForwarder(
     		'146.141.21.92',
     		ssh_username='s1533169',
@@ -987,14 +1018,16 @@ class Login(QMainWindow):
 
 		if(len(myresult)==0):
 			
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Login Failed")
+			alertMessage.setText("The username or password you entered is incorrect.")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("testImage.ico"))				
+			x=alertMessage.exec_()
 			print("The account you entered does not exist, Please try again")
-
-
-			print("got past create table")
+			
 			mydb.close()
-			print("got past mydb.close")
 			server.close()
-
 
 			
 		else:
@@ -1008,7 +1041,12 @@ class Login(QMainWindow):
 				self.close()
 
 			else:
-
+				alertMessage=QMessageBox()
+				alertMessage.setWindowTitle("Login Failed")
+				alertMessage.setText("The username or password you entered is incorrect.")
+				alertMessage.setIcon(QMessageBox.Information)
+				alertMessage.setWindowIcon(QIcon("testImage.ico"))				
+				x=alertMessage.exec_()
 				print("incorrect password, please try again")
 				mydb.close()
 				server.close()
@@ -1028,11 +1066,15 @@ class Login(QMainWindow):
 		self.close()
 		print("Forgot password clicked")
 
+	def quitButtonClicked(self):
+
+		sys.exit()
 
 class ForgotPasswordPage(QMainWindow):
 
 	def __init__(self):#Constructor for the login page. All the construction takes place in self.initUi()
 		super().__init__()
+		self.setWindowIcon(QIcon("testImage.ico"))
 		self.setStyleSheet('''
 						QMainWindow{
 						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
@@ -1054,6 +1096,7 @@ class ForgotPasswordPage(QMainWindow):
 						 QPushButton{
 						 background: rgba(55,55,55,255);
 						 }''')
+		 
 		self.initUi()
 
 	def initUi(self) :
@@ -1203,7 +1246,12 @@ def window() :
 							border-width: 1px;
     						border-style: ridge;
    							border-color: rgb(42,130,218);
-   							border-radius: 4px;}''')
+   							border-radius: 4px;}
+   						QMessageBox QPushButton{
+   							background: rgba(55,55,55,255);
+   						}
+
+   							''')
 	
 	win=Login()
 	win.showMaximized()
