@@ -1,9 +1,10 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QFrame,QGridLayout, 
-    QSplitter, QStyleFactory, QApplication,QVBoxLayout,QStyle)
+    QSplitter, QStyleFactory, QApplication,QVBoxLayout,QStyle, QSizePolicy,QSpacerItem)
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPalette
-from PyQt5.QtGui import QColor
+from PyQt5.QtGui import (QPalette,QColor,QPixmap)
+
+
 
 import sys
 import math
@@ -19,6 +20,7 @@ from statsmodels.tsa.arima_model import ARIMA
 
 import mysql.connector
 from sshtunnel import SSHTunnelForwarder
+from numpy.linalg import LinAlgError
 
 #from sklearn.metrics import mean_squared_error
 
@@ -171,8 +173,8 @@ class MyWindow(QMainWindow):
 		labelPval= QtWidgets.QLabel("P-Value: ")
 		lineEditPval = QtWidgets.QLineEdit()
 		self.sliderPval = QtWidgets.QSlider(Qt.Horizontal)
-		self.sliderPval.setMinimum(1)
-		self.sliderPval.setMaximum(10)
+		self.sliderPval.setMinimum(0)
+		self.sliderPval.setMaximum(5)
 		self.sliderPval.setValue(2)
 		self.sliderPval.setTickPosition(3)
 		self.sliderPval.setTickInterval(1)
@@ -190,8 +192,8 @@ class MyWindow(QMainWindow):
 		labelDval= QtWidgets.QLabel("D-Value: ")
 		lineEditDval = QtWidgets.QLineEdit()
 		self.sliderDval = QtWidgets.QSlider(Qt.Horizontal)
-		self.sliderDval.setMinimum(1)
-		self.sliderDval.setMaximum(10)
+		self.sliderDval.setMinimum(0)
+		self.sliderDval.setMaximum(2)
 		self.sliderDval.setValue(1)
 		self.sliderDval.setTickPosition(3)
 		self.sliderDval.setTickInterval(1)
@@ -204,8 +206,8 @@ class MyWindow(QMainWindow):
 		labelQval= QtWidgets.QLabel("Q-Value: ")
 		lineEditQval = QtWidgets.QLineEdit()
 		self.sliderQval = QtWidgets.QSlider(Qt.Horizontal)
-		self.sliderQval.setMinimum(1)
-		self.sliderQval.setMaximum(10)
+		self.sliderQval.setMinimum(0)
+		self.sliderQval.setMaximum(5)
 		self.sliderQval.setValue(1)
 		self.sliderQval.setTickPosition(QtWidgets.QSlider.TicksBothSides)
 		self.sliderQval.setFocusPolicy(Qt.StrongFocus)
@@ -222,36 +224,33 @@ class MyWindow(QMainWindow):
 		lineEditForecastLength = QtWidgets.QLineEdit()
 		
 		
-		dialSpinBox = QtWidgets.QSpinBox()
-		dial = QtWidgets.QDial()	
-		dial.setMinimum(7)
-		dial.setMaximum(37)
-		dial.setValue(27)
-		dial.setNotchesVisible(True)
-		dial.setStyle(QStyleFactory.create('Plastique'))
+		self.dialSpinBox = QtWidgets.QSpinBox()
+		self.dialSpinBox.setValue(27)
+		self.dialSpinBox.setMaximum(37)
+		self.dialSpinBox.setMinimum(7)
+		self.dialSpinBox.valueChanged.connect(self.dialSpinBoxValueChanged)
+		self.dial = QtWidgets.QDial()	
+		self.dial.setMinimum(7)
+		self.dial.setMaximum(37)
+		self.dial.setValue(27)
+		self.dial.setNotchesVisible(True)
+		self.dial.setStyle(QStyleFactory.create('Plastique'))
+		self.dial.valueChanged.connect(self.dialValueChanged)
 
-		slider = QtWidgets.QSlider(Qt.Horizontal)
+		'''slider = QtWidgets.QSlider(Qt.Horizontal)
 		slider.setMinimum(10)
 		slider.setMaximum(30)
 		slider.setValue(20)
 		slider.setTickPosition(3)
 		slider.setTickInterval(5)
-
-
-		
+		'''
 
 		buttonArima = QtWidgets.QPushButton("Estimate using ARIMA")
 		buttonArima.clicked.connect(self.varButtonClicker)
-
-
-
-
-
-
-
 		
-		
-		
+		logoutButton = QtWidgets.QPushButton("Logout")
+		logoutButton.clicked.connect(self.logoutButtonClicked)
+
 
 		
 
@@ -284,11 +283,11 @@ class MyWindow(QMainWindow):
 		bottomLeftGridLayout.addWidget(self.sliderQval,7,2,1,5)
 		
 		bottomLeftGridLayout.addWidget(labelForecastLength,8,0,1,1)	
-		bottomLeftGridLayout.addWidget(dialSpinBox,8,1,1,5)	
-		bottomLeftGridLayout.addWidget(dial,8,6,1,1)
+		bottomLeftGridLayout.addWidget(self.dialSpinBox,8,1,1,5)	
+		bottomLeftGridLayout.addWidget(self.dial,8,6,1,1)
 		
-		bottomLeftGridLayout.addWidget(slider,9,0,1,7)
-		bottomLeftGridLayout.addWidget(buttonArima,10,0,1,7)
+		bottomLeftGridLayout.addWidget(buttonArima,9,0,1,7)
+		bottomLeftGridLayout.addWidget(logoutButton,10,0,1,7)
 		
 		
 		
@@ -313,8 +312,44 @@ class MyWindow(QMainWindow):
 		grid.addWidget(bottomLeft,2,0,1,1)
 		grid.addWidget(right,0,1,3,3)
 
+
+		self.plotEmptyAxis()
 		#Now each on-button-click function is created
 
+
+	def plotEmptyAxis(self):
+
+		fig, ax =plt.subplots()
+		
+		ax.grid(linestyle="--")
+		ax.patch.set_facecolor('#323232')
+		fig.patch.set_facecolor('#191919')
+		#fig.patch.set_alpha(0.0)
+		#ax.patch.set_alpha(0.0)
+
+		ax.spines['bottom'].set_color('#ffffff')
+		ax.spines['top'].set_color('#ffffff') 
+		ax.spines['right'].set_color('#ffffff')
+		ax.spines['left'].set_color('#ffffff')
+		ax.tick_params(axis='x', colors='#ffffff')
+		ax.tick_params(axis='y', colors='#ffffff')
+		#ax.set_xlabel("Date",fontsize=15)
+		#ax.set_ylabel(self.featuresListWidget.currentItem().text(),fontsize=15)
+		ax.yaxis.label.set_color('white')
+		ax.xaxis.label.set_color('white')
+		#fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
+
+		self.plotWidget = FigureCanvas(fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
+		self.rightFrameGridLayout.addWidget(self.plotWidget)
+
+	def dialSpinBoxValueChanged(self):
+
+		self.dial.setValue(self.dialSpinBox.value())
+
+	def dialValueChanged(self):
+
+		self.dialSpinBox.setValue(self.dial.value())
+		#self.forecastLength=self.dial.value()
 
 
 	def sliderChangedPvalue(self):
@@ -443,7 +478,10 @@ class MyWindow(QMainWindow):
 			train = xValArray[0:len(xValArray)-7]#This may yield an array index out of bounds error if xValArray is size<5 so try fix it later
 			#test= xValArray[26:]
 
-			model_arima = ARIMA(train,order=(2,1,1))
+			print(self.comboBox.currentText())
+			print(self.featuresListWidget.currentItem().text())
+			
+			model_arima = ARIMA(train,order=(self.pVal,self.dVal,self.qVal))
 			print("got past Arima(train,order=(2,1,1))")
 			model_arima_fit = model_arima.fit()
 			print("got past model_arima.fit()")
@@ -487,6 +525,8 @@ class MyWindow(QMainWindow):
 			self.rightFrameGridLayout.addWidget(self.plotWidget)
 			
 		else :# This is entered if there is a plot already in the frame
+
+
 
 			plt.clf()
 			self.plotWidget.deleteLater() #existing plot widget is initially deleted. not sure if this actually works or not. TEst later. Also, the
@@ -538,61 +578,101 @@ class MyWindow(QMainWindow):
 
 
 
+			print(self.comboBox.currentText())
+			print(self.featuresListWidget.currentItem().text())
+			try:
 
+				model_arima = ARIMA(train,order=(self.pVal,self.dVal,self.qVal))
+				print("got past Arima(train,order=(2,1,1))")
+				model_arima_fit = model_arima.fit()
+				print("got past model_arima.fit()")
 
-			model_arima = ARIMA(train,order=(2,1,1))
-			print("got past Arima(train,order=(2,1,1))")
-			model_arima_fit = model_arima.fit()
-			print("got past model_arima.fit()")
+				forcasted=[]
+				forcasted= model_arima_fit.forecast(steps=27)[0]           #What is this zero here meant to signify
+				print("got past forecast")
 
-			forcasted=[]
-			forcasted= model_arima_fit.forecast(steps=27)[0]           #What is this zero here meant to signify
-			print("got past forecast")
-
-			rmse = self.rootMeanSquareError(forcasted,xValArray)
-			print("RMSE calculated:")
-			print(rmse)
-			forecastUpperError = forcasted + rmse
-			forecastLowerError = forcasted - rmse
+				rmse = self.rootMeanSquareError(forcasted,xValArray)
+				print("RMSE calculated:")
+				print(rmse)
+				forecastUpperError = forcasted + rmse
+				forecastLowerError = forcasted - rmse
 			
-			#Plot of y vs dates is now created below
-			fig, ax =plt.subplots()#Fig must be deleted  later so as not consume memory
-			#color='#1AB1ED' for blue
-			#ax.plot(y,linewidth=4,color='#BF1AED')
-			ax.plot_date(dates,y,linewidth = 3,color=colourString,fmt='-',label="Actual Data")
-			ax.plot_date(forecastDates,forcasted,linewidth = 3,color='#1AB1ED',fmt='-', label="Forecasted")
-			ax.plot_date(forecastDates,forecastUpperError,linewidth = 3,color='#ff0066',fmt='--', label="Error")
-			ax.plot_date(forecastDates,forecastLowerError,linewidth = 3, color='#ff0066', fmt='--')
-			plt.legend(loc="upper right")
-			ax.grid(linestyle="--")
-			ax.patch.set_facecolor('#323232')			
-			fig.patch.set_facecolor('#191919')
-			#fig.patch.set_alpha(0.0)
-			#ax.patch.set_alpha(0.0)
-			ax.spines['bottom'].set_color('#ffffff')
-			ax.spines['top'].set_color('#ffffff') 
-			ax.spines['right'].set_color('#ffffff')
-			ax.spines['left'].set_color('#ffffff')
-			ax.tick_params(axis='x', colors='#ffffff')
-			ax.tick_params(axis='y', colors='#ffffff')
-			ax.set_xlabel("Date",fontsize=15)
-			ax.set_ylabel(self.featuresListWidget.currentItem().text(),fontsize=15)
-			fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
-			ax.yaxis.label.set_color('white')
-			ax.xaxis.label.set_color('white')
+				#Plot of y vs dates is now created below
+				fig, ax =plt.subplots()#Fig must be deleted  later so as not consume memory
+				#color='#1AB1ED' for blue
+				#ax.plot(y,linewidth=4,color='#BF1AED')
+				ax.plot_date(dates,y,linewidth = 3,color=colourString,fmt='-',label="Actual Data")
+				ax.plot_date(forecastDates,forcasted,linewidth = 3,color='#1AB1ED',fmt='-', label="Forecasted")
+				ax.plot_date(forecastDates,forecastUpperError,linewidth = 3,color='#ff0066',fmt='--', label="Error")
+				ax.plot_date(forecastDates,forecastLowerError,linewidth = 3, color='#ff0066', fmt='--')
+				plt.legend(loc="upper right")
+				ax.grid(linestyle="--")
+				ax.patch.set_facecolor('#323232')			
+				fig.patch.set_facecolor('#191919')
+				#fig.patch.set_alpha(0.0)
+				#ax.patch.set_alpha(0.0)
+				ax.spines['bottom'].set_color('#ffffff')
+				ax.spines['top'].set_color('#ffffff') 
+				ax.spines['right'].set_color('#ffffff')
+				ax.spines['left'].set_color('#ffffff')
+				ax.tick_params(axis='x', colors='#ffffff')
+				ax.tick_params(axis='y', colors='#ffffff')
+				ax.set_xlabel("Date",fontsize=15)
+				ax.set_ylabel(self.featuresListWidget.currentItem().text(),fontsize=15)
+				fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
+				ax.yaxis.label.set_color('white')
+				ax.xaxis.label.set_color('white')
 			
-			#fig.savefig('temp.png', transparent=True)
+				#fig.savefig('temp.png', transparent=True)
 
-			self.plotWidget = FigureCanvas(fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
-			self.rightFrameGridLayout.addWidget(self.plotWidget)
+				self.plotWidget = FigureCanvas(fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
+				self.rightFrameGridLayout.addWidget(self.plotWidget)
+
+			except LinAlgError as err:
+				
+				print(err)
+				self.plotEmptyAxis()
+
+			except ValueError as err:
+
+				self.plotEmptyAxis()
+				print(err)
 			#right.setLayout(self.rightFrameGridLayout)
 
-	#This funnctions body was only used for test purposes and has the functionality of reverting back to the login screen
-	def backTestButtonClicker (self):
 
-		print("Back test button clicked successfully")
+	
+	def logoutButtonClicked (self):
 		
 		self.next=Login()
+		self.next.setStyleSheet('''
+						QMainWindow{
+						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
+						 }
+						 
+						 QLineEdit{
+
+						 font-size: 20px;
+						 border-width: 2px;
+						 border-style: solid;
+						 border-color: None None White None;
+						 border-radius: 0px;
+						 background: rgba(55,55,55,0); 
+						 }
+						 QLabel:loginLabel{
+
+						 font-size: 80px;
+						 }
+						 QLabel{
+
+						 font-size: 20px;
+						 }
+						 QPushButton{
+
+						 background: rgba(55,55,55,255);
+						 }
+
+						 ''')
+		self.next.showMaximized()
 		self.close()
 
 #This is the class for the login page. This is the first page that is created when the app runs and quite obviously it still needs proper designing.
@@ -615,8 +695,7 @@ class Register(QMainWindow):
 		innerFrame = QtWidgets.QFrame()
 		innerFrame.setFrameShape(QFrame.Panel)
 		innerFrame.setFrameShadow(QFrame.Raised)
-		innerFrameLayout= QGridLayout(
-			)
+		innerFrameLayout= QGridLayout()
 		innerFrameLayout.setSpacing(1)
 		innerFrameLayout.setContentsMargins(10,200,10,200)
 		innerFrame.setLayout(innerFrameLayout)
@@ -731,48 +810,114 @@ class Login(QMainWindow):
 		outerFrame = QtWidgets.QFrame()
 		outerFrame.setFrameShape(QFrame.Panel)
 		outerFrame.setFrameShadow(QFrame.Raised)
-		outerFrameLayout = QVBoxLayout()
+		outerFrameLayout = QHBoxLayout()
 		outerFrameLayout.setSpacing(10)
-		outerFrameLayout.setContentsMargins(500,20,500,20)# Left top right then bottom
+		outerFrameLayout.setContentsMargins(20,20,20,20)# Left top right then bottom
 		#Still need to try set innerframes minimum size to prevent it from being squashed when minimized
 
-		innerFrame = QtWidgets.QFrame()
+		loginLabel= QtWidgets.QLabel("Welcome!",objectName="loginLabel")
+		loginLabel.setAlignment(Qt.AlignCenter)
+		loginLabel.setStyleSheet("""
+
+						 font-size: 80px;
+						 """)
+		loginLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)
+		loginLabel.setSizePolicy(loginLabelSizePolicy)
+
+
+
+		innerFrame = QtWidgets.QFrame(self,objectName="innerFrameLogin")
 		innerFrame.setFrameShape(QFrame.Panel)
 		innerFrame.setFrameShadow(QFrame.Raised)
-		innerFrameLayout= QGridLayout(
-			)
-		innerFrameLayout.setSpacing(1)
-		innerFrameLayout.setContentsMargins(10,200,10,200)
+		innerFrame.setStyleSheet("""QFrame{background: rgba(90,90,90,100);}""")
+		#innerFrameSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
+		#innerFrameSizePolicy.setHorizontalStretch(1)
+		#innerFrame.setSizePolicy(innerFrameSizePolicy)
+
+		innerFrameLayout= QGridLayout()
+		innerFrameLayout.setSpacing(30)
+		innerFrameLayout.setContentsMargins(20,20,20,20)
 		innerFrame.setLayout(innerFrameLayout)
 
-		loginLabel= QtWidgets.QLabel("Login",objectName="loginLabel")
-		innerFrameLayout.addWidget(loginLabel,0,0,1,2)
+		
+		logoLabel = QtWidgets.QLabel()
+		logoLabel.setStyleSheet("""background: rgba(90,90,90,0);""")
+		logoLabelSizePolicy=QSizePolicy(QSizePolicy.Maximum,QSizePolicy.Maximum)
+		logoLabel.setSizePolicy(logoLabelSizePolicy)
+		
+		pixmap = QPixmap("Artboard 1.ico")
+		logoLabel.setPixmap(pixmap)
+		logoLabel.setAlignment(Qt.AlignCenter)
+		
 
-		userNameLabel = QtWidgets.QLabel("Username")
-		innerFrameLayout.addWidget(userNameLabel,1,0,1,2)
+		userNameLabel = QtWidgets.QLabel("Username:")
+		userNameLabel.setStyleSheet("""background: rgba(90,90,90,0);""")
 
-		self.usernameLineEditLogin = QtWidgets.QLineEdit("Please enter your username here")
-		innerFrameLayout.addWidget(self.usernameLineEditLogin,2,0,1,2)
+		self.usernameLineEditLogin = QtWidgets.QLineEdit()		
 
-
-		passwordLabel = QtWidgets.QLabel("Password")
-		innerFrameLayout.addWidget(passwordLabel,3,0,1,2)
-
-		self.passwordLineEditLogin=QtWidgets.QLineEdit("Type your Password here")
+		passwordLabel = QtWidgets.QLabel("Password:")
+		passwordLabel.setStyleSheet("""background: rgba(90,90,90,0);""")
+		self.passwordLineEditLogin=QtWidgets.QLineEdit()
 		self.passwordLineEditLogin.setEchoMode(2)
-		innerFrameLayout.addWidget(self.passwordLineEditLogin,4,0,1,2)
-
+		
 		loginButton = QtWidgets.QPushButton("Login")
 		loginButton.clicked.connect(self.loginButtonFunction)
-		innerFrameLayout.addWidget(loginButton,5,0,1,2,Qt.AlignCenter)
+
+		forgotPasswordButton = QtWidgets.QPushButton("Forgot Password?")
+		forgotPasswordButton.clicked.connect(self.forgotPasswordClicked)
 
 		goRegisterButton = QtWidgets.QPushButton("Create new Account")
 		goRegisterButton.clicked.connect(self.goRegisterButtonFunction)
-		innerFrameLayout.addWidget(goRegisterButton,6,0,1,2,Qt.AlignCenter)
+
+		quitProgramButton = QtWidgets.QPushButton("Quit Program")
+
+		formBlock = QtWidgets.QWidget()
+		formBlockSizePolicy =QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
+		formBlock.setSizePolicy(formBlockSizePolicy)
+		formBlockLayout = QGridLayout()
+		formBlock.setLayout(formBlockLayout)
+
+		formBlockLayout.addWidget(userNameLabel,0,0)
+
+		formBlockLayout.addWidget(self.usernameLineEditLogin,0,1)
+
+		formBlockLayout.addWidget(passwordLabel,1,0)
+		formBlockLayout.addWidget(self.passwordLineEditLogin,1,1)
 
 
+		innerFrameLayout.addWidget(logoLabel,0,0,Qt.AlignCenter)
+		innerFrameLayout.addWidget(formBlock,1,0)
+		innerFrameLayout.addWidget(loginButton,2,0)
+		innerFrameLayout.addWidget(forgotPasswordButton,3,0)
+		innerFrameLayout.addWidget(goRegisterButton,4,0)
+		innerFrameLayout.addWidget(quitProgramButton,5,0)
+		"""innerFrameLayout.addWidget(userNameLabel,1,0,1,1)
+		innerFrameLayout.addWidget(self.usernameLineEditLogin,1,1,1,3)
 
-		outerFrameLayout.addWidget(innerFrame)
+		innerFrameLayout.addWidget(passwordLabel,2,0,1,1)
+		innerFrameLayout.addWidget(self.passwordLineEditLogin,2,1,1,3)
+
+		innerFrameLayout.addWidget(loginButton,3,2,1,2,Qt.AlignCenter)
+		innerFrameLayout.addWidget(goRegisterButton,4,2,1,2,Qt.AlignCenter)
+		"""
+		frameDouble = QtWidgets.QFrame()
+		doubleFrameSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
+		doubleFrameSizePolicy.setHorizontalStretch(1)
+		frameDouble.setSizePolicy(doubleFrameSizePolicy)
+
+		frameDoubleVLayout = QVBoxLayout()
+		frameDouble.setLayout(frameDoubleVLayout)
+		frameDoubleVLayout.addWidget(loginLabel,Qt.AlignCenter)
+		frameDoubleVLayout.addWidget(innerFrame,Qt.AlignCenter)
+
+		outerFrameLayout.insertStretch(0,1)
+		#outerFrameLayout.addWidget(loginLabel,Qt.AlignCenter)
+		
+		outerFrameLayout.addWidget(frameDouble)
+		
+		outerFrameLayout.addStretch(1)
+		#outerFrameLayout.insertStretch(0,3)
+		#space = QSpacerItem()
 		outerFrame.setLayout(outerFrameLayout)
 
 		mainGrid = QGridLayout()
@@ -791,6 +936,10 @@ class Login(QMainWindow):
 
 	def loginButtonFunction(self):
 
+		self.next=MyWindow()
+		self.next.showMaximized()
+		self.close()
+		"""
 		inUserName= self.usernameLineEditLogin.text()
 		inUserPassword = self.passwordLineEditLogin.text()
 
@@ -845,11 +994,191 @@ class Login(QMainWindow):
 				server.close()
 
 
-		
+		"""
 
 	def goRegisterButtonFunction(self):
 
 		self.next=Register()
+		self.next.showMaximized()
+		self.close()
+
+	def forgotPasswordClicked(self):
+		self.next=ForgotPasswordPage()
+		self.next.setStyleSheet('''
+						QMainWindow{
+						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
+						 }
+						 
+						 QLineEdit{
+
+						 font-size: 20px;
+						 border-width: 2px;
+						 border-style: solid;
+						 border-color: None None White None;
+						 border-radius: 0px;
+						 background: rgba(55,55,55,0); 
+						 }
+						 QLabel:loginLabel{
+
+						 font-size: 80px;
+						 }
+						 QLabel{
+
+						 font-size: 20px;
+
+						 }
+						 QPushButton{
+
+						 background: rgba(55,55,55,255);
+						 }
+
+						 ''')
+		self.next.showMaximized()
+		self.close()
+		print("Forgot password clicked")
+
+
+class ForgotPasswordPage(QMainWindow):
+
+	def __init__(self):#Constructor for the login page. All the construction takes place in self.initUi()
+		super().__init__()
+		self.initUi()
+
+	def initUi(self) :
+
+		outerFrame = QtWidgets.QFrame()
+		outerFrame.setFrameShape(QFrame.Panel)
+		outerFrame.setFrameShadow(QFrame.Raised)
+		outerFrameLayout = QHBoxLayout()
+		outerFrameLayout.setSpacing(10)
+		outerFrameLayout.setContentsMargins(20,20,20,20)# Left top right then bottom
+		#Still need to try set innerframes minimum size to prevent it from being squashed when minimized
+
+		forgotItLabel= QtWidgets.QLabel("Forgot it Huh?")
+		forgotItLabel.setAlignment(Qt.AlignCenter)
+		forgotItLabel.setStyleSheet("""
+
+						 font-size: 80px;
+						 """)
+		forgotItLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)
+		forgotItLabel.setSizePolicy(forgotItLabelSizePolicy)
+
+
+
+		innerFrame = QtWidgets.QFrame(self,objectName="innerFrameLogin")
+		innerFrame.setFrameShape(QFrame.Panel)
+		innerFrame.setFrameShadow(QFrame.Raised)
+		innerFrame.setStyleSheet("""QFrame{background: rgba(90,90,90,100);}""")
+		
+
+		innerFrameLayout= QGridLayout()
+		innerFrameLayout.setSpacing(30)
+		innerFrameLayout.setContentsMargins(20,20,20,20)
+		innerFrame.setLayout(innerFrameLayout)
+		
+		explainLabel = QtWidgets.QLabel("No worries, just type in your username and email Address below and we\n                               will have it sent to you shortly!")
+		explainLabel.setStyleSheet("background: rgba(19,18,18,0);")
+		explainLabelSP = QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
+		explainLabel.setSizePolicy(explainLabelSP)
+
+
+		usernameLabel= QtWidgets.QLabel("Username:")
+		usernameLabel.setStyleSheet("backGround: rgba(12,12,12,0);")
+		usernameLineEdit=QtWidgets.QLineEdit()
+
+		emailAddressLabel=QtWidgets.QLabel("Email Address:")
+		emailAddressLabel.setStyleSheet("background: rgba(19,18,18,0);")
+		emailAddressLineEdit= QtWidgets.QLineEdit()
+
+
+
+		sendEmailButton = QtWidgets.QPushButton("Send Email")
+		returnButton= QtWidgets.QPushButton("Return to Mainpage")
+		returnButton.clicked.connect(self.returnButtonClicked)
+
+		logo = QtWidgets.QLabel()
+		logo.setStyleSheet("""background: rgba(90,90,90,0);""")
+		logoSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
+		logo.setSizePolicy(logoSizePolicy)
+		
+		pixmap = QPixmap("testImage.ico")
+		logo.setPixmap(pixmap)
+		logo.setAlignment(Qt.AlignCenter)
+
+		innerFrameLayout.addWidget(logo,0,0,1,5,Qt.AlignCenter)
+		innerFrameLayout.addWidget(explainLabel,1,0,1,5)
+		innerFrameLayout.addWidget(usernameLabel,2,0,1,1,Qt.AlignCenter)
+		innerFrameLayout.addWidget(usernameLineEdit,2,1,1,4)
+		innerFrameLayout.addWidget(emailAddressLabel,3,0,1,1,Qt.AlignCenter)
+		innerFrameLayout.addWidget(emailAddressLineEdit,3,1,1,4)
+		innerFrameLayout.addWidget(sendEmailButton,4,0,1,5)
+		innerFrameLayout.addWidget(returnButton,5,0,1,5)
+
+		frameDouble = QtWidgets.QFrame()
+		doubleFrameSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
+		doubleFrameSizePolicy.setHorizontalStretch(1)
+		frameDouble.setSizePolicy(doubleFrameSizePolicy)
+
+		frameDoubleVLayout = QVBoxLayout()
+		frameDouble.setLayout(frameDoubleVLayout)
+		frameDoubleVLayout.addWidget(forgotItLabel,Qt.AlignCenter)
+		frameDoubleVLayout.addWidget(innerFrame,Qt.AlignCenter)
+
+		outerFrameLayout.insertStretch(0,1)
+		#outerFrameLayout.addWidget(loginLabel,Qt.AlignCenter)
+		
+		outerFrameLayout.addWidget(frameDouble)
+		
+		outerFrameLayout.addStretch(1)
+		
+		outerFrame.setLayout(outerFrameLayout)
+
+		mainGrid = QGridLayout()
+		mainGrid.setSpacing(10)
+		mainGrid.addWidget(outerFrame)
+
+
+
+		outerWidgetBox=QtWidgets.QWidget()
+		outerWidgetBox.setLayout(mainGrid)
+		
+		self.setCentralWidget(outerWidgetBox)
+		self.setGeometry(0,0,1500,900)
+		self.setWindowTitle("Forgot Password")
+		
+		self.showMaximized()
+
+	def returnButtonClicked(self):
+
+		self.next=Login()
+		self.next.setStyleSheet('''
+						QMainWindow{
+						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
+						 }
+						 
+						 QLineEdit{
+
+						 font-size: 20px;
+						 border-width: 2px;
+						 border-style: solid;
+						 border-color: None None White None;
+						 border-radius: 0px;
+						 background: rgba(55,55,55,0); 
+						 }
+						 QLabel:loginLabel{
+
+						 font-size: 80px;
+						 }
+						 QLabel{
+
+						 font-size: 20px;
+						 }
+						 QPushButton{
+
+						 background: rgba(55,55,55,255);
+						 }
+
+						 ''')
 		self.next.showMaximized()
 		self.close()
 
@@ -884,6 +1213,10 @@ def window() :
                 			stop:0 rgba(25,25,25,255), stop:1 rgba(55,55,55,255))
 						
 						}
+						QMainWindow:loginPage{
+
+						background-color: #2a82da
+						}
 						QPushButton {
 							font-size: 15px
 
@@ -896,10 +1229,7 @@ def window() :
 
 							font-size: 12px
 						}
-						QLabel:loginLabel{
-
-							font-size: 30px
-						}
+						
 
 						QLineEdit {
 
@@ -913,6 +1243,34 @@ def window() :
 						''')
 	
 	win=Login()
+	win.setStyleSheet('''
+						QMainWindow{
+						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
+						 }
+						 
+						 QLineEdit{
+
+						 font-size: 20px;
+						 border-width: 2px;
+						 border-style: solid;
+						 border-color: None None White None;
+						 border-radius: 0px;
+						 background: rgba(55,55,55,0); 
+						 }
+						 QLabel:loginLabel{
+
+						 font-size: 80px;
+						 }
+						 QLabel{
+
+						 font-size: 20px;
+						 }
+						 QPushButton{
+
+						 background: rgba(55,55,55,255);
+						 }
+
+						 ''')
 	win.showMaximized()
 	sys.exit(app.exec_())#executes the main loop
 
