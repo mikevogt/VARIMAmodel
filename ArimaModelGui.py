@@ -35,7 +35,7 @@ class MyWindow(QMainWindow):
 		self.pVal=2
 		self.dVal=1
 		self.qVal=1
-		self.forecastlength=27
+		self.forecastLength=27
 		self.initUi()
 
 
@@ -162,6 +162,7 @@ class MyWindow(QMainWindow):
 		self.radioButtonOrange.setStyle(QStyleFactory.create('windows'))
 		
 		buttonPlot = QtWidgets.QPushButton("Plot Data")
+		buttonPlot.clicked.connect(self.plotDataClicked)
 
 		labelArimaCustomize = QtWidgets.QLabel("Customize Arima Variables")
 
@@ -177,6 +178,8 @@ class MyWindow(QMainWindow):
 
 		self.pValSpinBox = QtWidgets.QSpinBox()
 		self.pValSpinBox.setValue(2)
+		self.pValSpinBox.setMinimum(0)
+		self.pValSpinBox.setMaximum(5)
 		self.pValSpinBox.valueChanged.connect(self.spinboxChangedPvalue)
 
 		labelDval= QtWidgets.QLabel("D-Value: ")
@@ -191,6 +194,8 @@ class MyWindow(QMainWindow):
 
 		self.dValSpinBox = QtWidgets.QSpinBox()
 		self.dValSpinBox.setValue(1)
+		self.dValSpinBox.setMinimum(0)
+		self.dValSpinBox.setMaximum(2)
 		self.dValSpinBox.valueChanged.connect(self.spinboxChangedDvalue)
 
 		labelQval= QtWidgets.QLabel("Q-Value: ")
@@ -208,9 +213,11 @@ class MyWindow(QMainWindow):
 
 		self.qValSpinBox = QtWidgets.QSpinBox()
 		self.qValSpinBox.setValue(1)
+		self.qValSpinBox.setMinimum(0)
+		self.qValSpinBox.setMaximum(5)
 		self.qValSpinBox.valueChanged.connect(self.spinboxChangedQvalue)
 
-		labelForecastLength = QtWidgets.QLabel("ForecastLength: ")
+		labelForecastLength = QtWidgets.QLabel("forecastLength: ")
 		lineEditForecastLength = QtWidgets.QLineEdit()
 		
 		
@@ -320,11 +327,12 @@ class MyWindow(QMainWindow):
 	def dialSpinBoxValueChanged(self):
 
 		self.dial.setValue(self.dialSpinBox.value())
+		self.forecastLength=self.dial.value()
 
 	def dialValueChanged(self):
 
 		self.dialSpinBox.setValue(self.dial.value())
-		#self.forecastLength=self.dial.value()
+		self.forecastLength=self.dial.value()
 
 
 	def sliderChangedPvalue(self):
@@ -376,6 +384,83 @@ class MyWindow(QMainWindow):
 
 		return rMSE
 
+	def plotDataClicked(self):
+
+		#Determine the colour of the plot bases on user preference
+
+		colourString = "#BF1AED" #Default purple
+		if self.radioButtonPurple.isChecked():
+
+			colourString = "#BF1AED"
+		elif self.radioButtonGreen.isChecked():
+			colourString = "#00E600"
+
+		elif self.radioButtonOrange.isChecked():
+			
+			colourString = "#E46B3C"	
+
+		#If no feature has been select then return and display message box
+		if(self.featuresListWidget.currentItem() == None):
+			#Makes sure a feature is selected. should maybe have this open an alert box instead of printing to the console
+			#If this removed, program will crash if no item is selected
+			print("No feature selected, please select one above")
+			return
+
+
+		plt.clf()
+		self.plotWidget.deleteLater()#Not fully sure if this is neccessary however we should only potentially remove it during polishing
+		
+		shareData = self.data[self.data.Ticker == self.comboBox.currentText()] #Stores a dataFrame of all shares with the selected ticker
+
+			
+		dateColumn = shareData['DateStamps']# takes and stores all the required date stamps
+			
+		pythonDateList =[] #This will store all the date stamps from dateColumn in python datetime format
+
+		for i in range (0,len(dateColumn)) :
+
+			pythonDateList.append(datetime.datetime.strptime(str(dateColumn.iloc[i]),"%Y%m%d"))
+
+
+		#Now we convert all the python datetime objects into matplotlib date format
+		dates = matplotlib.dates.date2num(pythonDateList)
+		
+		#We then access the selected feature column and copy its entire column into y.
+		featureColumnName =self.featuresListWidget.currentItem().text()
+		y= shareData[featureColumnName]
+
+		print(self.comboBox.currentText())
+		print(self.featuresListWidget.currentItem().text())
+			
+		#Plot of y vs dates is now created below
+		fig, ax =plt.subplots()
+		#color='#1AB1ED' for blue
+		#ax.plot(y,linewidth=3,color='#BF1AED')
+		ax.plot_date(dates,y,linewidth = 3,color=colourString,fmt='-', label ="Actual")
+		plt.legend(loc="upper right")
+		ax.grid(linestyle="--")
+		ax.patch.set_facecolor('#323232')
+		fig.patch.set_facecolor('#191919')
+		#fig.patch.set_alpha(0.0)
+		#ax.patch.set_alpha(0.0)
+
+		ax.spines['bottom'].set_color('#ffffff')
+		ax.spines['top'].set_color('#ffffff') 
+		ax.spines['right'].set_color('#ffffff')
+		ax.spines['left'].set_color('#ffffff')
+		ax.tick_params(axis='x', colors='#ffffff')
+		ax.tick_params(axis='y', colors='#ffffff')
+		ax.set_xlabel("Date",fontsize=15)
+		ax.set_ylabel(self.featuresListWidget.currentItem().text(),fontsize=15)
+		ax.yaxis.label.set_color('white')
+		ax.xaxis.label.set_color('white')
+		fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
+
+		self.plotWidget = FigureCanvas(fig) #FigureCanvas is an matplotlib object that can act as a pyqt5 widget
+		self.rightFrameGridLayout.addWidget(self.plotWidget)
+
+
+
 
 	#Currently, this function does not perform a varima model on the selected stock and feature but rather plots the selected stock and feature
 	def varButtonClicker(self):
@@ -417,11 +502,13 @@ class MyWindow(QMainWindow):
 
 				pythonDateList.append(datetime.datetime.strptime(str(dateColumn.iloc[i]),"%Y%m%d"))
 
-			dateDelta = pythonDateList[len(pythonDateList)-1]-pythonDateList[len(pythonDateList)-2]# this date difference varies throughout each share date set and hence 
-																									#may lead to problems
+			#Now we create a date list called pythonForecastDatelist which will contain the last 7 dates plus 20 future dates
+			#in increments of length dateDelta
+			dateDelta = pythonDateList[len(pythonDateList)-1]-pythonDateList[len(pythonDateList)-2]# this date difference varies throughout each share date set and hence may lead to problems																								
 			pythonDateListLast7 =pythonDateList[-7:]																					
 			pythonDateListFuture =[]
-			inDate = pythonDateList[len(pythonDateList)-1]
+			inDate = pythonDateList[len(pythonDateList)-1]#Start date for all future dates
+
 			for i in range(0,20):
 				
 				pythonDateListFuture.append(inDate)
@@ -529,7 +616,9 @@ class MyWindow(QMainWindow):
 			pythonDateListLast7 =pythonDateList[-7:]
 
 			inDate = pythonDateList[len(pythonDateList)-1]
-			for i in range(0,20):
+			print("self.forecast Length-7")
+			print(self.forecastLength-7)
+			for i in range(0,self.forecastLength-7):
 				
 				pythonDateListFuture.append(inDate)
 				inDate=inDate+dateDelta
@@ -563,7 +652,7 @@ class MyWindow(QMainWindow):
 				print("got past model_arima.fit()")
 
 				forcasted=[]
-				forcasted= model_arima_fit.forecast(steps=27)[0]           #What is this zero here meant to signify
+				forcasted= model_arima_fit.forecast(steps=self.forecastLength)[0]           #What is this zero here meant to signify
 				print("got past forecast")
 
 				rmse = self.rootMeanSquareError(forcasted,xValArray)
