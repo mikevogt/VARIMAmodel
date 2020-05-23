@@ -10,3 +10,5 @@
 [![Build Status](https://travis-ci.org/mikevogt/VARIMAmodel.svg?branch=master)](https://travis-ci.org/mikevogt/VARIMAmodel) [![Coverage Status](https://coveralls.io/repos/github/mikevogt/VARIMAmodel/badge.svg?branch=master)](https://coveralls.io/github/mikevogt/VARIMAmodel>?branch=master)
 #Coveralls Badge
 [![Coverage Status](https://coveralls.io/repos/github/mikevogt/VARIMAmodel/badge.svg?branch=master)](https://coveralls.io/github/mikevogt/VARIMAmodel?branch=master)
+
+[![codecov](https://codecov.io/gh/mikevogt/VARIMAmodel/branch/master/graph/badge.svg)](https://codecov.io/gh/mikevogt/VARIMAmodel)
