@@ -19,4 +19,5 @@ install:
 script: coverage -m unittest discover -v
 
 after_success:
+  - codecov
   - coveralls
