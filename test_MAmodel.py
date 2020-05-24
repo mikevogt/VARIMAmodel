@@ -6,11 +6,11 @@ import pandas as pd
 
 from functions import MAmodel
 
-    def differecing(numDiff, shareFeature_data):
+def differecing(numDiff, shareFeature_data):
 
-        data_diff = shareFeature_data.diff(periods=numDiff)
-        data_diff = data_diff[numDiff:]
-        return data_diff
+    data_diff = shareFeature_data.diff(periods=numDiff)
+    data_diff = data_diff[numDiff:]
+    return data_diff
 
 class TestMAmodel(unittest.TestCase):
         
