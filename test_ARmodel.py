@@ -5,15 +5,13 @@ import numpy
 import pandas as pd
 
 from functions import ARmodel
+def differecing(numDiff, shareFeature_data):
+
+    data_diff = shareFeature_data.diff(periods=numDiff)
+    data_diff = data_diff[numDiff:]
+    return data_diff
 
 class TestARmodel(unittest.TestCase):
-
-    def differecing(numDiff, shareFeature_data):
-
-        data_diff = shareFeature_data.diff(periods=numDiff)
-        data_diff = data_diff[numDiff:]
-        return data_diff
-        
 
     def test_ARmodel(self):
 
