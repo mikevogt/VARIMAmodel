@@ -7,8 +7,8 @@ class TestifStationary(unittest.TestCase):
 
     def test_ifStationary(self):
         testData =  pd.read_csv('unit_test.csv',',')
-        a = modelFunctions()
-        result = a.ifStationary(testData)
+        #a = ifStationary()
+        result = ifStationary(testData)
         self.assertEqual(result, 0)
         
 if __name__ == '__main__':
