@@ -16,7 +16,6 @@ class TestARmodel(unittest.TestCase):
         
 
     def test_ARmodel(self):
-        d = modelFunctions()
 
         resultTestData = [-14.67057602, -68.04512658,  20.74505794,  -1.86955487,
         -24.3323447 ,  44.0012286 ,  41.11481005, -55.95581696,
