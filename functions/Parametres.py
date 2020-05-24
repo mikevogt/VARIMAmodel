@@ -5,7 +5,7 @@ from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.stattools import pacf
 from statsmodels.tsa.stattools import acf
 
-def Parametres(self,shareFeatureData):
+def Parametres(shareFeatureData):
     pVal = 0
     dVal = 0  # should not be more then 2
     qVal = 0
