@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QFrame,QGridLayout, 
-    QSplitter, QStyleFactory, QApplication,QVBoxLayout,QStyle, QSizePolicy,QSpacerItem,QMessageBox)
+from PyQt5.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QFrame,QGridLayout,
+	QSplitter, QStyleFactory, QApplication,QVBoxLayout,QStyle, QSizePolicy,QSpacerItem,QMessageBox)
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import (QPalette,QColor,QPixmap,QIcon)
 
@@ -22,15 +22,17 @@ import mysql.connector
 from sshtunnel import SSHTunnelForwarder
 from numpy.linalg import LinAlgError
 
+import bcrypt
+
 #from sklearn.metrics import mean_squared_error
 
 
 class MyWindow(QMainWindow):
 	#MainWindow constructor. Most of the actual construction takes place in the function initUi(self) when it is called
 	def __init__(self):
-		
+
 		super(MyWindow,self).__init__()#This can be written as super().__init__() i think which would make more sense but leave it as is for now
-		self.setWindowIcon(QIcon("testImage.ico")) 
+		self.setWindowIcon(QIcon("testImage.ico"))
 		self.data =pd.read_csv('ProcessedStandardised.csv',';')#Reads in the standardized data from ProcessedStandardised.csv. This file must be in the same directory as varimaGui.py
 		self.pVal=2
 		self.dVal=1
@@ -40,9 +42,9 @@ class MyWindow(QMainWindow):
 
 
 	def initUi(self):
-		
+
 		#The gui for main window is built below. It consists of a central widget called widgetBox which has a gridlayout (called grid) set to it
-		
+
 		widgetBox = QWidget(self)
 		grid = QGridLayout()
 		grid.setSpacing(10)
@@ -60,7 +62,7 @@ class MyWindow(QMainWindow):
 		topLeft = QFrame(self,objectName="topLeft")#Objectname is only used for stylesheet purposes and hence is not needed for declaring most widgets
 		topLeft.setFrameShape(QFrame.Panel)
 		topLeft.setFrameShadow(QFrame.Raised)
-		#builds layout for top left QFrame. 
+		#builds layout for top left QFrame.
 		gridTopLeft = QGridLayout(topLeft)
 		gridTopLeft.setSpacing(10)
 		topLeft.setLayout(gridTopLeft)
@@ -70,34 +72,34 @@ class MyWindow(QMainWindow):
 		buttonImport= QtWidgets.QPushButton("Click herer",objectName="Button1")
 		buttonImport.setText("Import Data")
 		buttonImport.clicked.connect(self.buttonImportFunction)
-		
+
 
 		#Shares label is now made
 		label1 = QtWidgets.QLabel("Shares")
-		
+
 
 		#comboBox is now made
 
-		
+
 		self.comboBox= QtWidgets.QComboBox()
-		
+
 		for share in self.data.Ticker.unique():#For loop that iterates through the unique values in the column called  "Ticker" of self.data
 			#Still need to fix this so that it does not add appostrophes around each share name
 			self.comboBox.addItem(share)
 
 
-		
+
 		#Ignore the block of commets below here
 		#Features scroll area is now made
-		#innerGroupBox is made first. This will have a VBoxLayout containing list of hello worlds. 
+		#innerGroupBox is made first. This will have a VBoxLayout containing list of hello worlds.
 		#it will then be added to a scrollarea via setWidget
 		'''innerGroupBox=QtWidgets.QGroupBox(objectName="featureBox")
 
-		scrollVLayout=QVBoxLayout()	
+		scrollVLayout=QVBoxLayout()
 		featureList=[]
 
 		for i in range(0,35):
-			
+
 			featureList.append(QtWidgets.QLabel("Hello World "+str(i)))
 			scrollVLayout.addWidget(featureList[i])
 
@@ -115,7 +117,7 @@ class MyWindow(QMainWindow):
 
 
 		#Next, the features scroll list (called featuresListWidget) is made using a QListWidget() within a QGroupBox()
-		
+
 		self.featuresListWidget = QtWidgets.QListWidget()
 		self.featuresListWidget.setAlternatingRowColors(True)
 
@@ -127,15 +129,15 @@ class MyWindow(QMainWindow):
 
 		listWidgetGroupBox=QtWidgets.QGroupBox("Features")#Outer groupBox to house the features list widget
 		listWidgetGroupBoxLayout=QtWidgets.QVBoxLayout()
-		listWidgetGroupBox.setLayout(listWidgetGroupBoxLayout)		
-		listWidgetGroupBoxLayout.addWidget(self.featuresListWidget)#featuresListWidget is first added to the groupbox	
-		
+		listWidgetGroupBox.setLayout(listWidgetGroupBoxLayout)
+		listWidgetGroupBoxLayout.addWidget(self.featuresListWidget)#featuresListWidget is first added to the groupbox
+
 		#All widgets are then added to the top left grid
 		gridTopLeft.addWidget(buttonImport,0,0,1,4)
 		gridTopLeft.addWidget(label1,1,0)
 		gridTopLeft.addWidget(self.comboBox,1,1,1,3)
 		gridTopLeft.addWidget(listWidgetGroupBox,2,0,4,4)# the groupbox (listWidgetGroupBox) is added to the top left grid completing the placement of the features list
-		
+
 
 		#############################################################################################################################################
 		############################################### Bottom left frame is built and populated below ##############################################
@@ -149,7 +151,7 @@ class MyWindow(QMainWindow):
 		bottomLeft.setLayout(bottomLeftGridLayout)
 
 		#Next, each item in the bottom left frame is created without adding it to the layout just yet
-		
+
 		labelPlotCustomize = QtWidgets.QLabel("Customize Main Plot line:")
 
 		labelPlotColour = QtWidgets.QLabel("Plot line colour:")
@@ -160,7 +162,7 @@ class MyWindow(QMainWindow):
 		self.radioButtonPurple.setStyle(QStyleFactory.create('windows'))
 		self.radioButtonOrange = QtWidgets.QRadioButton("Orange")
 		self.radioButtonOrange.setStyle(QStyleFactory.create('windows'))
-		
+
 		buttonPlot = QtWidgets.QPushButton("Plot Data")
 		buttonPlot.clicked.connect(self.plotDataClicked)
 
@@ -209,7 +211,7 @@ class MyWindow(QMainWindow):
 		self.sliderQval.setTickInterval(1)
 		self.sliderQval.setSingleStep(1)
 		self.sliderQval.valueChanged.connect(self.sliderChangedQvalue)
-		
+
 
 		self.qValSpinBox = QtWidgets.QSpinBox()
 		self.qValSpinBox.setValue(1)
@@ -219,14 +221,14 @@ class MyWindow(QMainWindow):
 
 		labelForecastLength = QtWidgets.QLabel("forecastLength: ")
 		lineEditForecastLength = QtWidgets.QLineEdit()
-		
-		
+
+
 		self.dialSpinBox = QtWidgets.QSpinBox()
 		self.dialSpinBox.setValue(27)
 		self.dialSpinBox.setMaximum(37)
 		self.dialSpinBox.setMinimum(7)
 		self.dialSpinBox.valueChanged.connect(self.dialSpinBoxValueChanged)
-		self.dial = QtWidgets.QDial()	
+		self.dial = QtWidgets.QDial()
 		self.dial.setMinimum(7)
 		self.dial.setMaximum(37)
 		self.dial.setValue(27)
@@ -236,51 +238,51 @@ class MyWindow(QMainWindow):
 
 		buttonArima = QtWidgets.QPushButton("Estimate using ARIMA")
 		buttonArima.clicked.connect(self.varButtonClicker)
-		
+
 		logoutButton = QtWidgets.QPushButton("Logout")
 		logoutButton.clicked.connect(self.logoutButtonClicked)
 
 
 		#Now each item created above is added to the grid layout for the bottom left frame
-		
+
 		bottomLeftGridLayout.addWidget(labelPlotCustomize,0,0,1,7)
 
 		bottomLeftGridLayout.addWidget(labelPlotColour,1,0,1,1)
 		bottomLeftGridLayout.addWidget(self.radioButtonPurple,1,1,1,2)
 		bottomLeftGridLayout.addWidget(self.radioButtonGreen,1,3,1,2)
 		bottomLeftGridLayout.addWidget(self.radioButtonOrange,1,5,1,2)
-		
+
 		bottomLeftGridLayout.addWidget(buttonPlot,2,0,1,7)
-		
+
 		bottomLeftGridLayout.addWidget(labelArimaCustomize,3,0,1,7)
-		
+
 		bottomLeftGridLayout.addWidget(labelPval,4,0,1,1)
 		bottomLeftGridLayout.addWidget(self.pValSpinBox,4,1,1,1)
 		bottomLeftGridLayout.addWidget(self.sliderPval,4,2,1,5)
-		
+
 		bottomLeftGridLayout.addWidget(labelDval,5,0,1,1)
 		bottomLeftGridLayout.addWidget(self.dValSpinBox,5,1,1,1)
 		bottomLeftGridLayout.addWidget(self.sliderDval,5,2,1,5)
-		
+
 		bottomLeftGridLayout.addWidget(labelQval,6,0,1,1)
 		bottomLeftGridLayout.addWidget(self.qValSpinBox,6,1,1,1)
 		bottomLeftGridLayout.addWidget(self.sliderQval,6,2,1,5)
-		
-		bottomLeftGridLayout.addWidget(labelForecastLength,7,0,1,1)	
-		bottomLeftGridLayout.addWidget(self.dialSpinBox,7,1,1,5)	
+
+		bottomLeftGridLayout.addWidget(labelForecastLength,7,0,1,1)
+		bottomLeftGridLayout.addWidget(self.dialSpinBox,7,1,1,5)
 		bottomLeftGridLayout.addWidget(self.dial,7,6,1,1)
-		
+
 		bottomLeftGridLayout.addWidget(buttonArima,8,0,1,7)
 		bottomLeftGridLayout.addWidget(logoutButton,9,0,1,7)
-		
-		
-		
+
+
+
 		############################################################################################################################################
 		################################################# Right frame is now built and populated ###################################################
 		############################################################################################################################################
 
 		#builds right QFrame and sets a grid layout for it
-		right = QFrame(self)		
+		right = QFrame(self)
 		right.setFrameShape(QFrame.Panel)
 		right.setFrameShadow(QFrame.Raised)
 		self.rightFrameGridLayout=QGridLayout()
@@ -304,13 +306,13 @@ class MyWindow(QMainWindow):
 	def plotEmptyAxis(self):
 
 		fig, ax =plt.subplots()
-		
+
 		ax.grid(linestyle="--")
 		ax.patch.set_facecolor('#323232')
 		fig.patch.set_facecolor('#191919')
 
 		ax.spines['bottom'].set_color('#ffffff')
-		ax.spines['top'].set_color('#ffffff') 
+		ax.spines['top'].set_color('#ffffff')
 		ax.spines['right'].set_color('#ffffff')
 		ax.spines['left'].set_color('#ffffff')
 		ax.tick_params(axis='x', colors='#ffffff')
@@ -340,7 +342,7 @@ class MyWindow(QMainWindow):
 
 		self.pValSpinBox.setValue(self.sliderPval.value())
 		self.pVal =self.sliderPval.value()
-	
+
 	def sliderChangedDvalue(self):
 
 		self.dValSpinBox.setValue(self.sliderDval.value())
@@ -360,7 +362,7 @@ class MyWindow(QMainWindow):
 		self.sliderDval.setValue(self.dValSpinBox.value())
 		self.dVal = self.dValSpinBox.value()
 
-	def spinboxChangedQvalue(self):	
+	def spinboxChangedQvalue(self):
 
 		self.sliderQval.setValue(self.qValSpinBox.value())
 		self.qVal = self.qValSpinBox.value()
@@ -370,12 +372,12 @@ class MyWindow(QMainWindow):
 		#So far there is no purpose to this button however we may be able to think of one or replace it etc
 		#self.data =pd.read_csv('ProcessedNonStandardised.csv',';')
 		print("button import pressed")
-		
+
 
 	def rootMeanSquareError(self,forecastValues,actualValues): # Havent tested if this gives the correct output yet
 
 		sum =0.0
-		
+
 		for i in range(0,7):
 
 			sum = sum +(forecastValues[i]-actualValues[len(actualValues)-7+i])**2
@@ -396,8 +398,8 @@ class MyWindow(QMainWindow):
 			colourString = "#00E600"
 
 		elif self.radioButtonOrange.isChecked():
-			
-			colourString = "#E46B3C"	
+
+			colourString = "#E46B3C"
 
 		#If no feature has been select then return and display message box
 		if(self.featuresListWidget.currentItem() == None):
@@ -409,12 +411,12 @@ class MyWindow(QMainWindow):
 
 		plt.clf()
 		self.plotWidget.deleteLater()#Not fully sure if this is neccessary however we should only potentially remove it during polishing
-		
+
 		shareData = self.data[self.data.Ticker == self.comboBox.currentText()] #Stores a dataFrame of all shares with the selected ticker
 
-			
+
 		dateColumn = shareData['DateStamps']# takes and stores all the required date stamps
-			
+
 		pythonDateList =[] #This will store all the date stamps from dateColumn in python datetime format
 
 		for i in range (0,len(dateColumn)) :
@@ -424,14 +426,14 @@ class MyWindow(QMainWindow):
 
 		#Now we convert all the python datetime objects into matplotlib date format
 		dates = matplotlib.dates.date2num(pythonDateList)
-		
+
 		#We then access the selected feature column and copy its entire column into y.
 		featureColumnName =self.featuresListWidget.currentItem().text()
 		y= shareData[featureColumnName]
 
 		print(self.comboBox.currentText())
 		print(self.featuresListWidget.currentItem().text())
-			
+
 		#Plot of y vs dates is now created below
 		fig, ax =plt.subplots()
 		#color='#1AB1ED' for blue
@@ -445,7 +447,7 @@ class MyWindow(QMainWindow):
 		#ax.patch.set_alpha(0.0)
 
 		ax.spines['bottom'].set_color('#ffffff')
-		ax.spines['top'].set_color('#ffffff') 
+		ax.spines['top'].set_color('#ffffff')
 		ax.spines['right'].set_color('#ffffff')
 		ax.spines['left'].set_color('#ffffff')
 		ax.tick_params(axis='x', colors='#ffffff')
@@ -464,7 +466,7 @@ class MyWindow(QMainWindow):
 
 	#Currently, this function does not perform a varima model on the selected stock and feature but rather plots the selected stock and feature
 	def varButtonClicker(self):
-		
+
 		#self.featuresListWidget.currentItem().text() is the text of the item selected in the featuresList widget
 		#self.comboBox.currentText() is the text of the item selected in the drop down list. namely the share
 
@@ -476,8 +478,8 @@ class MyWindow(QMainWindow):
 			colourString = "#00E600"
 
 		elif self.radioButtonOrange.isChecked():
-			
-			colourString = "#E46B3C"	
+
+			colourString = "#E46B3C"
 
 
 		if(self.featuresListWidget.currentItem() == None):
@@ -485,17 +487,17 @@ class MyWindow(QMainWindow):
 			#If this removed, program will crash if no item is selected
 			print("No feature selected, please select one above")
 			return
-		
-		
+
+
 
 		if self.rightFrameGridLayout.itemAt(0) == None : #Checks if there is a plot already there
-			
+
 			plt.clf()
 			shareData = self.data[self.data.Ticker == self.comboBox.currentText()] #Stores a dataFrame of all shares with the selected ticker
 
-			
+
 			dateColumn = shareData['DateStamps']# takes and stores all the required date stamps
-			
+
 			pythonDateList =[] #This will store all the date stamps from dateColumn in python datetime format
 
 			for i in range (0,len(dateColumn)) :
@@ -504,13 +506,13 @@ class MyWindow(QMainWindow):
 
 			#Now we create a date list called pythonForecastDatelist which will contain the last 7 dates plus 20 future dates
 			#in increments of length dateDelta
-			dateDelta = pythonDateList[len(pythonDateList)-1]-pythonDateList[len(pythonDateList)-2]# this date difference varies throughout each share date set and hence may lead to problems																								
-			pythonDateListLast7 =pythonDateList[-7:]																					
+			dateDelta = pythonDateList[len(pythonDateList)-1]-pythonDateList[len(pythonDateList)-2]# this date difference varies throughout each share date set and hence may lead to problems
+			pythonDateListLast7 =pythonDateList[-7:]
 			pythonDateListFuture =[]
 			inDate = pythonDateList[len(pythonDateList)-1]#Start date for all future dates
 
 			for i in range(0,20):
-				
+
 				pythonDateListFuture.append(inDate)
 				inDate=inDate+dateDelta
 
@@ -542,7 +544,7 @@ class MyWindow(QMainWindow):
 
 			print(self.comboBox.currentText())
 			print(self.featuresListWidget.currentItem().text())
-			
+
 			model_arima = ARIMA(train,order=(self.pVal,self.dVal,self.qVal))
 			print("got past Arima(train,order=(2,1,1))")
 			model_arima_fit = model_arima.fit()
@@ -571,7 +573,7 @@ class MyWindow(QMainWindow):
 			#ax.patch.set_alpha(0.0)
 
 			ax.spines['bottom'].set_color('#ffffff')
-			ax.spines['top'].set_color('#ffffff') 
+			ax.spines['top'].set_color('#ffffff')
 			ax.spines['right'].set_color('#ffffff')
 			ax.spines['left'].set_color('#ffffff')
 			ax.tick_params(axis='x', colors='#ffffff')
@@ -585,31 +587,31 @@ class MyWindow(QMainWindow):
 
 			self.plotWidget = FigureCanvas(fig) #FigureCanvas is an matplotlib object that can act as a pyqt5 widget
 			self.rightFrameGridLayout.addWidget(self.plotWidget)
-			
+
 		else :# This is entered if there is a plot already in the frame
 
 
 
 			plt.clf()
 			self.plotWidget.deleteLater() #existing plot widget is initially deleted. not sure if this actually works or not. TEst later. Also, the
-											#existing figure should be deleted here as well. Not quite sure how to do this though but i think making 
+											#existing figure should be deleted here as well. Not quite sure how to do this though but i think making
 											#ax and fig into class variables and then calling plt.clf() should do it.
-			
-			
+
+
 			#Stores a dataFrame of all shares with the selected ticker
 			shareData = self.data[self.data.Ticker == self.comboBox.currentText()]
-			
-			# takes and stores all the required date stamps			
+
+			# takes and stores all the required date stamps
 			dateColumn = shareData['DateStamps']
 
 			#This will store all the date stamps from dateColumn in python datetime format
 			pythonDateList =[]
 			for i in range (0,len(dateColumn)) :
-				
+
 				pythonDateList.append(datetime.datetime.strptime(str(dateColumn.iloc[i]),"%Y%m%d"))
 
 
-			dateDelta = pythonDateList[len(pythonDateList)-1]-pythonDateList[len(pythonDateList)-2]# this date difference varies throughout each share date set and hence 
+			dateDelta = pythonDateList[len(pythonDateList)-1]-pythonDateList[len(pythonDateList)-2]# this date difference varies throughout each share date set and hence
 																									#may lead to problems
 
 			pythonDateListFuture =[]
@@ -619,7 +621,7 @@ class MyWindow(QMainWindow):
 			print("self.forecast Length-7")
 			print(self.forecastLength-7)
 			for i in range(0,self.forecastLength-7):
-				
+
 				pythonDateListFuture.append(inDate)
 				inDate=inDate+dateDelta
 
@@ -660,7 +662,7 @@ class MyWindow(QMainWindow):
 				print(rmse)
 				forecastUpperError = forcasted + rmse
 				forecastLowerError = forcasted - rmse
-			
+
 				#Plot of y vs dates is now created below
 				fig, ax =plt.subplots()#Fig must be deleted  later so as not consume memory
 				#color='#1AB1ED' for blue
@@ -671,12 +673,12 @@ class MyWindow(QMainWindow):
 				ax.plot_date(forecastDates,forecastLowerError,linewidth = 3, color='#ff0066', fmt='--')
 				plt.legend(loc="upper right")
 				ax.grid(linestyle="--")
-				ax.patch.set_facecolor('#323232')			
+				ax.patch.set_facecolor('#323232')
 				fig.patch.set_facecolor('#191919')
 				#fig.patch.set_alpha(0.0)
 				#ax.patch.set_alpha(0.0)
 				ax.spines['bottom'].set_color('#ffffff')
-				ax.spines['top'].set_color('#ffffff') 
+				ax.spines['top'].set_color('#ffffff')
 				ax.spines['right'].set_color('#ffffff')
 				ax.spines['left'].set_color('#ffffff')
 				ax.tick_params(axis='x', colors='#ffffff')
@@ -686,32 +688,32 @@ class MyWindow(QMainWindow):
 				fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
 				ax.yaxis.label.set_color('white')
 				ax.xaxis.label.set_color('white')
-			
+
 				#fig.savefig('temp.png', transparent=True)
 
 				self.plotWidget = FigureCanvas(fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
 				self.rightFrameGridLayout.addWidget(self.plotWidget)
 
 			except LinAlgError as err:
-				
+
 				print(err)
-				
+
 				alertMessage=QMessageBox()
 				alertMessage.setWindowTitle("Data Invalid")
 				alertMessage.setText("The Singular Value Decomposition(SVG) did not converge.\nPlease choose a different model order or data set")
 				alertMessage.setIcon(QMessageBox.Warning)
-				alertMessage.setWindowIcon(QIcon("testImage.ico")) 	
+				alertMessage.setWindowIcon(QIcon("testImage.ico"))
 				x=alertMessage.exec_()
 
 				self.plotEmptyAxis()
 
 			except ValueError as err:
-				
+
 				alertMessage=QMessageBox()
 				alertMessage.setWindowTitle("Data Invalid")
 				alertMessage.setText("The Singular Value Decomposition(SVG) did not converge.\nPlease choose a different model order or data set")
 				alertMessage.setIcon(QMessageBox.Warning)
-				alertMessage.setWindowIcon(QIcon("testImage.ico")) 				
+				alertMessage.setWindowIcon(QIcon("testImage.ico"))
 				x=alertMessage.exec_()
 
 				self.plotEmptyAxis()
@@ -719,9 +721,9 @@ class MyWindow(QMainWindow):
 			#right.setLayout(self.rightFrameGridLayout)
 
 
-	
+
 	def logoutButtonClicked (self):
-		
+
 		self.next=Login()
 		self.next.showMaximized()
 		self.close()
@@ -731,18 +733,18 @@ class Register(QMainWindow):
 
 	def __init__(self):
 		super().__init__()
-		self.setWindowIcon(QIcon("testImage.ico")) 
+		self.setWindowIcon(QIcon("testImage.ico"))
 		self.setStyleSheet('''
 						QMainWindow{
 						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
-						 }						 
+						 }
 						 QLineEdit{
 						 font-size: 20px;
 						 border-width: 2px;
 						 border-style: solid;
 						 border-color: None None White None;
 						 border-radius: 0px;
-						 background: rgba(55,55,55,0); 
+						 background: rgba(55,55,55,0);
 						 }
 						 QLabel:loginLabel{
 						 font-size: 80px;
@@ -777,13 +779,13 @@ class Register(QMainWindow):
 		innerFrame.setFrameShape(QFrame.Panel)
 		innerFrame.setFrameShadow(QFrame.Raised)
 		innerFrame.setStyleSheet("""QFrame{background: rgba(90,90,90,100);}""")
-		
+
 
 		innerFrameLayout= QGridLayout()
 		innerFrameLayout.setSpacing(30)
 		innerFrameLayout.setContentsMargins(20,20,20,20)
 		innerFrame.setLayout(innerFrameLayout)
-		
+
 		explainLabel = QtWidgets.QLabel("Create an account by filling in the required fields below and \n                    then clicking Create Account button.")
 		explainLabel.setStyleSheet("background: rgba(19,18,18,0);")
 		explainLabelSP = QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
@@ -806,7 +808,7 @@ class Register(QMainWindow):
 
 		registerButton = QtWidgets.QPushButton("Create Account")
 		registerButton.clicked.connect(self.registerButtonFunction)
-		
+
 		returnButton= QtWidgets.QPushButton("Return to Mainpage")
 		returnButton.clicked.connect(self.returnButtonClicked)
 
@@ -814,7 +816,7 @@ class Register(QMainWindow):
 		logo.setStyleSheet("""background: rgba(90,90,90,0);""")
 		logoSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
 		logo.setSizePolicy(logoSizePolicy)
-		
+
 		pixmap = QPixmap("testImage.ico")
 		logo.setPixmap(pixmap)
 		logo.setAlignment(Qt.AlignCenter)
@@ -846,11 +848,11 @@ class Register(QMainWindow):
 		frameDoubleVLayout.addWidget(innerFrame,Qt.AlignCenter)
 
 		outerFrameLayout.insertStretch(0,1)
-		
+
 		outerFrameLayout.addWidget(frameDouble)
-		
+
 		outerFrameLayout.addStretch(1)
-		
+
 		outerFrame.setLayout(outerFrameLayout)
 
 		mainGrid = QGridLayout()
@@ -860,10 +862,10 @@ class Register(QMainWindow):
 		outerWidgetBox=QtWidgets.QWidget()
 		outerWidgetBox.setLayout(mainGrid)
 
-	
+
 		self.setCentralWidget(outerWidgetBox)
 		self.setGeometry(0,0,1500,900)
-		self.setWindowTitle("Register")		
+		self.setWindowTitle("Register")
 		self.showMaximized()
 
 
@@ -871,6 +873,8 @@ class Register(QMainWindow):
 
 		inUserName= self.usernameLineEdit.text()
 		inUserPassword = self.passwordLineEdit.text()
+		inUserEmail = self.emailAddressLineEdit.text()
+		hashUserPassword = bcrypt.hashpw(inUserPassword.encode('utf-8'), bcrypt.gensalt())
 
 		if(len(inUserPassword)==0 or len(inUserName)==0):
 
@@ -878,15 +882,15 @@ class Register(QMainWindow):
 			alertMessage.setWindowTitle("Registration Failed")
 			alertMessage.setText("Please enter a username, password and email address to register.")
 			alertMessage.setIcon(QMessageBox.Information)
-			alertMessage.setWindowIcon(QIcon("testImage.ico")) 					
+			alertMessage.setWindowIcon(QIcon("testImage.ico"))
 			x=alertMessage.exec_()
 			return
 
 		server = SSHTunnelForwarder(
-    		'146.141.21.92',
-    		ssh_username='s1533169',
-    		ssh_password='dingun123',
-    		remote_bind_address=('127.0.0.1', 3306)
+			'146.141.21.92',
+			ssh_username='s1533169',
+			ssh_password='dingun123',
+			remote_bind_address=('127.0.0.1', 3306)
 		)
 		server.start()
 
@@ -905,9 +909,9 @@ class Register(QMainWindow):
 		print(myresult)
 
 		if(len(myresult)==0):
-			
-			sqlInsertCommand ="INSERT INTO ARIMA_USERS VALUES(%s,%s)"
-			usernamePasswordPair=(inUserName,inUserPassword)
+
+			sqlInsertCommand ="INSERT INTO ARIMA_USERS VALUES(%s,%s,%s)"
+			usernamePasswordPair=(inUserName,hashUserPassword,inUserEmail)
 			mycursor.execute(sqlInsertCommand,usernamePasswordPair)
 
 			mydb.commit()
@@ -929,12 +933,12 @@ class Register(QMainWindow):
 			alertMessage.setWindowTitle("Registration Failed")
 			alertMessage.setText("The username you have requested already exists. Please try another one.")
 			alertMessage.setIcon(QMessageBox.Information)
-			alertMessage.setWindowIcon(QIcon("testImage.ico")) 					
+			alertMessage.setWindowIcon(QIcon("testImage.ico"))
 			x=alertMessage.exec_()
 			print("UserName already exists, Please try another")
 			print("got past create table")
-			
-		
+
+
 	def returnButtonClicked(self):
 
 		self.next=Login()
@@ -948,18 +952,18 @@ class Login(QMainWindow):
 
 	def __init__(self):#Constructor for the login page. All the construction takes place in self.initUi()
 		super().__init__()
-		self.setWindowIcon(QIcon("testImage.ico")) 
+		self.setWindowIcon(QIcon("testImage.ico"))
 		self.setStyleSheet('''
 						QMainWindow{
 						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
-						 }						 
+						 }
 						 QLineEdit{
 						 font-size: 20px;
 						 border-width: 2px;
 						 border-style: solid;
 						 border-color: None None White None;
 						 border-radius: 0px;
-						 background: rgba(55,55,55,0); 
+						 background: rgba(55,55,55,0);
 						 }
 						 QLabel:loginLabel{
 						 font-size: 80px;
@@ -999,26 +1003,26 @@ class Login(QMainWindow):
 		innerFrameLayout.setSpacing(30)
 		innerFrameLayout.setContentsMargins(20,20,20,20)
 		innerFrame.setLayout(innerFrameLayout)
-		
+
 		#Makes logo label and places logo image inside it
 		logoLabel = QtWidgets.QLabel()
 		logoLabel.setStyleSheet("""background: rgba(90,90,90,0);""")
 		logoLabelSizePolicy=QSizePolicy(QSizePolicy.Maximum,QSizePolicy.Maximum)
-		logoLabel.setSizePolicy(logoLabelSizePolicy)		
+		logoLabel.setSizePolicy(logoLabelSizePolicy)
 		pixmap = QPixmap("testImage.ico")
 		logoLabel.setPixmap(pixmap)
 		logoLabel.setAlignment(Qt.AlignCenter)
-		
+
 
 		userNameLabel = QtWidgets.QLabel("Username:")
 		userNameLabel.setStyleSheet("""background: rgba(90,90,90,0);""")
-		self.usernameLineEditLogin = QtWidgets.QLineEdit()		
+		self.usernameLineEditLogin = QtWidgets.QLineEdit()
 
 		passwordLabel = QtWidgets.QLabel("Password:")
 		passwordLabel.setStyleSheet("""background: rgba(90,90,90,0);""")
 		self.passwordLineEditLogin=QtWidgets.QLineEdit()
 		self.passwordLineEditLogin.setEchoMode(2)
-		
+
 		loginButton = QtWidgets.QPushButton("Login")
 		loginButton.clicked.connect(self.loginButtonFunction)
 
@@ -1050,7 +1054,7 @@ class Login(QMainWindow):
 		innerFrameLayout.addWidget(forgotPasswordButton,3,0)
 		innerFrameLayout.addWidget(goRegisterButton,4,0)
 		innerFrameLayout.addWidget(quitProgramButton,5,0)
-		
+
 
 		frameDouble = QtWidgets.QFrame()
 		doubleFrameSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
@@ -1065,7 +1069,7 @@ class Login(QMainWindow):
 		outerFrameLayout.insertStretch(0,1)
 		outerFrameLayout.addWidget(frameDouble)
 		outerFrameLayout.addStretch(1)
-		
+
 		outerFrame.setLayout(outerFrameLayout)
 
 		mainGrid = QGridLayout()
@@ -1075,15 +1079,15 @@ class Login(QMainWindow):
 
 		outerWidgetBox=QtWidgets.QWidget()
 		outerWidgetBox.setLayout(mainGrid)
-		
+
 		self.setCentralWidget(outerWidgetBox)
 		self.setGeometry(0,0,1500,900)
 		self.setWindowTitle("Login")
-		
+
 		self.showMaximized()
 
 	def loginButtonFunction(self):
-		
+
 		inUserName= self.usernameLineEditLogin.text()
 		inUserPassword = self.passwordLineEditLogin.text()
 
@@ -1093,17 +1097,17 @@ class Login(QMainWindow):
 			alertMessage.setWindowTitle("Login Failed")
 			alertMessage.setText("Please enter both a username and password to login.")
 			alertMessage.setIcon(QMessageBox.Information)
-			alertMessage.setWindowIcon(QIcon("testImage.ico")) 					
+			alertMessage.setWindowIcon(QIcon("testImage.ico"))
 			x=alertMessage.exec_()
 			return
 
 
 
 		server = SSHTunnelForwarder(
-    		'146.141.21.92',
-    		ssh_username='s1533169',
-    		ssh_password='dingun123',
-    		remote_bind_address=('127.0.0.1', 3306)
+			'146.141.21.92',
+			ssh_username='s1533169',
+			ssh_password='dingun123',
+			remote_bind_address=('127.0.0.1', 3306)
 		)
 		server.start()
 
@@ -1120,26 +1124,28 @@ class Login(QMainWindow):
 		myresult=mycursor.fetchall()
 		print("fetchall result")
 		print(myresult)
+		hashedPwd = myresult[0][1]
+		hp = bcrypt.hashpw(inUserPassword.encode('utf8'), hashedPwd.encode('utf8'))
 
 		if(len(myresult)==0):
-			
+
 			mydb.close()
 			server.close()
 			alertMessage=QMessageBox()
 			alertMessage.setWindowTitle("Login Failed")
 			alertMessage.setText("The username or password you entered is incorrect.")
 			alertMessage.setIcon(QMessageBox.Information)
-			alertMessage.setWindowIcon(QIcon("testImage.ico"))				
+			alertMessage.setWindowIcon(QIcon("testImage.ico"))
 			x=alertMessage.exec_()
 			print("The account you entered does not exist, Please try again")
-			
-			
 
-			
+
+
+
 		else:
 
-			if(myresult[0][1]==inUserPassword):
-				
+			if(hp == hashedPwd.encode('utf-8')):
+
 				mydb.close()
 				server.close()
 
@@ -1155,13 +1161,13 @@ class Login(QMainWindow):
 				alertMessage.setWindowTitle("Login Failed")
 				alertMessage.setText("The username or password you entered is incorrect.")
 				alertMessage.setIcon(QMessageBox.Information)
-				alertMessage.setWindowIcon(QIcon("testImage.ico"))				
+				alertMessage.setWindowIcon(QIcon("testImage.ico"))
 				x=alertMessage.exec_()
 				print("incorrect password, please try again")
-				
 
 
-		
+
+
 
 	def goRegisterButtonFunction(self):
 
@@ -1170,7 +1176,7 @@ class Login(QMainWindow):
 		self.close()
 
 	def forgotPasswordClicked(self):
-		self.next=ForgotPasswordPage()		
+		self.next=ForgotPasswordPage()
 		self.next.showMaximized()
 		self.close()
 		print("Forgot password clicked")
@@ -1187,14 +1193,14 @@ class ForgotPasswordPage(QMainWindow):
 		self.setStyleSheet('''
 						QMainWindow{
 						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
-						 }						 
+						 }
 						 QLineEdit{
 						 font-size: 20px;
 						 border-width: 2px;
 						 border-style: solid;
 						 border-color: None None White None;
 						 border-radius: 0px;
-						 background: rgba(55,55,55,0); 
+						 background: rgba(55,55,55,0);
 						 }
 						 QLabel:loginLabel{
 						 font-size: 80px;
@@ -1205,7 +1211,7 @@ class ForgotPasswordPage(QMainWindow):
 						 QPushButton{
 						 background: rgba(55,55,55,255);
 						 }''')
-		 
+
 		self.initUi()
 
 	def initUi(self) :
@@ -1228,13 +1234,13 @@ class ForgotPasswordPage(QMainWindow):
 		innerFrame.setFrameShape(QFrame.Panel)
 		innerFrame.setFrameShadow(QFrame.Raised)
 		innerFrame.setStyleSheet("""QFrame{background: rgba(90,90,90,100);}""")
-		
+
 
 		innerFrameLayout= QGridLayout()
 		innerFrameLayout.setSpacing(30)
 		innerFrameLayout.setContentsMargins(20,20,20,20)
 		innerFrame.setLayout(innerFrameLayout)
-		
+
 		explainLabel = QtWidgets.QLabel("No worries, just type in your username and email Address below and we\n                               will have it sent to you shortly!")
 		explainLabel.setStyleSheet("background: rgba(19,18,18,0);")
 		explainLabelSP = QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
@@ -1257,7 +1263,7 @@ class ForgotPasswordPage(QMainWindow):
 		logo.setStyleSheet("""background: rgba(90,90,90,0);""")
 		logoSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
 		logo.setSizePolicy(logoSizePolicy)
-		
+
 		pixmap = QPixmap("testImage.ico")
 		logo.setPixmap(pixmap)
 		logo.setAlignment(Qt.AlignCenter)
@@ -1283,11 +1289,11 @@ class ForgotPasswordPage(QMainWindow):
 
 		outerFrameLayout.insertStretch(0,1)
 		#outerFrameLayout.addWidget(loginLabel,Qt.AlignCenter)
-		
+
 		outerFrameLayout.addWidget(frameDouble)
-		
+
 		outerFrameLayout.addStretch(1)
-		
+
 		outerFrame.setLayout(outerFrameLayout)
 
 		mainGrid = QGridLayout()
@@ -1296,11 +1302,11 @@ class ForgotPasswordPage(QMainWindow):
 
 		outerWidgetBox=QtWidgets.QWidget()
 		outerWidgetBox.setLayout(mainGrid)
-		
+
 		self.setCentralWidget(outerWidgetBox)
 		self.setGeometry(0,0,1500,900)
 		self.setWindowTitle("Forgot Password")
-		
+
 		self.showMaximized()
 
 	def returnButtonClicked(self):
@@ -1311,7 +1317,7 @@ class ForgotPasswordPage(QMainWindow):
 
 def window() :
 	app=QApplication(sys.argv)#required for all GUIs
-	
+
 	#Style of app and color theme are set below
 	app.setStyle("fusion")
 
@@ -1333,10 +1339,10 @@ def window() :
 	app.setPalette(dark_palette)
 
 	#Style sheet of app is then set. Maybe add this to a new file if it gets too large
-	app.setStyleSheet('''QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }					
+	app.setStyleSheet('''QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }
 						QMainWindow{
 						 background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-                			stop:0 rgba(25,25,25,255), stop:1 rgba(55,55,55,255))					
+							stop:0 rgba(25,25,25,255), stop:1 rgba(55,55,55,255))
 						}
 						QMainWindow:loginPage{
 
@@ -1353,15 +1359,15 @@ def window() :
 						}
 						QLineEdit {
 							border-width: 1px;
-    						border-style: ridge;
-   							border-color: rgb(42,130,218);
-   							border-radius: 4px;}
-   						QMessageBox QPushButton{
-   							background: rgba(55,55,55,255);
-   						}
+							border-style: ridge;
+							border-color: rgb(42,130,218);
+							border-radius: 4px;}
+						QMessageBox QPushButton{
+							background: rgba(55,55,55,255);
+						}
 
-   							''')
-	
+							''')
+
 	win=Login()
 	win.showMaximized()
 	sys.exit(app.exec_())#executes the main loop
@@ -1376,8 +1382,8 @@ window()
 '''QCheckBox:indicator{
 
 							border-width: 1px;
-    						border-style: ridge;
-   							border-color: rgb(42,130,218);
-   							border-radius: 4px;
+							border-style: ridge;
+							border-color: rgb(42,130,218);
+							border-radius: 4px;
 
 }'''
