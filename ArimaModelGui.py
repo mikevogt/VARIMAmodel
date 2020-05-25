@@ -1124,8 +1124,7 @@ class Login(QMainWindow):
 		myresult=mycursor.fetchall()
 		print("fetchall result")
 		print(myresult)
-		hashedPwd = myresult[0][1]
-		hp = bcrypt.hashpw(inUserPassword.encode('utf8'), hashedPwd.encode('utf8'))
+
 
 		if(len(myresult)==0):
 
@@ -1143,6 +1142,9 @@ class Login(QMainWindow):
 
 
 		else:
+
+			hashedPwd = myresult[0][1]
+			hp = bcrypt.hashpw(inUserPassword.encode('utf8'), hashedPwd.encode('utf8'))
 
 			if(hp == hashedPwd.encode('utf-8')):
 
