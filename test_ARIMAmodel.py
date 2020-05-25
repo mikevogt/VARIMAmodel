@@ -13,7 +13,7 @@ def differecing(numDiff, shareFeature_data):
 
 class TestARIMAmodel(unittest.TestCase):
 
-    def test_ARIMAmodel():
+    def test_ARIMAmodel(self):
 
         resultTestData =[-5.28963772,  1.6839004,  -2.01805453, -0.05284403, -1.09609074, -0.54227541,
          -0.83627243, -0.68020191, -0.76305311, -0.71907093, -0.7424192,  -0.7300246,
