@@ -22,7 +22,7 @@ class TestMAmodel(unittest.TestCase):
         testData = pd.read_csv('unit_test.csv', ',')
         diffdata = differecing(1, testData)
         result = MAmodel.MAmodel(1, diffdata)
-        finalResult = str(np.around(result.to_numpy(), decimal=3))
+        finalResult = str(np.around(result.to_numpy(), decimals=3))
         self.assertEqual(resultTestData, finalResult)   
 
 if __name__ == '__main__':
