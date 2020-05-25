@@ -32,7 +32,7 @@ class MyWindow(QMainWindow):
 	def __init__(self):
 
 		super(MyWindow,self).__init__()#This can be written as super().__init__() i think which would make more sense but leave it as is for now
-		self.setWindowIcon(QIcon("testImage.ico"))
+		self.setWindowIcon(QIcon("logo4.ico"))
 		self.data =pd.read_csv('ProcessedStandardised.csv',';')#Reads in the standardized data from ProcessedStandardised.csv. This file must be in the same directory as varimaGui.py
 		self.pVal=2
 		self.dVal=1
@@ -702,7 +702,7 @@ class MyWindow(QMainWindow):
 				alertMessage.setWindowTitle("Data Invalid")
 				alertMessage.setText("The Singular Value Decomposition(SVG) did not converge.\nPlease choose a different model order or data set")
 				alertMessage.setIcon(QMessageBox.Warning)
-				alertMessage.setWindowIcon(QIcon("testImage.ico"))
+				alertMessage.setWindowIcon(QIcon("logo4.ico"))
 				x=alertMessage.exec_()
 
 				self.plotEmptyAxis()
@@ -713,7 +713,7 @@ class MyWindow(QMainWindow):
 				alertMessage.setWindowTitle("Data Invalid")
 				alertMessage.setText("The Singular Value Decomposition(SVG) did not converge.\nPlease choose a different model order or data set")
 				alertMessage.setIcon(QMessageBox.Warning)
-				alertMessage.setWindowIcon(QIcon("testImage.ico"))
+				alertMessage.setWindowIcon(QIcon("logo4.ico"))
 				x=alertMessage.exec_()
 
 				self.plotEmptyAxis()
@@ -733,7 +733,7 @@ class Register(QMainWindow):
 
 	def __init__(self):
 		super().__init__()
-		self.setWindowIcon(QIcon("testImage.ico"))
+		self.setWindowIcon(QIcon("logo4.ico"))
 		self.setStyleSheet('''
 						QMainWindow{
 						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
@@ -817,7 +817,7 @@ class Register(QMainWindow):
 		logoSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
 		logo.setSizePolicy(logoSizePolicy)
 
-		pixmap = QPixmap("testImage.ico")
+		pixmap = QPixmap("logo4.ico")
 		logo.setPixmap(pixmap)
 		logo.setAlignment(Qt.AlignCenter)
 
@@ -882,7 +882,7 @@ class Register(QMainWindow):
 			alertMessage.setWindowTitle("Registration Failed")
 			alertMessage.setText("Please enter a username, password and email address to register.")
 			alertMessage.setIcon(QMessageBox.Information)
-			alertMessage.setWindowIcon(QIcon("testImage.ico"))
+			alertMessage.setWindowIcon(QIcon("logo4.ico"))
 			x=alertMessage.exec_()
 			return
 
@@ -933,7 +933,7 @@ class Register(QMainWindow):
 			alertMessage.setWindowTitle("Registration Failed")
 			alertMessage.setText("The username you have requested already exists. Please try another one.")
 			alertMessage.setIcon(QMessageBox.Information)
-			alertMessage.setWindowIcon(QIcon("testImage.ico"))
+			alertMessage.setWindowIcon(QIcon("logo4.ico"))
 			x=alertMessage.exec_()
 			print("UserName already exists, Please try another")
 			print("got past create table")
@@ -952,7 +952,7 @@ class Login(QMainWindow):
 
 	def __init__(self):#Constructor for the login page. All the construction takes place in self.initUi()
 		super().__init__()
-		self.setWindowIcon(QIcon("testImage.ico"))
+		self.setWindowIcon(QIcon("logo4.ico"))
 		self.setStyleSheet('''
 						QMainWindow{
 						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
@@ -1009,7 +1009,7 @@ class Login(QMainWindow):
 		logoLabel.setStyleSheet("""background: rgba(90,90,90,0);""")
 		logoLabelSizePolicy=QSizePolicy(QSizePolicy.Maximum,QSizePolicy.Maximum)
 		logoLabel.setSizePolicy(logoLabelSizePolicy)
-		pixmap = QPixmap("testImage.ico")
+		pixmap = QPixmap("logo4.ico")
 		logoLabel.setPixmap(pixmap)
 		logoLabel.setAlignment(Qt.AlignCenter)
 
@@ -1097,7 +1097,7 @@ class Login(QMainWindow):
 			alertMessage.setWindowTitle("Login Failed")
 			alertMessage.setText("Please enter both a username and password to login.")
 			alertMessage.setIcon(QMessageBox.Information)
-			alertMessage.setWindowIcon(QIcon("testImage.ico"))
+			alertMessage.setWindowIcon(QIcon("logo4.ico"))
 			x=alertMessage.exec_()
 			return
 
@@ -1135,7 +1135,7 @@ class Login(QMainWindow):
 			alertMessage.setWindowTitle("Login Failed")
 			alertMessage.setText("The username or password you entered is incorrect.")
 			alertMessage.setIcon(QMessageBox.Information)
-			alertMessage.setWindowIcon(QIcon("testImage.ico"))
+			alertMessage.setWindowIcon(QIcon("logo4.ico"))
 			x=alertMessage.exec_()
 			print("The account you entered does not exist, Please try again")
 
@@ -1161,7 +1161,7 @@ class Login(QMainWindow):
 				alertMessage.setWindowTitle("Login Failed")
 				alertMessage.setText("The username or password you entered is incorrect.")
 				alertMessage.setIcon(QMessageBox.Information)
-				alertMessage.setWindowIcon(QIcon("testImage.ico"))
+				alertMessage.setWindowIcon(QIcon("logo4.ico"))
 				x=alertMessage.exec_()
 				print("incorrect password, please try again")
 
@@ -1189,7 +1189,7 @@ class ForgotPasswordPage(QMainWindow):
 
 	def __init__(self):#Constructor for the login page. All the construction takes place in self.initUi()
 		super().__init__()
-		self.setWindowIcon(QIcon("testImage.ico"))
+		self.setWindowIcon(QIcon("logo4.ico"))
 		self.setStyleSheet('''
 						QMainWindow{
 						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
@@ -1264,7 +1264,7 @@ class ForgotPasswordPage(QMainWindow):
 		logoSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
 		logo.setSizePolicy(logoSizePolicy)
 
-		pixmap = QPixmap("testImage.ico")
+		pixmap = QPixmap("logo4.ico")
 		logo.setPixmap(pixmap)
 		logo.setAlignment(Qt.AlignCenter)
 
