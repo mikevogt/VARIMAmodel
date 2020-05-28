@@ -17,6 +17,9 @@ import pandas as pd
 
 from statsmodels.tsa.ar_model import AR
 from statsmodels.tsa.arima_model import ARIMA
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.stattools import pacf
+from statsmodels.tsa.stattools import acf
 
 import mysql.connector
 from sshtunnel import SSHTunnelForwarder
@@ -236,6 +239,8 @@ class MyWindow(QMainWindow):
 		self.dial.setStyle(QStyleFactory.create('Plastique'))
 		self.dial.valueChanged.connect(self.dialValueChanged)
 
+		optimizeButton=QtWidgets.QPushButton("Optimize Model Order")
+		optimizeButton.clicked.connect(self.optimizeModelOrder)
 		buttonArima = QtWidgets.QPushButton("Estimate using ARIMA")
 		buttonArima.clicked.connect(self.varButtonClicker)
 
@@ -272,8 +277,10 @@ class MyWindow(QMainWindow):
 		bottomLeftGridLayout.addWidget(self.dialSpinBox,7,1,1,5)
 		bottomLeftGridLayout.addWidget(self.dial,7,6,1,1)
 
-		bottomLeftGridLayout.addWidget(buttonArima,8,0,1,7)
-		bottomLeftGridLayout.addWidget(logoutButton,9,0,1,7)
+		bottomLeftGridLayout.addWidget(optimizeButton,8,0,1,7)
+		bottomLeftGridLayout.addWidget(buttonArima,9,0,1,7)
+		
+		bottomLeftGridLayout.addWidget(logoutButton,10,0,1,7)
 
 
 
@@ -325,6 +332,50 @@ class MyWindow(QMainWindow):
 
 		self.plotWidget = FigureCanvas(fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
 		self.rightFrameGridLayout.addWidget(self.plotWidget)
+
+	def optimizeModelOrder(self):
+
+
+		if(self.featuresListWidget.currentItem() == None):
+			#Makes sure a feature is selected. should maybe have this open an alert box instead of printing to the console
+			#If this removed, program will crash if no item is selected
+			print("No feature selected, please select one above")
+			return
+
+
+		shareData = self.data[self.data.Ticker == self.comboBox.currentText()] #Stores a dataFrame of all shares with the selected ticker
+		featureColumnName =self.featuresListWidget.currentItem().text()
+		data= shareData[featureColumnName]
+		pVal = 0
+		dVal = 0  # should not be more then 2
+		qVal = 0
+		count1 = 0
+		count2 = 0
+		check = 0
+		acfArray = acf(data, nlags=30)
+		pacfArray = pacf(data, nlags=30)
+		
+		for i in range(0, 30):
+			
+			if acfArray[i] >= 0.24 and acfArray[i] <= 0.25:
+				count = i + 1
+				print(acfArray[count - 1])
+				pVal = count
+		
+		while check != -1:
+			
+			for i in range(0, 30):
+				
+				if pacfArray[i] < 0:
+					count2 = i
+					check = -1
+					qVal = count2
+					break
+
+		values = [pVal, dVal, qVal]
+		print(values)
+		#return values
+
 
 	def dialSpinBoxValueChanged(self):
 
@@ -385,6 +436,11 @@ class MyWindow(QMainWindow):
 		rMSE =math.sqrt(sum/7)
 
 		return rMSE
+
+	def exponentiate(self,inVal):
+
+		return (1.02)**(inVal)-1
+
 
 	def plotDataClicked(self):
 
@@ -660,9 +716,21 @@ class MyWindow(QMainWindow):
 				rmse = self.rootMeanSquareError(forcasted,xValArray)
 				print("RMSE calculated:")
 				print(rmse)
-				forecastUpperError = forcasted + rmse
-				forecastLowerError = forcasted - rmse
 
+				forecastUpperError=[]
+				forecastLowerError=[]
+				
+				
+				for i in range(0,len(forcasted)):
+					
+				
+					forecastUpperError.append(forcasted[i]+rmse +self.exponentiate(i))
+					forecastLowerError.append(forcasted[i]-rmse -self.exponentiate(i))
+					
+
+
+				print("after")
+				print(forecastUpperError)
 				#Plot of y vs dates is now created below
 				fig, ax =plt.subplots()#Fig must be deleted  later so as not consume memory
 				#color='#1AB1ED' for blue
