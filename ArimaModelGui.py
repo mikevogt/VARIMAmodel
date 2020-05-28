@@ -26,6 +26,9 @@ from sshtunnel import SSHTunnelForwarder
 from numpy.linalg import LinAlgError
 
 import bcrypt
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 #from sklearn.metrics import mean_squared_error
 
@@ -1319,13 +1322,18 @@ class ForgotPasswordPage(QMainWindow):
 
 		usernameLabel= QtWidgets.QLabel("Username:")
 		usernameLabel.setStyleSheet("backGround: rgba(12,12,12,0);")
-		usernameLineEdit=QtWidgets.QLineEdit()
+		self.uLineEdit=QtWidgets.QLineEdit()
+
+		passwordLabel= QtWidgets.QLabel("New Password:")
+		passwordLabel.setStyleSheet("backGround: rgba(12,12,12,0);")
+		self.pLineEdit=QtWidgets.QLineEdit()
 
 		emailAddressLabel=QtWidgets.QLabel("Email Address:")
 		emailAddressLabel.setStyleSheet("background: rgba(19,18,18,0);")
-		emailAddressLineEdit= QtWidgets.QLineEdit()
+		self.eLineEdit= QtWidgets.QLineEdit()
 
-		sendEmailButton = QtWidgets.QPushButton("Send Email")
+		sendEmailButton = QtWidgets.QPushButton("Reset Password")
+		sendEmailButton.clicked.connect(self.sendEmailButtonClicked)
 		returnButton= QtWidgets.QPushButton("Return to Mainpage")
 		returnButton.clicked.connect(self.returnButtonClicked)
 
@@ -1341,11 +1349,13 @@ class ForgotPasswordPage(QMainWindow):
 		innerFrameLayout.addWidget(logo,0,0,1,5,Qt.AlignCenter)
 		innerFrameLayout.addWidget(explainLabel,1,0,1,5)
 		innerFrameLayout.addWidget(usernameLabel,2,0,1,1,Qt.AlignCenter)
-		innerFrameLayout.addWidget(usernameLineEdit,2,1,1,4)
+		innerFrameLayout.addWidget(self.uLineEdit,2,1,1,4)
 		innerFrameLayout.addWidget(emailAddressLabel,3,0,1,1,Qt.AlignCenter)
-		innerFrameLayout.addWidget(emailAddressLineEdit,3,1,1,4)
-		innerFrameLayout.addWidget(sendEmailButton,4,0,1,5)
-		innerFrameLayout.addWidget(returnButton,5,0,1,5)
+		innerFrameLayout.addWidget(self.eLineEdit,3,1,1,4)
+		innerFrameLayout.addWidget(passwordLabel,4,0,1,1,Qt.AlignCenter)
+		innerFrameLayout.addWidget(self.pLineEdit,4,1,1,4)
+		innerFrameLayout.addWidget(sendEmailButton,5,0,1,5)
+		innerFrameLayout.addWidget(returnButton,6,0,1,5)
 
 		frameDouble = QtWidgets.QFrame()
 		doubleFrameSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
@@ -1384,6 +1394,158 @@ class ForgotPasswordPage(QMainWindow):
 		self.next=Login()
 		self.next.showMaximized()
 		self.close()
+
+	def sendEmailButtonClicked(self):
+
+		inUserName = self.uLineEdit.text()
+		inUserPassword = self.pLineEdit.text()
+		inUserEmail = self.eLineEdit.text()
+
+		if(len(inUserEmail)==0 or len(inUserName)==0):
+
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Password Reset Failed")
+			alertMessage.setText("Please enter a valid username and email address to login.")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("Logo.ico"))
+			x=alertMessage.exec_()
+			return
+
+		if(len(inUserPassword)==0):
+
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Password Reset Failed")
+			alertMessage.setText("Please enter a new password.")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("Logo.ico"))
+			x=alertMessage.exec_()
+			return
+
+
+		server = SSHTunnelForwarder(
+			'146.141.21.92',
+			ssh_username='s1533169',
+			ssh_password='dingun123',
+			remote_bind_address=('127.0.0.1', 3306)
+		)
+		server.start()
+
+		print("Got here")
+
+
+		mydb =mysql.connector.connect(host="localhost",user="s1533169",passwd="dingun123" ,port=server.local_bind_port)
+		mycursor= mydb.cursor()
+
+		mycursor.execute("USE d1533169")
+		print(inUserName)
+		print(":::test")
+		mycursor.execute("SELECT * FROM ARIMA_USERS WHERE USERNAME=%s",(inUserName.strip(),))
+		myresult=mycursor.fetchall()
+		print("fetchall result")
+		print(myresult)
+
+
+		if(len(myresult)==0):
+
+			mydb.close()
+			server.close()
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Password Reset Failed")
+			alertMessage.setText("The username or email address you entered is incorrect.")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("Logo.ico"))
+			x=alertMessage.exec_()
+			print("The usernme or password is incorrect, Please try again.")
+
+		elif(myresult[0][2] != inUserEmail):
+
+			mydb.close()
+			server.close()
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Password Reset Failed")
+			alertMessage.setText("The username or email address you entered is incorrect.")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("Logo.ico"))
+			x=alertMessage.exec_()
+			print("The usernme or password is incorrect, Please try again.")
+
+
+		else:
+
+			hashedPwd = bcrypt.hashpw(inUserPassword.encode('utf-8'), bcrypt.gensalt())
+			sqlInsertCommand ="UPDATE ARIMA_USERS SET PASSWORD = %s WHERE USERNAME = %s"	#(%s,%s,%s)"
+			usernamePasswordPair=(hashedPwd,inUserName)
+			mycursor.execute(sqlInsertCommand,usernamePasswordPair)
+
+			mydb.commit()
+
+			print("got past create table")
+			mydb.close()
+			print("got past mydb.close")
+			server.close()
+
+			sender_email = "scrapedthroughc2@gmail.com"
+			receiver_email = inUserEmail
+			password = "arimamodel1!"
+
+			message = MIMEMultipart("alternative")
+			message["Subject"] = "STC2 Password Reset"
+			message["From"] = sender_email
+			message["To"] = receiver_email
+
+			# Create the plain-text and HTML version of your message
+			text = """\
+			Hi there,
+			Thank you for using our product.
+			Please click this link to reset your password:
+			www.realpython.com"""
+			html = """\
+			<html>
+			  <body>
+			    <p>Hi there,<br><br>
+			       You have just successfully reset your password! You can now login in with your new password. If this was not you, please send an email to ScrapedThroughC2@gmail.com
+			       and we will get back to you as soon as possible to review your account activity.<br><br>
+			       We hope that you are enjoying our product. If you should need any assistance, please either email ScrapedThroughC2@gmail.com
+			       or call Nic (cell): 0832261920.<br><br>
+
+			       Kind regards,<br><br>
+			       The STC2 Team
+			    </p>
+			  </body>
+			</html>
+			"""
+
+			# Turn these into plain/html MIMEText objects
+			part1 = MIMEText(text, "plain")
+			part2 = MIMEText(html, "html")
+
+			# Add HTML/plain-text parts to MIMEMultipart message
+			# The email client will try to render the last part first
+			message.attach(part1)
+			message.attach(part2)
+
+			# Create secure connection with server and send email
+			context = ssl.create_default_context()
+			with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+			    server.login(sender_email, password)
+			    server.sendmail(
+			        sender_email, receiver_email, message.as_string()
+			    )
+
+			print("Email sent to user.")
+
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Success!")
+			alertMessage.setText("Your password has been successfully reset. A confirmation email has been sent to your email address. You can now login using your new password.")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("Logo.ico"))
+			x=alertMessage.exec_()
+			print("Password successfully reset.")
+
+			self.next=Login()
+			self.next.showMaximized()
+			self.close()
+
 
 def window() :
 	app=QApplication(sys.argv)#required for all GUIs
