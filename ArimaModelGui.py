@@ -799,7 +799,6 @@ class MyWindow(QMainWindow):
 		self.next.showMaximized()
 		self.close()
 
-#This is the class for the login page. This is the first page that is created when the app runs and quite obviously it still needs proper designing.
 class Register(QMainWindow):
 
 	def __init__(self):
@@ -807,15 +806,7 @@ class Register(QMainWindow):
 		self.setWindowIcon(QIcon("Logo.ico"))
 		self.setStyleSheet('''
 						QMainWindow{
-						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
-						 }
-						 QLineEdit{
-						 font-size: 20px;
-						 border-width: 2px;
-						 border-style: solid;
-						 border-color: None None White None;
-						 border-radius: 0px;
-						 background: rgba(55,55,55,0);
+						border-image: url(b16.jpg);
 						 }
 						 QLabel:loginLabel{
 						 font-size: 80px;
@@ -823,90 +814,20 @@ class Register(QMainWindow):
 						 QLabel{
 						 font-size: 20px;
 						 }
-						 QPushButton{
-						 background: rgba(55,55,55,255);
-						 }''')
+						''')
 		self.initUi()
 
 	def initUi(self):
 
+		
 		outerFrame = QtWidgets.QFrame()
 		outerFrame.setFrameShape(QFrame.Panel)
 		outerFrame.setFrameShadow(QFrame.Raised)
 		outerFrameLayout = QHBoxLayout()
+
+		outerFrame.setLayout(outerFrameLayout)
 		outerFrameLayout.setSpacing(10)
 		outerFrameLayout.setContentsMargins(20,20,20,20)# Left top right then bottom
-		#Still need to try set innerframes minimum size to prevent it from being squashed when minimized
-
-		registrationLabel= QtWidgets.QLabel("Registration")
-		registrationLabel.setAlignment(Qt.AlignCenter)
-		registrationLabel.setStyleSheet("""font-size: 80px;""")
-		registrationLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)
-		registrationLabel.setSizePolicy(registrationLabelSizePolicy)
-
-
-
-		innerFrame = QtWidgets.QFrame(self,objectName="innerFrameRegistration")
-		innerFrame.setFrameShape(QFrame.Panel)
-		innerFrame.setFrameShadow(QFrame.Raised)
-		innerFrame.setStyleSheet("""QFrame{background: rgba(90,90,90,100);}""")
-
-
-		innerFrameLayout= QGridLayout()
-		innerFrameLayout.setSpacing(30)
-		innerFrameLayout.setContentsMargins(20,20,20,20)
-		innerFrame.setLayout(innerFrameLayout)
-
-		explainLabel = QtWidgets.QLabel("Create an account by filling in the required fields below and \n                    then clicking Create Account button.")
-		explainLabel.setStyleSheet("background: rgba(19,18,18,0);")
-		explainLabelSP = QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
-		explainLabel.setSizePolicy(explainLabelSP)
-
-
-		usernameLabel= QtWidgets.QLabel("Username:")
-		usernameLabel.setStyleSheet("backGround: rgba(12,12,12,0);")
-		self.usernameLineEdit=QtWidgets.QLineEdit()
-
-		passwordLabel = QtWidgets.QLabel("Password:")
-		passwordLabel.setStyleSheet("background: rgba(12,12,12,0)")
-		self.passwordLineEdit = QtWidgets.QLineEdit()
-
-		emailAddressLabel=QtWidgets.QLabel("Email Address:")
-		emailAddressLabel.setStyleSheet("background: rgba(19,18,18,0);")
-		self.emailAddressLineEdit= QtWidgets.QLineEdit()
-
-
-
-		registerButton = QtWidgets.QPushButton("Create Account")
-		registerButton.clicked.connect(self.registerButtonFunction)
-
-		returnButton= QtWidgets.QPushButton("Return to Mainpage")
-		returnButton.clicked.connect(self.returnButtonClicked)
-
-		logo = QtWidgets.QLabel()
-		logo.setStyleSheet("""background: rgba(90,90,90,0);""")
-		logoSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
-		logo.setSizePolicy(logoSizePolicy)
-
-		pixmap = QPixmap("Logo.ico")
-		logo.setPixmap(pixmap)
-		logo.setAlignment(Qt.AlignCenter)
-
-		innerFrameLayout.addWidget(logo,0,0,1,5,Qt.AlignCenter)
-
-		innerFrameLayout.addWidget(explainLabel,1,0,1,5)
-
-		innerFrameLayout.addWidget(usernameLabel,2,0,1,1,Qt.AlignCenter)
-		innerFrameLayout.addWidget(self.usernameLineEdit,2,1,1,4)
-
-		innerFrameLayout.addWidget(passwordLabel,3,0,1,1,Qt.AlignCenter)
-		innerFrameLayout.addWidget(self.passwordLineEdit,3,1,1,4)
-
-		innerFrameLayout.addWidget(emailAddressLabel,4,0,1,1,Qt.AlignCenter)
-		innerFrameLayout.addWidget(self.emailAddressLineEdit,4,1,1,4)
-
-		innerFrameLayout.addWidget(registerButton,5,0,1,5)
-		innerFrameLayout.addWidget(returnButton,6,0,1,5)
 
 		frameDouble = QtWidgets.QFrame()
 		doubleFrameSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
@@ -915,33 +836,289 @@ class Register(QMainWindow):
 
 		frameDoubleVLayout = QVBoxLayout()
 		frameDouble.setLayout(frameDoubleVLayout)
-		frameDoubleVLayout.addWidget(registrationLabel,Qt.AlignCenter)
+
+		innerFrame = QtWidgets.QFrame(self,objectName="innerFrameLogin")
+		innerFrame.setFrameShape(QFrame.Panel)
+		innerFrame.setFrameShadow(QFrame.Raised)
+		innerFrame.setStyleSheet("""QFrame{
+											background: rgba(90,90,90,100);
+											border-width: 1px;
+											border-style: outset;
+											border-color: rgba(130,130,130,100);
+											border-radius: 35px;}""")
+		innerFrameLayout= QVBoxLayout()
+		innerFrameLayout.setSpacing(30)
+		innerFrameLayout.setContentsMargins(20,20,20,20)
+		innerFrame.setLayout(innerFrameLayout)
+
+		
+		formBlock = QtWidgets.QWidget()
+		formBlockSizePolicy =QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
+		formBlock.setSizePolicy(formBlockSizePolicy)
+		formBlockLayout = QGridLayout()
+		formBlock.setLayout(formBlockLayout)
+
+
+
+		loginLabel= QtWidgets.QLabel("STC2",objectName="loginLabel")
+		loginLabel.setAlignment(Qt.AlignCenter)
+		loginLabel.setStyleSheet("""font-size: 100px;""")
+		loginLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)
+		loginLabel.setSizePolicy(loginLabelSizePolicy)
+
+		
+
+		#Makes logo label and places logo image inside it
+		logoLabel = QtWidgets.QLabel()
+		logoLabel.setStyleSheet("""background: rgba(90,90,90,0);
+									border-color: rgba(140,140,140,0);""")
+		logoLabelSizePolicy=QSizePolicy(QSizePolicy.Expanding,QSizePolicy.Fixed)#Horizontal,vertical
+		logoLabel.setSizePolicy(logoLabelSizePolicy)
+		pixmap = QPixmap("Logo.ico")
+		logoLabel.setPixmap(pixmap)
+		logoLabel.setAlignment(Qt.AlignCenter)
+
+		widgetUsername = QtWidgets.QWidget()#below border-radius 35px works but onnly for username
+		widgetUsername.setStyleSheet("""
+										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(96,99,108,200), stop:1 rgba(133,131,142,200));
+										border-width: 1px;
+										border-style: outset;
+										border-color: rgba(140,140,140,100);
+										border-radius: 30px;
+										""")
+		widgetUsernameSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
+		widgetUsername.setSizePolicy(widgetUsernameSizePolicy)
+		usernameLayout = QHBoxLayout()
+		widgetUsername.setLayout(usernameLayout)
+
+
+		widgetEmail = QtWidgets.QWidget()
+		widgetEmail.setStyleSheet("""
+										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(96,99,108,200), stop:1 rgba(133,131,142,200));
+										border-width: 1px;
+										border-style: outset;
+										border-color: rgba(140,140,140,100);
+										border-radius: 30px;
+										""")
+		widgetEmailSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
+		widgetEmail.setSizePolicy(widgetEmailSizePolicy)
+		emailLayout = QHBoxLayout()
+		widgetEmail.setLayout(emailLayout)
+
+		widgetPassword = QtWidgets.QWidget()
+		widgetPassword.setStyleSheet("""
+										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(96,99,108,200), stop:1 rgba(133,131,142,200));
+										border-width: 1px;
+										border-style: outset;
+										border-color: rgba(140,140,140,100);
+										border-radius: 30px;
+										""")
+		widgetPasswordSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
+		widgetPassword.setSizePolicy(widgetPasswordSizePolicy)
+		passwordLayout = QHBoxLayout()
+		widgetPassword.setLayout(passwordLayout)
+
+		widgetConfirmPassword = QtWidgets.QWidget()
+		widgetConfirmPassword.setStyleSheet("""
+										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(96,99,108,200), stop:1 rgba(133,131,142,200));
+										border-width: 1px;
+										border-style: outset;
+										border-color: rgba(140,140,140,100);
+										border-radius: 30px;
+										""")
+		widgetConfirmPasswordSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
+		widgetConfirmPassword.setSizePolicy(widgetConfirmPasswordSizePolicy)
+		confirmPasswordLayout = QHBoxLayout()
+		widgetConfirmPassword.setLayout(confirmPasswordLayout)
+	
+		self.usernameLineEdit = QtWidgets.QLineEdit()
+		self.usernameLineEdit.setStyleSheet("""color: rgba(255,255,255,255);
+													background:rgba(69, 83, 105,0);
+													border-color: rgba(14,14,14,0);
+													border-radius: 20px;
+													font-size: 15px;""")
+		self.usernameLineEdit.setPlaceholderText("Username")
+
+		self.emailAddressLineEdit = QtWidgets.QLineEdit()
+		self.emailAddressLineEdit.setStyleSheet("""color: rgba(255,255,255,255);
+													background:rgba(69, 83, 105,0);
+													border-color: rgba(14,14,14,0);
+													border-radius: 20px;
+													font-size: 15px;""")
+		self.emailAddressLineEdit.setPlaceholderText("Email Address") 
+
+		self.passwordLineEdit=QtWidgets.QLineEdit()
+		self.passwordLineEdit.setPlaceholderText("Password") 
+		self.passwordLineEdit.setEchoMode(2)
+		self.passwordLineEdit.setStyleSheet("""color: rgba(255,255,255,255);
+													background:rgba(69, 83, 105,0);
+													border-color: rgba(14,14,14,0);
+													border-radius: 20px;
+													font-size: 15px;""")
+
+		self.confirmPasswordLineEdit=QtWidgets.QLineEdit()
+		self.confirmPasswordLineEdit.setPlaceholderText("Confirm Password") 
+		self.confirmPasswordLineEdit.setEchoMode(2)
+		self.confirmPasswordLineEdit.setStyleSheet("""color: rgba(255,255,255,255);
+													background:rgba(69, 83, 105,0);
+													border-color: rgba(14,14,14,0);
+													border-radius: 20px;
+													font-size: 15px;""")
+		
+
+		usernameLogoLabel = QtWidgets.QLabel()
+		usernameLogoLabel.setStyleSheet("""background:rgba(156, 165, 179,255);
+											border-color: rgba(14,14,14,0);
+											border-radius: 23px;""")
+		usernameLogoLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)#Horizontal,vertical
+		usernameLogoLabel.setSizePolicy(usernameLogoLabelSizePolicy)
+		pixmap = QPixmap("48px.png")
+		usernameLogoLabel.setPixmap(pixmap)
+		usernameLogoLabel.setAlignment(Qt.AlignCenter)
+
+		emailLogoLabel = QtWidgets.QLabel()
+		emailLogoLabel.setStyleSheet("""background:rgba(156, 165, 179,255);
+											border-color: rgba(14,14,14,0);
+											border-radius: 23px;""")
+		emailLogoLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
+		emailLogoLabel.setSizePolicy(emailLogoLabelSizePolicy)
+		pixmap = QPixmap("email2_48px.png")
+		emailLogoLabel.setPixmap(pixmap)
+		emailLogoLabel.setAlignment(Qt.AlignCenter)
+
+
+		passwordLogoLabel = QtWidgets.QLabel()
+		passwordLogoLabel.setStyleSheet("""background:rgba(156, 165, 179,255);
+											border-color: rgba(14,14,14,0);
+											border-radius: 23px;""")
+		passwordLogoLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)#Horizontal,vertical		
+		passwordLogoLabel.setSizePolicy(passwordLogoLabelSizePolicy)
+		pixmap = QPixmap("lock2_48px.png")
+		passwordLogoLabel.setPixmap(pixmap)
+		passwordLogoLabel.setAlignment(Qt.AlignCenter)
+
+		confirmPasswordLogoLabel = QtWidgets.QLabel()
+		confirmPasswordLogoLabel.setStyleSheet("""background:rgba(156, 165, 179,255);
+											border-color: rgba(14,14,14,0);
+											border-radius: 23px;""")
+		confirmPasswordLogoLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)#Horizontal,vertical		
+		confirmPasswordLogoLabel.setSizePolicy(confirmPasswordLogoLabelSizePolicy)
+		pixmap = QPixmap("lock2_48px.png")
+		confirmPasswordLogoLabel.setPixmap(pixmap)
+		confirmPasswordLogoLabel.setAlignment(Qt.AlignCenter)
+
+		usernameLayout.addWidget(usernameLogoLabel)
+		usernameLayout.addWidget(self.usernameLineEdit)
+		emailLayout.addWidget(emailLogoLabel)
+		emailLayout.addWidget(self.emailAddressLineEdit)
+		passwordLayout.addWidget(passwordLogoLabel)
+		passwordLayout.addWidget(self.passwordLineEdit)
+		confirmPasswordLayout.addWidget(confirmPasswordLogoLabel)
+		confirmPasswordLayout.addWidget(self.confirmPasswordLineEdit)
+
+		showPasswordCheck=QtWidgets.QCheckBox("Show Password")
+		showPasswordCheck.setStyleSheet("""QCheckBox::indicator {
+    										border: 3px solid #5A5A5A;
+    										background: none;
+											}
+											
+											""")
+
+		registerButton = QtWidgets.QPushButton("Register")
+		registerButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical		
+		registerButton.setSizePolicy(registerButtonSizePolicy)
+		registerButton.setStyleSheet("""	QPushButton{font-size: 15px;
+										color: rgba(60,70,89,225);
+										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(188, 192, 204,200), stop:1 rgba(205,208,220,225));
+										border-width: 1px;
+										border-style: outset;
+										border-color: rgba(240,240,240,200);
+										border-radius: 16px;
+										min-height:30px;
+										max-height:35px;}
+										QPushButton:hover {
+    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(205,208,220,225), stop:1 rgba(188, 192, 204,200));
+											}
+										QPushButton:pressed {
+    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(185,188,200,225), stop:1 rgba(168, 172, 184,200));  
+										border-style: inset;  
+											}
+										""")
+		registerButton.clicked.connect(self.registerButtonClicked)
+
+		returnButton = QtWidgets.QPushButton("Return to Mainpage")
+		returnButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical		
+		returnButton.setSizePolicy(returnButtonSizePolicy)
+		returnButton.setStyleSheet("""	QPushButton{font-size: 15px;
+										color: rgba(60,70,89,225);
+										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(188, 192, 204,200), stop:1 rgba(205,208,220,225));
+										border-width: 1px;
+										border-style: outset;
+										border-color: rgba(240,240,240,200);
+										border-radius: 16px;
+										min-height:30px;
+										max-height:35px;}
+										QPushButton:hover {
+    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(205,208,220,225), stop:1 rgba(188, 192, 204,200));
+											}
+										QPushButton:pressed {
+    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(185,188,200,225), stop:1 rgba(168, 172, 184,200));  
+										border-style: inset;  
+											}
+										""")
+		returnButton.clicked.connect(self.returnButtonClicked)
+
+
+		formBlockLayout.addWidget(widgetUsername,0,0,1,2)
+
+		formBlockLayout.addWidget(widgetEmail,1,0,1,2)
+
+		formBlockLayout.addWidget(widgetPassword,2,0,1,2)
+
+		formBlockLayout.addWidget(widgetConfirmPassword,3,0,1,2)
+
+		formBlockLayout.addWidget(showPasswordCheck,4,0,1,2,Qt.AlignRight)
+		formBlockLayout.addWidget(registerButton,5,0,1,1)
+		formBlockLayout.addWidget(returnButton,5,1,1,1)
+		
+
+		innerFrameLayout.addWidget(logoLabel,Qt.AlignCenter)
+		innerFrameLayout.addWidget(formBlock)
+
+		
+		frameDoubleVLayout.addWidget(loginLabel,Qt.AlignCenter)
 		frameDoubleVLayout.addWidget(innerFrame,Qt.AlignCenter)
-
 		outerFrameLayout.insertStretch(0,1)
-
 		outerFrameLayout.addWidget(frameDouble)
-
 		outerFrameLayout.addStretch(1)
-
-		outerFrame.setLayout(outerFrameLayout)
+		
 
 		mainGrid = QGridLayout()
 		mainGrid.setSpacing(10)
 		mainGrid.addWidget(outerFrame)
 
+
 		outerWidgetBox=QtWidgets.QWidget()
 		outerWidgetBox.setLayout(mainGrid)
 
-
-		self.setCentralWidget(outerWidgetBox)
-		self.setGeometry(0,0,1500,900)
+		self.setCentralWidget(outerWidgetBox)		
 		self.setWindowTitle("Register")
 		self.showMaximized()
 
 
-	def registerButtonFunction(self):
+	def registerButtonClicked(self):
 
+		
 		inUserName= self.usernameLineEdit.text()
 		inUserPassword = self.passwordLineEdit.text()
 		inUserEmail = self.emailAddressLineEdit.text()
@@ -1009,13 +1186,11 @@ class Register(QMainWindow):
 			print("UserName already exists, Please try another")
 			print("got past create table")
 
-
 	def returnButtonClicked(self):
 
 		self.next=Login()
 		self.next.showMaximized()
 		self.close()
-
 
 
 
@@ -1033,14 +1208,7 @@ class Login(QMainWindow):
 						
 
 						 }
-						 QLineEdit{
-						 font-size: 20px;
-						 border-width: 2px;
-						 border-style: solid;
-						 border-color: None None White None;
-						 border-radius: 0px;
-						 background: rgba(55,55,55,0);
-						 }
+						 
 						 QLabel:loginLabel{
 						 font-size: 80px;
 						 }
@@ -1058,97 +1226,10 @@ class Login(QMainWindow):
 		outerFrame.setFrameShape(QFrame.Panel)
 		outerFrame.setFrameShadow(QFrame.Raised)
 		outerFrameLayout = QHBoxLayout()
+
+		outerFrame.setLayout(outerFrameLayout)
 		outerFrameLayout.setSpacing(10)
 		outerFrameLayout.setContentsMargins(20,20,20,20)# Left top right then bottom
-
-
-		loginLabel= QtWidgets.QLabel("STC2",objectName="loginLabel")
-		loginLabel.setAlignment(Qt.AlignCenter)
-		loginLabel.setStyleSheet("""font-size: 100px;""")
-		loginLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)
-		loginLabel.setSizePolicy(loginLabelSizePolicy)
-
-		innerFrame = QtWidgets.QFrame(self,objectName="innerFrameLogin")
-		innerFrame.setFrameShape(QFrame.Panel)
-		innerFrame.setFrameShadow(QFrame.Raised)
-		innerFrame.setStyleSheet("""QFrame{background: rgba(90,90,90,100);}""")
-		#innerFrameSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
-		#innerFrameSizePolicy.setHorizontalStretch(1)
-		#innerFrame.setSizePolicy(innerFrameSizePolicy)
-		innerFrameLayout= QGridLayout()
-		innerFrameLayout.setSpacing(30)
-		innerFrameLayout.setContentsMargins(20,20,20,20)
-		innerFrame.setLayout(innerFrameLayout)
-
-		#Makes logo label and places logo image inside it
-		logoLabel = QtWidgets.QLabel()
-		logoLabel.setStyleSheet("""background: rgba(90,90,90,0);""")
-		logoLabelSizePolicy=QSizePolicy(QSizePolicy.Maximum,QSizePolicy.Maximum)
-		logoLabel.setSizePolicy(logoLabelSizePolicy)
-		pixmap = QPixmap("Logo.ico")
-		logoLabel.setPixmap(pixmap)
-		logoLabel.setAlignment(Qt.AlignCenter)
-
-
-		userNameLabel = QtWidgets.QLabel("Username:")
-		userNameLabel.setStyleSheet("""background: rgba(90,90,90,0);""")
-		self.usernameLineEditLogin = QtWidgets.QLineEdit()
-
-		passwordLabel = QtWidgets.QLabel("Password:")
-		passwordLabel.setStyleSheet("""background: rgba(90,90,90,0);""")
-		self.passwordLineEditLogin=QtWidgets.QLineEdit()
-		usernameFrame= QFrame()
-		usernameFrame.setGeometry
-		usernameFrame.setStyleSheet("""
-									border-radius: 30px;""")
-		userLayout = QHBoxLayout()
-		usernameFrame.setLayout(userLayout)
-		userLayout.addWidget(self.passwordLineEditLogin)
-		self.passwordLineEditLogin.setStyleSheet(""" padding-right: 20px;
-													padding-left: 5px;
-													background: url(usernameIcon.png);
-														background-position: left;
-														background-repeat: no-repeat;
- 
-															border: 1px solid black;
-														border-radius: 10px;""")
-		self.passwordLineEditLogin.setEchoMode(2)
-
-		loginButton = QtWidgets.QPushButton("Login")
-		loginButton.clicked.connect(self.loginButtonFunction)
-
-		forgotPasswordButton = QtWidgets.QPushButton("Forgot Password?")
-		forgotPasswordButton.clicked.connect(self.forgotPasswordClicked)
-
-		goRegisterButton = QtWidgets.QPushButton("Create new Account")
-		goRegisterButton.clicked.connect(self.goRegisterButtonFunction)
-
-		quitProgramButton = QtWidgets.QPushButton("Quit Program")
-		quitProgramButton.clicked.connect(self.quitButtonClicked)
-
-		formBlock = QtWidgets.QWidget()
-		formBlockSizePolicy =QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
-		formBlock.setSizePolicy(formBlockSizePolicy)
-		formBlockLayout = QGridLayout()
-		formBlock.setLayout(formBlockLayout)
-
-		formBlockLayout.addWidget(userNameLabel,0,0)
-		formBlockLayout.addWidget(self.usernameLineEditLogin,0,1)
-
-		formBlockLayout.addWidget(passwordLabel,1,0)
-		formBlockLayout.addWidget(usernameFrame,1,1)
-		formBlockLayout.setRowStretch(0,1)
-		
-		formBlockLayout.setRowStretch(1,10)
-
-
-		innerFrameLayout.addWidget(logoLabel,0,0,Qt.AlignCenter)
-		innerFrameLayout.addWidget(formBlock,1,0)
-		innerFrameLayout.addWidget(loginButton,2,0)
-		innerFrameLayout.addWidget(forgotPasswordButton,3,0)
-		innerFrameLayout.addWidget(goRegisterButton,4,0)
-		innerFrameLayout.addWidget(quitProgramButton,5,0)
-
 
 		frameDouble = QtWidgets.QFrame()
 		doubleFrameSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
@@ -1157,14 +1238,261 @@ class Login(QMainWindow):
 
 		frameDoubleVLayout = QVBoxLayout()
 		frameDouble.setLayout(frameDoubleVLayout)
+
+		innerFrame = QtWidgets.QFrame(self,objectName="innerFrameLogin")
+		innerFrame.setFrameShape(QFrame.Panel)
+		innerFrame.setFrameShadow(QFrame.Raised)
+		innerFrame.setStyleSheet("""QFrame{
+											background: rgba(90,90,90,100);
+											border-width: 1px;
+											border-style: outset;
+											border-color: rgba(130,130,130,100);
+											border-radius: 35px;}""")
+		#innerFrameSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
+		#innerFrameSizePolicy.setHorizontalStretch(1)
+		#innerFrame.setSizePolicy(innerFrameSizePolicy)
+		innerFrameLayout= QVBoxLayout()
+		innerFrameLayout.setSpacing(30)
+		innerFrameLayout.setContentsMargins(20,20,20,20)
+		innerFrame.setLayout(innerFrameLayout)
+
+		
+		formBlock = QtWidgets.QWidget()
+		formBlockSizePolicy =QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
+		formBlock.setSizePolicy(formBlockSizePolicy)
+		formBlockLayout = QGridLayout()
+		formBlock.setLayout(formBlockLayout)
+
+
+
+		loginLabel= QtWidgets.QLabel("STC2",objectName="loginLabel")
+		loginLabel.setAlignment(Qt.AlignCenter)
+		loginLabel.setStyleSheet("""font-size: 100px;""")
+		loginLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)
+		loginLabel.setSizePolicy(loginLabelSizePolicy)
+
+		
+
+		#Makes logo label and places logo image inside it
+		logoLabel = QtWidgets.QLabel()
+		logoLabel.setStyleSheet("""background: rgba(90,90,90,0);
+									border-color: rgba(140,140,140,0);""")
+		logoLabelSizePolicy=QSizePolicy(QSizePolicy.Expanding,QSizePolicy.Maximum)#Horizontal,vertical
+		logoLabel.setSizePolicy(logoLabelSizePolicy)
+		pixmap = QPixmap("Logo.ico")
+		logoLabel.setPixmap(pixmap)
+		logoLabel.setAlignment(Qt.AlignCenter)
+
+		widgetUsername = QtWidgets.QWidget()
+		widgetUsername.setStyleSheet("""
+										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(96,99,108,200), stop:1 rgba(133,131,142,200));
+										border-width: 1px;
+										border-style: outset;
+										border-color: rgba(140,140,140,100);
+										border-radius: 35px;
+										""")
+		widgetUsernameSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
+		widgetUsername.setSizePolicy(widgetUsernameSizePolicy)
+		usernameLayout = QHBoxLayout()
+		widgetUsername.setLayout(usernameLayout)
+
+		widgetPassword = QtWidgets.QWidget()
+		widgetPassword.setStyleSheet("""
+										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(96,99,108,200), stop:1 rgba(133,131,142,200));
+										border-width: 1px;
+										border-style: outset;
+										border-color: rgba(140,140,140,100);
+										border-radius: 35px;
+										""")
+		widgetPasswordSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
+		widgetPassword.setSizePolicy(widgetPasswordSizePolicy)
+		passwordLayout = QHBoxLayout()
+		widgetPassword.setLayout(passwordLayout)
+	
+		self.usernameLineEditLogin = QtWidgets.QLineEdit()
+		usernameLineEditSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Expanding)#Horizontal,vertical
+		self.usernameLineEditLogin.setSizePolicy(logoLabelSizePolicy)
+		self.usernameLineEditLogin.setStyleSheet("""color: rgba(255,255,255,255);
+													background:rgba(69, 83, 105,0);
+													border-color: rgba(14,14,14,0);
+													border-radius: 20px;
+													font-size: 15px;""")
+		self.usernameLineEditLogin.setPlaceholderText("Username") 
+
+		self.passwordLineEditLogin=QtWidgets.QLineEdit()
+		self.passwordLineEditLogin.setPlaceholderText("Password") 
+		
+		self.passwordLineEditLogin.setStyleSheet("""color: rgba(255,255,255,255);
+													background:rgba(69, 83, 105,0);
+													border-color: rgba(14,14,14,0);
+													border-radius: 20px;
+													font-size: 15px;""")
+		self.passwordLineEditLogin.setEchoMode(2)
+
+		usernameLogoLabel = QtWidgets.QLabel()
+		usernameLogoLabel.setStyleSheet("""background:rgba(156, 165, 179,255);
+											border-color: rgba(14,14,14,0);
+											border-radius: 23px;""")
+		usernameLogoLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)#Horizontal,vertical
+		usernameLogoLabel.setSizePolicy(usernameLogoLabelSizePolicy)
+
+		pixmap = QPixmap("48px.png")
+		usernameLogoLabel.setPixmap(pixmap)
+		usernameLogoLabel.setAlignment(Qt.AlignCenter)
+
+		passwordLogoLabel = QtWidgets.QLabel()
+		passwordLogoLabel.setStyleSheet("""background:rgba(156, 165, 179,255);
+											border-color: rgba(14,14,14,0);
+											border-radius: 23px;""")
+		passwordLogoLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)#Horizontal,vertical		
+		passwordLogoLabel.setSizePolicy(passwordLogoLabelSizePolicy)
+
+		pixmap = QPixmap("lock2_48px.png")
+		passwordLogoLabel.setPixmap(pixmap)
+		passwordLogoLabel.setAlignment(Qt.AlignCenter)
+
+
+		usernameLayout.addWidget(usernameLogoLabel)
+		usernameLayout.addWidget(self.usernameLineEditLogin)
+		passwordLayout.addWidget(passwordLogoLabel)
+		passwordLayout.addWidget(self.passwordLineEditLogin)
+		showPasswordCheck=QtWidgets.QCheckBox("Show Password")
+		showPasswordCheck.setStyleSheet("""QCheckBox::indicator {
+    										border: 3px solid #5A5A5A;
+    										background: none;
+											}
+											
+											""")
+
+		loginButton = QtWidgets.QPushButton("Login")
+		loginButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)#Horizontal,vertical		
+		loginButton.setSizePolicy(loginButtonSizePolicy)
+		loginButton.setStyleSheet("""	QPushButton{font-size: 25px;
+										color: rgba(60,70,89,225);
+										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(188, 192, 204,200), stop:1 rgba(205,208,220,225));
+										border-width: 1px;
+										border-style: outset;
+										border-color: rgba(240,240,240,200);
+										border-radius: 30px;
+										min-height:65px;
+										max-height:68px;}
+										QPushButton:hover {
+    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(205,208,220,225), stop:1 rgba(188, 192, 204,200));
+											}
+										QPushButton:pressed {
+    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(185,188,200,225), stop:1 rgba(168, 172, 184,200));  
+										border-style: inset;  
+											}
+										""")
+		loginButton.clicked.connect(self.loginButtonFunction)
+
+		forgotButton = QtWidgets.QPushButton("Forgot Password?")
+		forgotButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical		
+		forgotButton.setSizePolicy(forgotButtonSizePolicy)
+		forgotButton.setStyleSheet("""	QPushButton{font-size: 15px;
+										color: rgba(60,70,89,225);
+										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(188, 192, 204,200), stop:1 rgba(205,208,220,225));
+										border-width: 1px;
+										border-style: outset;
+										border-color: rgba(240,240,240,200);
+										border-radius: 16px;
+										min-height:30px;
+										max-height:35px;}
+										QPushButton:hover {
+    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(205,208,220,225), stop:1 rgba(188, 192, 204,200));
+											}
+										QPushButton:pressed {
+    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(185,188,200,225), stop:1 rgba(168, 172, 184,200));  
+										border-style: inset;  
+											}
+										""")
+		forgotButton.clicked.connect(self.forgotPasswordClicked)
+
+
+		registerButton = QtWidgets.QPushButton("Register")
+		registerButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical		
+		registerButton.setSizePolicy(registerButtonSizePolicy)
+		registerButton.setStyleSheet("""	QPushButton{font-size: 15px;
+										color: rgba(60,70,89,225);
+										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(188, 192, 204,200), stop:1 rgba(205,208,220,225));
+										border-width: 1px;
+										border-style: outset;
+										border-color: rgba(240,240,240,200);
+										border-radius: 16px;
+										min-height:30px;
+										max-height:35px;}
+										QPushButton:hover {
+    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(205,208,220,225), stop:1 rgba(188, 192, 204,200));
+											}
+										QPushButton:pressed {
+    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(185,188,200,225), stop:1 rgba(168, 172, 184,200));  
+										border-style: inset;  
+											}
+										""")
+		registerButton.clicked.connect(self.goRegisterButtonFunction)
+
+		quitButton = QtWidgets.QPushButton("Quit Program")
+		quitButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical		
+		quitButton.setSizePolicy(quitButtonSizePolicy)
+		quitButton.setStyleSheet("""	QPushButton{font-size: 15px;
+										color: rgba(60,70,89,225);
+										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(188, 192, 204,200), stop:1 rgba(205,208,220,225));
+										border-width: 1px;
+										border-style: outset;
+										border-color: rgba(240,240,240,200);
+										border-radius: 16px;
+										min-height:30px;
+										max-height:35px;}
+										QPushButton:hover {
+    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(205,208,220,225), stop:1 rgba(188, 192, 204,200));
+											}
+										QPushButton:pressed {
+    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(185,188,200,225), stop:1 rgba(168, 172, 184,200));  
+										border-style: inset;  
+											}
+										""")
+		quitButton.clicked.connect(self.quitButtonFunction)
+
+
+		formBlockLayout.addWidget(widgetUsername,0,0,1,2)
+
+		
+		formBlockLayout.addWidget(widgetPassword,1,0,1,2)
+		formBlockLayout.addWidget(showPasswordCheck,2,0,1,2,Qt.AlignRight)
+		formBlockLayout.addWidget(loginButton,3,0,1,2)
+		formBlockLayout.addWidget(forgotButton,4,0,1,1)
+		formBlockLayout.addWidget(registerButton,4,1,1,1)
+		formBlockLayout.addWidget(quitButton,5,0,1,2)
+
+		innerFrameLayout.addWidget(logoLabel,Qt.AlignCenter)
+		innerFrameLayout.addWidget(formBlock)
+		
+		
+		
+		
+
+
+		
 		frameDoubleVLayout.addWidget(loginLabel,Qt.AlignCenter)
 		frameDoubleVLayout.addWidget(innerFrame,Qt.AlignCenter)
-
 		outerFrameLayout.insertStretch(0,1)
 		outerFrameLayout.addWidget(frameDouble)
 		outerFrameLayout.addStretch(1)
-
-		outerFrame.setLayout(outerFrameLayout)
+		
 
 		mainGrid = QGridLayout()
 		mainGrid.setSpacing(10)
@@ -1181,6 +1509,7 @@ class Login(QMainWindow):
 		self.showMaximized()
 
 	def loginButtonFunction(self):
+
 
 		inUserName= self.usernameLineEditLogin.text()
 		inUserPassword = self.passwordLineEditLogin.text()
@@ -1264,7 +1593,6 @@ class Login(QMainWindow):
 
 
 
-
 	def goRegisterButtonFunction(self):
 
 		self.next=Register()
@@ -1277,9 +1605,12 @@ class Login(QMainWindow):
 		self.close()
 		print("Forgot password clicked")
 
-	def quitButtonClicked(self):
-
+	def quitButtonFunction(self):
 		sys.exit()
+		print("quit clicked")
+
+
+
 
 class ForgotPasswordPage(QMainWindow):
 
