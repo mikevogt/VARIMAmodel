@@ -213,8 +213,8 @@ class Login(QMainWindow):
 										border-style: outset;
 										border-color: rgba(240,240,240,200);
 										border-radius: 16px;
-										min-height:20px;
-										max-height:30px;}
+										min-height:30px;
+										max-height:35px;}
 										QPushButton:hover {
     									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
 										stop:0 rgba(205,208,220,225), stop:1 rgba(188, 192, 204,200));
@@ -239,8 +239,8 @@ class Login(QMainWindow):
 										border-style: outset;
 										border-color: rgba(240,240,240,200);
 										border-radius: 16px;
-										min-height:20px;
-										max-height:30px;}
+										min-height:30px;
+										max-height:35px;}
 										QPushButton:hover {
     									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
 										stop:0 rgba(205,208,220,225), stop:1 rgba(188, 192, 204,200));
@@ -264,8 +264,8 @@ class Login(QMainWindow):
 										border-style: outset;
 										border-color: rgba(240,240,240,200);
 										border-radius: 16px;
-										min-height:20px;
-										max-height:30px;}
+										min-height:30px;
+										max-height:35px;}
 										QPushButton:hover {
     									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
 										stop:0 rgba(205,208,220,225), stop:1 rgba(188, 192, 204,200));
