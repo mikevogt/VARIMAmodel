@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QFrame,QGridLayout,
 	QSplitter, QStyleFactory, QApplication,QVBoxLayout,QStyle, QSizePolicy,QSpacerItem,QMessageBox)
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import (Qt,QSize)
 from PyQt5.QtGui import (QPalette,QColor,QPixmap,QIcon)
 
 
@@ -1022,11 +1022,16 @@ class Register(QMainWindow):
 class Login(QMainWindow):
 
 	def __init__(self):#Constructor for the login page. All the construction takes place in self.initUi()
+	#background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
+	#background-image: url(b7.jpg);
 		super().__init__()
 		self.setWindowIcon(QIcon("Logo.ico"))
 		self.setStyleSheet('''
 						QMainWindow{
-						 background: qradialgradient(cx: 0.5, cy: 0.5, radius: 2, fx: 0.5, fy: 0.5, stop: 0 rgba(228,107,60,50) , stop: 0.2 rgba(25,25,25,255) , stop: 0.4 rgba(55,55,55,255) );
+						
+							border-image: url(b16.jpg);
+						
+
 						 }
 						 QLineEdit{
 						 font-size: 20px;
@@ -1057,7 +1062,7 @@ class Login(QMainWindow):
 		outerFrameLayout.setContentsMargins(20,20,20,20)# Left top right then bottom
 
 
-		loginLabel= QtWidgets.QLabel("Welcome!",objectName="loginLabel")
+		loginLabel= QtWidgets.QLabel("STC2",objectName="loginLabel")
 		loginLabel.setAlignment(Qt.AlignCenter)
 		loginLabel.setStyleSheet("""font-size: 100px;""")
 		loginLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)
@@ -1092,6 +1097,21 @@ class Login(QMainWindow):
 		passwordLabel = QtWidgets.QLabel("Password:")
 		passwordLabel.setStyleSheet("""background: rgba(90,90,90,0);""")
 		self.passwordLineEditLogin=QtWidgets.QLineEdit()
+		usernameFrame= QFrame()
+		usernameFrame.setGeometry
+		usernameFrame.setStyleSheet("""
+									border-radius: 30px;""")
+		userLayout = QHBoxLayout()
+		usernameFrame.setLayout(userLayout)
+		userLayout.addWidget(self.passwordLineEditLogin)
+		self.passwordLineEditLogin.setStyleSheet(""" padding-right: 20px;
+													padding-left: 5px;
+													background: url(usernameIcon.png);
+														background-position: left;
+														background-repeat: no-repeat;
+ 
+															border: 1px solid black;
+														border-radius: 10px;""")
 		self.passwordLineEditLogin.setEchoMode(2)
 
 		loginButton = QtWidgets.QPushButton("Login")
@@ -1116,7 +1136,10 @@ class Login(QMainWindow):
 		formBlockLayout.addWidget(self.usernameLineEditLogin,0,1)
 
 		formBlockLayout.addWidget(passwordLabel,1,0)
-		formBlockLayout.addWidget(self.passwordLineEditLogin,1,1)
+		formBlockLayout.addWidget(usernameFrame,1,1)
+		formBlockLayout.setRowStretch(0,1)
+		
+		formBlockLayout.setRowStretch(1,10)
 
 
 		innerFrameLayout.addWidget(logoLabel,0,0,Qt.AlignCenter)
@@ -1152,7 +1175,7 @@ class Login(QMainWindow):
 		outerWidgetBox.setLayout(mainGrid)
 
 		self.setCentralWidget(outerWidgetBox)
-		self.setGeometry(0,0,1500,900)
+		#self.setGeometry(0,0,1500,900)
 		self.setWindowTitle("Login")
 
 		self.showMaximized()
@@ -1575,10 +1598,6 @@ def window() :
 						QMainWindow{
 						 background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
 							stop:0 rgba(25,25,25,255), stop:1 rgba(55,55,55,255))
-						}
-						QMainWindow:loginPage{
-
-						background-color: #2a82da
 						}
 						QPushButton {
 							font-size: 15px
