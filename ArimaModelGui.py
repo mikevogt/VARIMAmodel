@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QFrame,QGridLayout,
-	QSplitter, QStyleFactory, QApplication,QVBoxLayout,QStyle, QSizePolicy,QSpacerItem,QMessageBox)
+	QSplitter, QStyleFactory, QApplication,QVBoxLayout,QStyle, QSizePolicy,QSpacerItem,QMessageBox,QAction)
 from PyQt5.QtCore import (Qt,QSize)
 from PyQt5.QtGui import (QPalette,QColor,QPixmap,QIcon)
 
@@ -55,16 +55,43 @@ class MyWindow(QMainWindow):
 		grid = QGridLayout()
 		grid.setSpacing(10)
 		widgetBox.setLayout(grid)
+		self.setMinimumSize(900, 700);
 		self.setCentralWidget(widgetBox)
-		self.setGeometry(0,0,1500,900)
-		self.setWindowTitle("Varima Model")
+		self.setWindowTitle("Arima Model")
 
+		bar = self.menuBar()
+		file = bar.addMenu("File")
+		
+		save = QAction("Save Plot",self)
+		save.setShortcut("Ctrl+S")
+		file.addAction(save)
+		
+		
+		
+		logout = QAction("Logout",self)
+		file.addAction(logout)
+		quit = QAction("Quit",self) 
+		file.addAction(quit)
+
+		
+
+		view = bar.addMenu("View")
+		view.addAction("Themes")
+		helpMenu = bar.addMenu("Help")
+		helpMenu.addAction("About")
+      	#file.triggered[QAction].connect(self.processtrigger)
+		"""self.menuBar().addMenu("&File")
+		close=QtWidgets.QAction("&Close")
+		#close.triggered.connect(window.close)
+		self.menuBar().addAction(close)
+	"""
 		#Next, 3 QFrames are built to provide the primary framework of the window
 
 		#############################################################################################################################################
 		############################################## The top left frame is built and populated below below ########################################
 		#############################################################################################################################################
 
+		
 		topLeft = QFrame(self,objectName="innerFrame2")#Objectname is only used for stylesheet purposes and hence is not needed for declaring most widgets
 		topLeft.setFrameShape(QFrame.Panel)
 		topLeft.setFrameShadow(QFrame.Raised)
@@ -91,6 +118,8 @@ class MyWindow(QMainWindow):
 
 
 		self.comboBox= QtWidgets.QComboBox()
+		self.comboBox.setStyleSheet("""font-size:13px;
+										""")
 		"""self.comboBox.setStyleSheet(
 						border-radius:16px;
 						font-size: 15px;
@@ -345,15 +374,15 @@ class MyWindow(QMainWindow):
 
 		self.plotEmptyAxis()
 		#Now each on-button-click function is created
-
+		
 
 	def plotEmptyAxis(self):
 
 		fig, ax =plt.subplots()
 
 		ax.grid(linestyle="--")
-		ax.patch.set_facecolor('#323232')
-		fig.patch.set_facecolor('#191919')
+		ax.patch.set_facecolor('#282828')
+		fig.patch.set_facecolor("None")
 
 
 		ax.spines['bottom'].set_color('#ffffff')
@@ -369,10 +398,8 @@ class MyWindow(QMainWindow):
 		#fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
 
 		self.plotWidget = FigureCanvas(fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
-		self.plotWidget.setStyleSheet("""border-width: 1px;
-						border-style: outset;
-						border-color: rgba(255,255,255,255);
-						border-radius: 35px;""")
+		self.plotWidget.setStyleSheet("background-color:transparent;")
+		
 		self.rightFrameGridLayout.addWidget(self.plotWidget)
 
 	def optimizeModelOrder(self):
@@ -539,8 +566,8 @@ class MyWindow(QMainWindow):
 		ax.plot_date(dates,y,linewidth = 3,color=colourString,fmt='-', label ="Actual")
 		plt.legend(loc="upper right")
 		ax.grid(linestyle="--")
-		ax.patch.set_facecolor('#323232')
-		fig.patch.set_facecolor('#191919')
+		ax.patch.set_facecolor('#282828')
+		fig.patch.set_facecolor("None")
 		#fig.patch.set_alpha(0.0)
 		#ax.patch.set_alpha(0.0)
 
@@ -556,7 +583,8 @@ class MyWindow(QMainWindow):
 		ax.xaxis.label.set_color('white')
 		fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
 
-		self.plotWidget = FigureCanvas(fig) #FigureCanvas is an matplotlib object that can act as a pyqt5 widget
+		self.plotWidget = FigureCanvas(fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
+		self.plotWidget.setStyleSheet("background-color:transparent;")
 		self.rightFrameGridLayout.addWidget(self.plotWidget)
 
 
@@ -568,7 +596,7 @@ class MyWindow(QMainWindow):
 		#self.featuresListWidget.currentItem().text() is the text of the item selected in the featuresList widget
 		#self.comboBox.currentText() is the text of the item selected in the drop down list. namely the share
 
-		colourString = "#BF1AED" #Default purple
+		colourString = "#E46B3C" #Default Orange
 		if self.radioButtonPurple.isChecked():
 
 			colourString = "#BF1AED"
@@ -783,8 +811,8 @@ class MyWindow(QMainWindow):
 				ax.plot_date(forecastDates,forecastLowerError,linewidth = 3, color='#ff0066', fmt='--')
 				plt.legend(loc="upper right")
 				ax.grid(linestyle="--")
-				ax.patch.set_facecolor('#323232')
-				fig.patch.set_facecolor('#191919')
+				ax.patch.set_facecolor('#282828')
+				fig.patch.set_facecolor("None")
 				#fig.patch.set_alpha(0.0)
 				#ax.patch.set_alpha(0.0)
 				ax.spines['bottom'].set_color('#ffffff')
@@ -802,6 +830,7 @@ class MyWindow(QMainWindow):
 				#fig.savefig('temp.png', transparent=True)
 
 				self.plotWidget = FigureCanvas(fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
+				self.plotWidget.setStyleSheet("background-color:transparent;")
 				self.rightFrameGridLayout.addWidget(self.plotWidget)
 
 			except LinAlgError as err:
@@ -912,6 +941,11 @@ class Register(QMainWindow):
 		widgetUsername.setSizePolicy(widgetUsernameSizePolicy)
 		usernameLayout = QHBoxLayout()
 		widgetUsername.setLayout(usernameLayout)
+		bodyShadow = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow.setBlurRadius(9.0)
+		bodyShadow.setColor(QColor(0, 0, 0, 160))
+		bodyShadow.setOffset(-2)
+		widgetUsername.setGraphicsEffect(bodyShadow)
 
 
 		widgetEmail = QtWidgets.QWidget(objectName="groupWidget")
@@ -920,6 +954,12 @@ class Register(QMainWindow):
 		widgetEmail.setSizePolicy(widgetEmailSizePolicy)
 		emailLayout = QHBoxLayout()
 		widgetEmail.setLayout(emailLayout)
+		bodyShadow1 = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow1.setBlurRadius(9.0)
+		bodyShadow1.setColor(QColor(0, 0, 0, 160))
+		bodyShadow1.setOffset(-2)
+		widgetEmail.setGraphicsEffect(bodyShadow1)
+
 
 		widgetPassword = QtWidgets.QWidget(objectName="groupWidget")
 		
@@ -927,6 +967,11 @@ class Register(QMainWindow):
 		widgetPassword.setSizePolicy(widgetPasswordSizePolicy)
 		passwordLayout = QHBoxLayout()
 		widgetPassword.setLayout(passwordLayout)
+		bodyShadow2 = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow2.setBlurRadius(9.0)
+		bodyShadow2.setColor(QColor(0, 0, 0, 160))
+		bodyShadow2.setOffset(-2)
+		widgetPassword.setGraphicsEffect(bodyShadow2)
 
 		widgetConfirmPassword = QtWidgets.QWidget(objectName="groupWidget")
 		
@@ -934,6 +979,11 @@ class Register(QMainWindow):
 		widgetConfirmPassword.setSizePolicy(widgetConfirmPasswordSizePolicy)
 		confirmPasswordLayout = QHBoxLayout()
 		widgetConfirmPassword.setLayout(confirmPasswordLayout)
+		bodyShadow3 = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow3.setBlurRadius(9.0)
+		bodyShadow3.setColor(QColor(0, 0, 0, 160))
+		bodyShadow3.setOffset(-2)
+		widgetConfirmPassword.setGraphicsEffect(bodyShadow3)
 	
 		self.usernameLineEdit = QtWidgets.QLineEdit()
 		
@@ -1035,6 +1085,11 @@ class Register(QMainWindow):
 										border-style: inset;  
 											}
 										""")
+		bodyShadow4 = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow4.setBlurRadius(9.0)
+		bodyShadow4.setColor(QColor(0, 0, 0, 160))
+		bodyShadow4.setOffset(-2)
+		registerButton.setGraphicsEffect(bodyShadow4)
 		registerButton.clicked.connect(self.registerButtonClicked)
 
 		returnButton = QtWidgets.QPushButton("Return to Mainpage")
@@ -1060,6 +1115,11 @@ class Register(QMainWindow):
 										border-style: inset;  
 											}
 										""")
+		bodyShadow5 = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow5.setBlurRadius(9.0)
+		bodyShadow5.setColor(QColor(0, 0, 0, 160))
+		bodyShadow5.setOffset(-2)
+		returnButton.setGraphicsEffect(bodyShadow5)
 		returnButton.clicked.connect(self.returnButtonClicked)
 
 
@@ -1097,6 +1157,7 @@ class Register(QMainWindow):
 
 		self.setCentralWidget(outerWidgetBox)		
 		self.setWindowTitle("Register")
+		self.setMinimumSize(900, 700);
 		self.showMaximized()
 
 
@@ -1212,6 +1273,11 @@ class Login(QMainWindow):
 		frameDouble.setLayout(frameDoubleVLayout)
 
 		innerFrame = QtWidgets.QFrame(objectName="innerFrame")
+		bodyShadowT = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadowT.setBlurRadius(15.0)
+		bodyShadowT.setColor(QColor(0, 0, 0, 255))
+		bodyShadowT.setOffset(0)
+		innerFrame.setGraphicsEffect(bodyShadowT)
 
 		innerFrameLayout= QVBoxLayout()
 		innerFrameLayout.setSpacing(30)
@@ -1249,7 +1315,9 @@ class Login(QMainWindow):
 		widgetUsername = QtWidgets.QWidget(objectName="groupWidget")
 		widgetUsernameSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
 		widgetUsername.setSizePolicy(widgetUsernameSizePolicy)
+		widgetUsername.setFocusPolicy(Qt.StrongFocus)
 		usernameLayout = QHBoxLayout()
+
 		widgetUsername.setLayout(usernameLayout)
 		bodyShadow = QtWidgets.QGraphicsDropShadowEffect()
 		bodyShadow.setBlurRadius(9.0)
@@ -1343,13 +1411,21 @@ class Login(QMainWindow):
 		registerButton = QtWidgets.QPushButton("Register",objectName="button")
 		registerButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical		
 		registerButton.setSizePolicy(registerButtonSizePolicy)
-		
+		bodyShadow5 = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow5.setBlurRadius(9.0)
+		bodyShadow5.setColor(QColor(0, 0, 0, 160))
+		bodyShadow5.setOffset(-2)
+		registerButton.setGraphicsEffect(bodyShadow5)
 		registerButton.clicked.connect(self.goRegisterButtonFunction)
 
 		quitButton = QtWidgets.QPushButton("Quit Program",objectName="button")
 		quitButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical		
 		quitButton.setSizePolicy(quitButtonSizePolicy)
-	
+		bodyShadow6 = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow6.setBlurRadius(9.0)
+		bodyShadow6.setColor(QColor(0, 0, 0, 160))
+		bodyShadow6.setOffset(-2)
+		quitButton.setGraphicsEffect(bodyShadow6)
 		quitButton.clicked.connect(self.quitButtonFunction)
 
 
@@ -1383,6 +1459,7 @@ class Login(QMainWindow):
 
 		self.setCentralWidget(outerWidgetBox)
 		#self.setGeometry(0,0,1500,900)
+		self.setMinimumSize(900, 700);
 		self.setWindowTitle("Login")
 
 		self.showMaximized()
@@ -1592,6 +1669,11 @@ class ForgotPage(QMainWindow):
 		widgetUsername.setSizePolicy(widgetUsernameSizePolicy)
 		usernameLayout = QHBoxLayout()
 		widgetUsername.setLayout(usernameLayout)
+		bodyShadow = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow.setBlurRadius(9.0)
+		bodyShadow.setColor(QColor(0, 0, 0, 160))
+		bodyShadow.setOffset(-2)
+		widgetUsername.setGraphicsEffect(bodyShadow)
 
 
 		widgetEmail = QtWidgets.QWidget(objectName="groupWidget")
@@ -1599,12 +1681,22 @@ class ForgotPage(QMainWindow):
 		widgetEmail.setSizePolicy(widgetEmailSizePolicy)
 		emailLayout = QHBoxLayout()
 		widgetEmail.setLayout(emailLayout)
+		bodyShadow1 = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow1.setBlurRadius(9.0)
+		bodyShadow1.setColor(QColor(0, 0, 0, 160))
+		bodyShadow1.setOffset(-2)
+		widgetEmail.setGraphicsEffect(bodyShadow1)
 
 		widgetPassword = QtWidgets.QWidget(objectName="groupWidget")
 		widgetPasswordSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
 		widgetPassword.setSizePolicy(widgetPasswordSizePolicy)
 		passwordLayout = QHBoxLayout()
 		widgetPassword.setLayout(passwordLayout)
+		bodyShadow2 = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow2.setBlurRadius(9.0)
+		bodyShadow2.setColor(QColor(0, 0, 0, 160))
+		bodyShadow2.setOffset(-2)
+		widgetPassword.setGraphicsEffect(bodyShadow2)
 
 		widgetConfirmPassword = QtWidgets.QWidget(objectName="groupWidget")
 		
@@ -1612,6 +1704,11 @@ class ForgotPage(QMainWindow):
 		widgetConfirmPassword.setSizePolicy(widgetConfirmPasswordSizePolicy)
 		confirmPasswordLayout = QHBoxLayout()
 		widgetConfirmPassword.setLayout(confirmPasswordLayout)
+		bodyShadow3 = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow3.setBlurRadius(9.0)
+		bodyShadow3.setColor(QColor(0, 0, 0, 160))
+		bodyShadow3.setOffset(-2)
+		widgetConfirmPassword.setGraphicsEffect(bodyShadow3)
 	
 		self.usernameLineEdit = QtWidgets.QLineEdit()
 		
@@ -1696,12 +1793,21 @@ class ForgotPage(QMainWindow):
 		resetButton = QtWidgets.QPushButton("Reset Password",objectName="button")
 		resetButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical		
 		resetButton.setSizePolicy(resetButtonSizePolicy)
-	
+		bodyShadow4 = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow4.setBlurRadius(9.0)
+		bodyShadow4.setColor(QColor(0, 0, 0, 160))
+		bodyShadow4.setOffset(-2)
+		resetButton.setGraphicsEffect(bodyShadow4)
 		resetButton.clicked.connect(self.resetButtonClicked)
 
 		returnButton = QtWidgets.QPushButton("Return to Mainpage",objectName="button")
 		returnButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical		
 		returnButton.setSizePolicy(returnButtonSizePolicy)
+		bodyShadow5 = QtWidgets.QGraphicsDropShadowEffect()
+		bodyShadow5.setBlurRadius(9.0)
+		bodyShadow5.setColor(QColor(0, 0, 0, 160))
+		bodyShadow5.setOffset(-2)
+		returnButton.setGraphicsEffect(bodyShadow5)
 		
 		returnButton.clicked.connect(self.returnButtonClicked)
 
@@ -1737,7 +1843,7 @@ class ForgotPage(QMainWindow):
 
 		outerWidgetBox=QtWidgets.QWidget()
 		outerWidgetBox.setLayout(mainGrid)
-
+		self.setMinimumSize(900, 900);
 		self.setCentralWidget(outerWidgetBox)		
 		self.setWindowTitle("Forgot Password")
 		self.showMaximized()
@@ -1918,7 +2024,7 @@ def window() :
 	dark_palette.setColor(QPalette.Button, QColor(178, 182, 194))
 	dark_palette.setColor(QPalette.ButtonText, Qt.white)
 	dark_palette.setColor(QPalette.BrightText, Qt.red)
-	dark_palette.setColor(QPalette.Link,QColor(135, 189, 216) )
+	#dark_palette.setColor(QPalette.Link,QColor(135, 189, 216) )
 	dark_palette.setColor(QPalette.Highlight, QColor(135, 189, 216))
 	dark_palette.setColor(QPalette.HighlightedText,Qt.black )#Was initially Qt.Black
 
@@ -1936,6 +2042,14 @@ def window() :
 				#		}
 
 	#button max-height:35px;
+
+	"""QCheckBox::indicator {
+    										border: 1px solid #5A5A5A;
+    										background: none;
+											}
+						QCheckBox::indicator:checked{
+						image: url(dot10x10.png)
+						}"""
 	app.setStyleSheet('''
 						QMainWindow{
 						 border-image: url(b161.jpg);
@@ -1948,7 +2062,7 @@ def window() :
 						border-radius: 35px;
 						}
 						QFrame#innerFrame2{
-						background: rgba(90,90,90,100);
+						background: rgba(90,90,90,50);
 						border-width: 1px;
 						border-style: outset;
 						border-color: rgba(130,130,130,100);
@@ -1963,6 +2077,13 @@ def window() :
 										border-color: rgba(140,140,140,100);
 										border-radius: 29px;
 
+						}
+						QWidget#groupWidget:hover{
+						background: rgba(60,60,60,255);
+
+						}
+						QWidget#groupWidget:focus{
+						background: rgba(60,60,60,255);
 						}
 						
 						QPushButton#button{
@@ -1990,7 +2111,16 @@ def window() :
 										border-style: inset;  
 											}
 										
-						
+						QPushButton#button:focus {
+							
+							
+							background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+										stop:0 rgba(175,178,190,225), stop:1 rgba(158, 162, 174,200));  
+							border-style: inset;  	
+							border-color: rgba(255,255,255,255);
+							outline: none;
+
+						}
 						QPushButton {
 							font-size: 15px
 						}
@@ -2004,13 +2134,7 @@ def window() :
 						QLabel{
 							font-size: 12px
 						}
-						QCheckBox::indicator {
-    										border: 1px solid #5A5A5A;
-    										background: none;
-											}
-						QCheckBox::indicator:checked{
-						image: url(check3.png)
-						}
+						
 						
 						QMessageBox QPushButton{
 							background: rgba(55,55,55,255);
