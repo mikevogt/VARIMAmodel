@@ -65,7 +65,7 @@ class MyWindow(QMainWindow):
 		############################################## The top left frame is built and populated below below ########################################
 		#############################################################################################################################################
 
-		topLeft = QFrame(self,objectName="innerFrame")#Objectname is only used for stylesheet purposes and hence is not needed for declaring most widgets
+		topLeft = QFrame(self,objectName="innerFrame2")#Objectname is only used for stylesheet purposes and hence is not needed for declaring most widgets
 		topLeft.setFrameShape(QFrame.Panel)
 		topLeft.setFrameShadow(QFrame.Raised)
 		#builds layout for top left QFrame.
@@ -81,8 +81,11 @@ class MyWindow(QMainWindow):
 
 
 		#Shares label is now made
-		label1 = QtWidgets.QLabel("Shares")
-
+		
+		sharesLabel = QtWidgets.QLabel("Shares")
+		sharesLabel.setStyleSheet("""font-size: 15px;""")
+		sharesLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
+		sharesLabel.setSizePolicy(sharesLabelSizePolicy)
 
 		#comboBox is now made
 
@@ -135,6 +138,7 @@ class MyWindow(QMainWindow):
 		#Next, the features scroll list (called featuresListWidget) is made using a QListWidget() within a QGroupBox()
 
 		self.featuresListWidget = QtWidgets.QListWidget()
+		self.featuresListWidget.setStyleSheet("""font-size: 15px;""")
 		self.featuresListWidget.setAlternatingRowColors(True)
 
 		for column in self.data.columns[3:-2]:#For loop that iterates through all column names in data populating the featuresListWidget
@@ -144,16 +148,17 @@ class MyWindow(QMainWindow):
 
 
 		listWidgetGroupBox=QtWidgets.QGroupBox("Features")#Outer groupBox to house the features list widget
-		
+		listWidgetGroupBox.setStyleSheet("""font-size:15px;
+											""")
 		listWidgetGroupBoxLayout=QtWidgets.QVBoxLayout()
 		listWidgetGroupBox.setLayout(listWidgetGroupBoxLayout)
 		listWidgetGroupBoxLayout.addWidget(self.featuresListWidget)#featuresListWidget is first added to the groupbox
 
 		#All widgets are then added to the top left grid
-		gridTopLeft.addWidget(buttonImport,0,0,1,4)
-		gridTopLeft.addWidget(label1,1,0)
-		gridTopLeft.addWidget(self.comboBox,1,1,1,3)
-		gridTopLeft.addWidget(listWidgetGroupBox,2,0,4,4)# the groupbox (listWidgetGroupBox) is added to the top left grid completing the placement of the features list
+		#gridTopLeft.addWidget(buttonImport,0,0,1,4)
+		gridTopLeft.addWidget(sharesLabel,0,0,1,1)
+		gridTopLeft.addWidget(self.comboBox,0,1,1,4)
+		gridTopLeft.addWidget(listWidgetGroupBox,1,0,3,5)# the groupbox (listWidgetGroupBox) is added to the top left grid completing the placement of the features list
 
 
 		#############################################################################################################################################
@@ -161,7 +166,7 @@ class MyWindow(QMainWindow):
 		#############################################################################################################################################
 
 		#builds bottom left QFrame and creates a grid layout for it
-		bottomLeft = QFrame(self,objectName="innerFrame")
+		bottomLeft = QFrame(self,objectName="innerFrame2")
 		bottomLeft.setFrameShape(QFrame.Panel)
 		bottomLeft.setFrameShadow(QFrame.Raised)
 		bottomLeftGridLayout= QGridLayout()
@@ -169,23 +174,34 @@ class MyWindow(QMainWindow):
 
 		#Next, each item in the bottom left frame is created without adding it to the layout just yet
 
-		labelPlotCustomize = QtWidgets.QLabel("Customize Main Plot line:")
+		labelPlotCustomize = QtWidgets.QLabel("Plot Line Colour")
+		labelPlotCustomize.setStyleSheet("""font-size: 15px""")
+		
+		#customizeLabelWidget = QWidget()
+		#layout1=QHBoxLayout()
+		#customizeLabelWidget.setLayout(layout1)
+		#layout1.addWidget(labelPlotCustomize,Qt.AlignCenter)
 
 		labelPlotColour = QtWidgets.QLabel("Plot line colour:")
 
 		self.radioButtonGreen = QtWidgets.QRadioButton("Green")
+		self.radioButtonGreen.setStyleSheet("""font-size: 13px""")
 		self.radioButtonGreen.setStyle(QStyleFactory.create('windows'))
 		self.radioButtonPurple = QtWidgets.QRadioButton("Purple")
+		self.radioButtonPurple.setStyleSheet("""font-size: 13px""")
 		self.radioButtonPurple.setStyle(QStyleFactory.create('windows'))
 		self.radioButtonOrange = QtWidgets.QRadioButton("Orange")
+		self.radioButtonOrange.setStyleSheet("""font-size: 13px""")
 		self.radioButtonOrange.setStyle(QStyleFactory.create('windows'))
 		"""
 		buttonPlot = QtWidgets.QPushButton("Plot Data")
 		buttonPlot.clicked.connect(self.plotDataClicked)"""
 
 		labelArimaCustomize = QtWidgets.QLabel("Customize Arima Variables")
+		labelArimaCustomize.setStyleSheet("""font-size: 15px""")
 
-		labelPval= QtWidgets.QLabel("P-Value: ")
+		labelPval= QtWidgets.QLabel("P-Value:")
+		labelPval.setStyleSheet("""font-size: 13px""")
 		lineEditPval = QtWidgets.QLineEdit()
 		self.sliderPval = QtWidgets.QSlider(Qt.Horizontal)
 		self.sliderPval.setMinimum(0)
@@ -196,12 +212,14 @@ class MyWindow(QMainWindow):
 		self.sliderPval.valueChanged.connect(self.sliderChangedPvalue)
 
 		self.pValSpinBox = QtWidgets.QSpinBox()
+		self.pValSpinBox.setStyleSheet("""font-size: 13px""")
 		self.pValSpinBox.setValue(2)
 		self.pValSpinBox.setMinimum(0)
 		self.pValSpinBox.setMaximum(5)
 		self.pValSpinBox.valueChanged.connect(self.spinboxChangedPvalue)
 
-		labelDval= QtWidgets.QLabel("D-Value: ")
+		labelDval= QtWidgets.QLabel("D-Value:")
+		labelDval.setStyleSheet("""font-size: 13px""")
 		lineEditDval = QtWidgets.QLineEdit()
 		self.sliderDval = QtWidgets.QSlider(Qt.Horizontal)
 		self.sliderDval.setMinimum(0)
@@ -212,12 +230,14 @@ class MyWindow(QMainWindow):
 		self.sliderDval.valueChanged.connect(self.sliderChangedDvalue)
 
 		self.dValSpinBox = QtWidgets.QSpinBox()
+		self.dValSpinBox.setStyleSheet("""font-size: 13px""")
 		self.dValSpinBox.setValue(1)
 		self.dValSpinBox.setMinimum(0)
 		self.dValSpinBox.setMaximum(2)
 		self.dValSpinBox.valueChanged.connect(self.spinboxChangedDvalue)
 
-		labelQval= QtWidgets.QLabel("Q-Value: ")
+		labelQval= QtWidgets.QLabel("Q-Value:")
+		labelQval.setStyleSheet("""font-size: 13px""")
 		lineEditQval = QtWidgets.QLineEdit()
 		self.sliderQval = QtWidgets.QSlider(Qt.Horizontal)
 		self.sliderQval.setMinimum(0)
@@ -231,16 +251,19 @@ class MyWindow(QMainWindow):
 
 
 		self.qValSpinBox = QtWidgets.QSpinBox()
+		self.qValSpinBox.setStyleSheet("""font-size: 13px""")
 		self.qValSpinBox.setValue(1)
 		self.qValSpinBox.setMinimum(0)
 		self.qValSpinBox.setMaximum(5)
 		self.qValSpinBox.valueChanged.connect(self.spinboxChangedQvalue)
 
-		labelForecastLength = QtWidgets.QLabel("forecastLength: ")
-		lineEditForecastLength = QtWidgets.QLineEdit()
+		labelForecastLength = QtWidgets.QLabel("Forecast Length:")
+		labelForecastLength.setStyleSheet("""font-size: 13px""")
+		
 
 
 		self.dialSpinBox = QtWidgets.QSpinBox()
+		self.dialSpinBox.setStyleSheet("""font-size: 13px""")
 		self.dialSpinBox.setValue(27)
 		self.dialSpinBox.setMaximum(37)
 		self.dialSpinBox.setMinimum(7)
@@ -264,30 +287,30 @@ class MyWindow(QMainWindow):
 
 		#Now each item created above is added to the grid layout for the bottom left frame
 
-		bottomLeftGridLayout.addWidget(labelPlotCustomize,0,0,1,7)
+		bottomLeftGridLayout.addWidget(labelPlotCustomize,0,0,1,7,Qt.AlignCenter)
 
-		bottomLeftGridLayout.addWidget(labelPlotColour,1,0,1,1)
-		bottomLeftGridLayout.addWidget(self.radioButtonPurple,1,1,1,2)
-		bottomLeftGridLayout.addWidget(self.radioButtonGreen,1,3,1,2)
-		bottomLeftGridLayout.addWidget(self.radioButtonOrange,1,5,1,2)
+		#bottomLeftGridLayout.addWidget(labelPlotColour,1,0,1,1)
+		bottomLeftGridLayout.addWidget(self.radioButtonPurple,1,0,1,3,Qt.AlignCenter)
+		bottomLeftGridLayout.addWidget(self.radioButtonGreen,1,3,1,1,Qt.AlignCenter)
+		bottomLeftGridLayout.addWidget(self.radioButtonOrange,1,4,1,3,Qt.AlignCenter)
 
 		#bottomLeftGridLayout.addWidget(buttonPlot,2,0,1,7)
 
-		bottomLeftGridLayout.addWidget(labelArimaCustomize,2,0,1,7)
+		bottomLeftGridLayout.addWidget(labelArimaCustomize,2,0,1,7,Qt.AlignCenter)
 
-		bottomLeftGridLayout.addWidget(labelPval,3,0,1,1)
+		bottomLeftGridLayout.addWidget(labelPval,3,0,1,1,Qt.AlignCenter)
 		bottomLeftGridLayout.addWidget(self.pValSpinBox,3,1,1,1)
 		bottomLeftGridLayout.addWidget(self.sliderPval,3,2,1,5)
 
-		bottomLeftGridLayout.addWidget(labelDval,4,0,1,1)
+		bottomLeftGridLayout.addWidget(labelDval,4,0,1,1,Qt.AlignCenter)
 		bottomLeftGridLayout.addWidget(self.dValSpinBox,4,1,1,1)
 		bottomLeftGridLayout.addWidget(self.sliderDval,4,2,1,5)
 
-		bottomLeftGridLayout.addWidget(labelQval,5,0,1,1)
+		bottomLeftGridLayout.addWidget(labelQval,5,0,1,1,Qt.AlignCenter)
 		bottomLeftGridLayout.addWidget(self.qValSpinBox,5,1,1,1)
 		bottomLeftGridLayout.addWidget(self.sliderQval,5,2,1,5)
 
-		bottomLeftGridLayout.addWidget(labelForecastLength,6,0,1,1)
+		bottomLeftGridLayout.addWidget(labelForecastLength,6,0,1,1,Qt.AlignCenter)
 		bottomLeftGridLayout.addWidget(self.dialSpinBox,6,1,1,5)
 		bottomLeftGridLayout.addWidget(self.dial,6,6,1,1)
 
@@ -303,7 +326,7 @@ class MyWindow(QMainWindow):
 		############################################################################################################################################
 
 		#builds right QFrame and sets a grid layout for it
-		right = QFrame(self,objectName="innerFrame")
+		right = QFrame(self,objectName="innerFrame2")
 		right.setFrameShape(QFrame.Panel)
 		right.setFrameShadow(QFrame.Raised)
 		self.rightFrameGridLayout=QGridLayout()
@@ -1366,6 +1389,12 @@ class Login(QMainWindow):
 
 	def loginButtonFunction(self):
 
+		if (True):
+
+			self.next=MyWindow()
+			self.next.showMaximized()
+			self.close()
+			return
 
 		inUserName= self.usernameLineEditLogin.text()
 		inUserPassword = self.passwordLineEditLogin.text()
@@ -1917,6 +1946,13 @@ def window() :
 						border-style: outset;
 						border-color: rgba(130,130,130,100);
 						border-radius: 35px;
+						}
+						QFrame#innerFrame2{
+						background: rgba(90,90,90,100);
+						border-width: 1px;
+						border-style: outset;
+						border-color: rgba(130,130,130,100);
+						border-radius: 20px;
 						}
 						QWidget#groupWidget{
 						background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
