@@ -62,23 +62,33 @@ class MyWindow(QMainWindow):
 		bar = self.menuBar()
 		file = bar.addMenu("File")
 		
-		save = QAction("Save Plot",self)
-		save.setShortcut("Ctrl+S")
-		file.addAction(save)
-		
+		savePlot = QAction("Save Plot",self)
+		savePlot.setShortcut("Ctrl+S")
+		file.addAction(savePlot)
+		savePlot.triggered.connect(self.savePlotTriggered)
 		
 		
 		logout = QAction("Logout",self)
 		file.addAction(logout)
+		logout.triggered.connect(self.logoutButtonClicked)
+
 		quit = QAction("Quit",self) 
 		file.addAction(quit)
+		quit.triggered.connect(self.quitTriggered)
 
 		
 
 		view = bar.addMenu("View")
-		view.addAction("Themes")
+		
+		themes = QAction("Themes",self)
+		view.addAction(themes)
+		themes.triggered.connect(self.themesTriggered)
+
 		helpMenu = bar.addMenu("Help")
-		helpMenu.addAction("About")
+
+		about=QAction("About",self)
+		helpMenu.addAction(about)
+		about.triggered.connect(self.aboutTriggered)
       	#file.triggered[QAction].connect(self.processtrigger)
 		"""self.menuBar().addMenu("&File")
 		close=QtWidgets.QAction("&Close")
@@ -376,6 +386,33 @@ class MyWindow(QMainWindow):
 		#Now each on-button-click function is created
 		
 
+	def quitTriggered(self):
+		
+		print("quit triggered worked")
+
+
+	def aboutTriggered(self):
+
+		print("aboutTriggered")
+		alertMessage=QMessageBox()
+		alertMessage.setWindowTitle("About")
+		alertMessage.setText("P val explaination. D value explanation. Q Value explanation")
+		alertMessage.setIcon(QMessageBox.Information)
+		alertMessage.setWindowIcon(QIcon("Logo.ico"))
+		x=alertMessage.exec_()
+
+				
+
+
+	def savePlotTriggered(self):
+
+		print("savePlot triggered")
+
+	def themesTriggered(self):
+
+		print("Themes Triggered")
+
+
 	def plotEmptyAxis(self):
 
 		fig, ax =plt.subplots()
@@ -508,7 +545,7 @@ class MyWindow(QMainWindow):
 
 	def exponentiate(self,inVal):
 
-		return (1.02)**(inVal)-1
+		return (1.01)**(inVal)-1
 
 
 	def plotDataClicked(self):
@@ -752,6 +789,8 @@ class MyWindow(QMainWindow):
 				inDate=inDate+dateDelta
 
 			pythonForecastDateList = pythonDateListLast7+pythonDateListFuture
+			print("pythonForecastDateList")
+			print(pythonForecastDateList)
 			#Now we convert all the python datetime objects into matplotlib date format
 			dates = matplotlib.dates.date2num(pythonDateList)
 			forecastDates = matplotlib.dates.date2num(pythonForecastDateList)
@@ -794,8 +833,8 @@ class MyWindow(QMainWindow):
 				for i in range(0,len(forcasted)):
 					
 				
-					forecastUpperError.append(forcasted[i]+rmse +self.exponentiate(i))
-					forecastLowerError.append(forcasted[i]-rmse -self.exponentiate(i))
+					forecastUpperError.append(forcasted[i] + rmse + self.exponentiate(i))
+					forecastLowerError.append(forcasted[i] - rmse - self.exponentiate(i))
 					
 
 
@@ -1058,7 +1097,8 @@ class Register(QMainWindow):
 		confirmPasswordLayout.addWidget(confirmPasswordLogoLabel)
 		confirmPasswordLayout.addWidget(self.confirmPasswordLineEdit)
 
-		showPasswordCheck=QtWidgets.QCheckBox("Show Password")
+		self.showPasswordCheck=QtWidgets.QCheckBox("Show Password")
+		self.showPasswordCheck.stateChanged.connect(self.showPasswordChecked)
 		
 
 		registerButton = QtWidgets.QPushButton("Register")
@@ -1084,6 +1124,16 @@ class Register(QMainWindow):
 										stop:0 rgba(185,188,200,225), stop:1 rgba(168, 172, 184,200));  
 										border-style: inset;  
 											}
+										QPushButton:focus {
+							
+							
+											background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+											stop:0 rgba(175,178,190,225), stop:1 rgba(158, 162, 174,200));  
+											border-style: inset;  	
+											border-color: rgba(255,255,255,255);
+											outline: none;
+
+										}
 										""")
 		bodyShadow4 = QtWidgets.QGraphicsDropShadowEffect()
 		bodyShadow4.setBlurRadius(9.0)
@@ -1112,8 +1162,19 @@ class Register(QMainWindow):
 										QPushButton:pressed {
     									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
 										stop:0 rgba(185,188,200,225), stop:1 rgba(168, 172, 184,200));  
-										border-style: inset;  
+										border-style: inset;
+
 											}
+										QPushButton:focus {
+							
+							
+											background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+											stop:0 rgba(175,178,190,225), stop:1 rgba(158, 162, 174,200));  
+											border-style: inset;  	
+											border-color: rgba(255,255,255,255);
+											outline: none;
+
+										}
 										""")
 		bodyShadow5 = QtWidgets.QGraphicsDropShadowEffect()
 		bodyShadow5.setBlurRadius(9.0)
@@ -1131,7 +1192,7 @@ class Register(QMainWindow):
 
 		formBlockLayout.addWidget(widgetConfirmPassword,3,0,1,2)
 
-		formBlockLayout.addWidget(showPasswordCheck,4,0,1,2,Qt.AlignRight)
+		formBlockLayout.addWidget(self.showPasswordCheck,4,0,1,2,Qt.AlignRight)
 		formBlockLayout.addWidget(registerButton,5,0,1,1)
 		formBlockLayout.addWidget(returnButton,5,1,1,1)
 		
@@ -1160,6 +1221,15 @@ class Register(QMainWindow):
 		self.setMinimumSize(900, 700);
 		self.showMaximized()
 
+	def showPasswordChecked(self):
+
+		if (self.showPasswordCheck.isChecked()):
+
+			self.passwordLineEdit.setEchoMode(0)
+
+		else:
+
+			self.passwordLineEdit.setEchoMode(2)
 
 	def registerButtonClicked(self):
 
@@ -1782,13 +1852,9 @@ class ForgotPage(QMainWindow):
 		confirmPasswordLayout.addWidget(confirmPasswordLogoLabel)
 		confirmPasswordLayout.addWidget(self.confirmPasswordLineEdit)
 
-		showPasswordCheck=QtWidgets.QCheckBox("Show Password")
-		showPasswordCheck.setStyleSheet("""QCheckBox::indicator {
-    										border: 3px solid #5A5A5A;
-    										background: none;
-											}
-											
-											""")
+		self.showPasswordCheck=QtWidgets.QCheckBox("Show Password")
+		self.showPasswordCheck.stateChanged.connect(self.showPasswordChecked)
+		
 
 		resetButton = QtWidgets.QPushButton("Reset Password",objectName="button")
 		resetButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical		
@@ -1820,7 +1886,7 @@ class ForgotPage(QMainWindow):
 
 		formBlockLayout.addWidget(widgetConfirmPassword,4,0,1,2)
 
-		formBlockLayout.addWidget(showPasswordCheck,5,0,1,2,Qt.AlignRight)
+		formBlockLayout.addWidget(self.showPasswordCheck,5,0,1,2,Qt.AlignRight)
 		formBlockLayout.addWidget(resetButton,6,0,1,1)
 		formBlockLayout.addWidget(returnButton,6,1,1,1)
 		
@@ -1847,6 +1913,17 @@ class ForgotPage(QMainWindow):
 		self.setCentralWidget(outerWidgetBox)		
 		self.setWindowTitle("Forgot Password")
 		self.showMaximized()
+
+
+	def showPasswordChecked(self):
+
+		if (self.showPasswordCheck.isChecked()):
+
+			self.passwordLineEdit.setEchoMode(0)
+
+		else:
+
+			self.passwordLineEdit.setEchoMode(2)
 
 
 	def resetButtonClicked(self):
@@ -2082,9 +2159,7 @@ def window() :
 						background: rgba(60,60,60,255);
 
 						}
-						QWidget#groupWidget:focus{
-						background: rgba(60,60,60,255);
-						}
+						
 						
 						QPushButton#button{
 
