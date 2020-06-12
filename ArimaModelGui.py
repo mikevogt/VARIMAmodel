@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QFrame,QGridLayout,
-	QSplitter, QStyleFactory, QApplication,QVBoxLayout,QStyle, QSizePolicy,QSpacerItem,QMessageBox,QAction)
+	QSplitter, QStyleFactory, QApplication,QVBoxLayout,QStyle, QSizePolicy,QSpacerItem,QMessageBox,QAction,QListView,QAbstractItemView)
 from PyQt5.QtCore import (Qt,QSize)
 from PyQt5.QtGui import (QPalette,QColor,QPixmap,QIcon)
 
@@ -35,22 +35,24 @@ from email.mime.multipart import MIMEMultipart
 
 class MyWindow(QMainWindow):
 	#MainWindow constructor. Most of the actual construction takes place in the function initUi(self) when it is called
+	data1 =pd.read_csv('ProcessedStandardised2.csv',';')
 	def __init__(self):
 
 		super(MyWindow,self).__init__()#This can be written as super().__init__() i think which would make more sense but leave it as is for now
 		self.setWindowIcon(QIcon("Logo.ico"))
-		self.data =pd.read_csv('ProcessedStandardised.csv',';')#Reads in the standardized data from ProcessedStandardised.csv. This file must be in the same directory as varimaGui.py
+		self.data =pd.read_csv('ProcessedStandardised2.csv',';')#Reads in the standardized data from ProcessedStandardised.csv. This file must be in the same directory as varimaGui.py
 		self.pVal=2
 		self.dVal=1
 		self.qVal=1
 		self.forecastLength=27
 		self.initUi()
+		self.count=0
 
 
 	def initUi(self):
 
 		#The gui for main window is built below. It consists of a central widget called widgetBox which has a gridlayout (called grid) set to it
-
+		
 		widgetBox = QWidget(self)
 		grid = QGridLayout()
 		grid.setSpacing(10)
@@ -85,6 +87,7 @@ class MyWindow(QMainWindow):
 		themes.triggered.connect(self.themesTriggered)
 
 		helpMenu = bar.addMenu("Help")
+
 
 		about=QAction("About",self)
 		helpMenu.addAction(about)
@@ -125,11 +128,23 @@ class MyWindow(QMainWindow):
 		sharesLabel.setSizePolicy(sharesLabelSizePolicy)
 
 		#comboBox is now made
-
-
+		"""
+		border: 1px solid #32414B;
+ 										 border-radius: 0;
+  										background-color: #19232D;
+  										combobox-popup: 0;
+		"""
 		self.comboBox= QtWidgets.QComboBox()
-		self.comboBox.setStyleSheet("""font-size:13px;
+		self.comboBox.setStyleSheet("""
+									QComboBox{
+									font-size:13px;
+
+																		
+									}
+									
+										
 										""")
+
 		"""self.comboBox.setStyleSheet(
 						border-radius:16px;
 						font-size: 15px;
@@ -146,7 +161,8 @@ class MyWindow(QMainWindow):
 			self.comboBox.addItem(share)
 
 
-
+		#self.comboBox.setItemData(0, QColor(Qt.black), Qt.ForegroundRole);
+		self.comboBox.setMaxVisibleItems(50)
 		#Ignore the block of commets below here
 		#Features scroll area is now made
 		#innerGroupBox is made first. This will have a VBoxLayout containing list of hello worlds.
@@ -394,12 +410,8 @@ class MyWindow(QMainWindow):
 	def aboutTriggered(self):
 
 		print("aboutTriggered")
-		alertMessage=QMessageBox()
-		alertMessage.setWindowTitle("About")
-		alertMessage.setText("P val explaination. D value explanation. Q Value explanation")
-		alertMessage.setIcon(QMessageBox.Information)
-		alertMessage.setWindowIcon(QIcon("Logo.ico"))
-		x=alertMessage.exec_()
+		self.current=AboutPage()
+		self.current.show()
 
 				
 
@@ -407,6 +419,12 @@ class MyWindow(QMainWindow):
 	def savePlotTriggered(self):
 
 		print("savePlot triggered")
+		
+		string="plot"+str(self.count)+".png"
+		self.fig.savefig(string,facecolor='#323232')
+
+		self.count=self.count+1
+		self.varButtonClicker()
 
 	def themesTriggered(self):
 
@@ -415,26 +433,26 @@ class MyWindow(QMainWindow):
 
 	def plotEmptyAxis(self):
 
-		fig, ax =plt.subplots()
+		self.fig, self.ax =plt.subplots()
 
-		ax.grid(linestyle="--")
-		ax.patch.set_facecolor('#282828')
-		fig.patch.set_facecolor("None")
+		self.ax.grid(linestyle="--")
+		self.ax.patch.set_facecolor('#282828')
+		self.fig.patch.set_facecolor("None")
 
 
-		ax.spines['bottom'].set_color('#ffffff')
-		ax.spines['top'].set_color('#ffffff')
-		ax.spines['right'].set_color('#ffffff')
-		ax.spines['left'].set_color('#ffffff')
-		ax.tick_params(axis='x', colors='#ffffff')
-		ax.tick_params(axis='y', colors='#ffffff')
+		self.ax.spines['bottom'].set_color('#ffffff')
+		self.ax.spines['top'].set_color('#ffffff')
+		self.ax.spines['right'].set_color('#ffffff')
+		self.ax.spines['left'].set_color('#ffffff')
+		self.ax.tick_params(axis='x', colors='#ffffff')
+		self.ax.tick_params(axis='y', colors='#ffffff')
 		#ax.set_xlabel("Date",fontsize=15)
 		#ax.set_ylabel(self.featuresListWidget.currentItem().text(),fontsize=15)
-		ax.yaxis.label.set_color('white')
-		ax.xaxis.label.set_color('white')
+		self.ax.yaxis.label.set_color('white')
+		self.ax.xaxis.label.set_color('white')
 		#fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
 
-		self.plotWidget = FigureCanvas(fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
+		self.plotWidget = FigureCanvas(self.fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
 		self.plotWidget.setStyleSheet("background-color:transparent;")
 		
 		self.rightFrameGridLayout.addWidget(self.plotWidget)
@@ -568,6 +586,15 @@ class MyWindow(QMainWindow):
 			#Makes sure a feature is selected. should maybe have this open an alert box instead of printing to the console
 			#If this removed, program will crash if no item is selected
 			print("No feature selected, please select one above")
+
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("No Feature Selected.")
+			alertMessage.setText("You have not selected a feature to plot. Please select a feature from the side bar before plotting")
+			alertMessage.setIcon(QMessageBox.Info)
+			alertMessage.setWindowIcon(QIcon("Logo.ico"))
+			x=alertMessage.exec_()
+
+			self.plotEmptyAxis()
 			return
 
 
@@ -649,6 +676,16 @@ class MyWindow(QMainWindow):
 			#Makes sure a feature is selected. should maybe have this open an alert box instead of printing to the console
 			#If this removed, program will crash if no item is selected
 			print("No feature selected, please select one above")
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("No Feature Selected.")
+			alertMessage.setText("You have not selected a feature to plot. Please select a feature from the side bar before plotting")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("Logo.ico"))
+			x=alertMessage.exec_()
+
+			
+			
+			
 			return
 
 
@@ -754,8 +791,9 @@ class MyWindow(QMainWindow):
 		else :# This is entered if there is a plot already in the frame
 
 
-
-			plt.clf()
+			plt.close(self.fig)
+			#plt.clf()
+			#plt.cla()
 			self.plotWidget.deleteLater() #existing plot widget is initially deleted. not sure if this actually works or not. TEst later. Also, the
 											#existing figure should be deleted here as well. Not quite sure how to do this though but i think making
 											#ax and fig into class variables and then calling plt.clf() should do it.
@@ -841,34 +879,34 @@ class MyWindow(QMainWindow):
 				print("after")
 				print(forecastUpperError)
 				#Plot of y vs dates is now created below
-				fig, ax =plt.subplots()#Fig must be deleted  later so as not consume memory
+				self.fig, self.ax =plt.subplots()#Fig must be deleted  later so as not consume memory
 				#color='#1AB1ED' for blue
 				#ax.plot(y,linewidth=4,color='#BF1AED')
-				ax.plot_date(dates,y,linewidth = 3,color=colourString,fmt='-',label="Actual Data")
-				ax.plot_date(forecastDates,forcasted,linewidth = 3,color='#1AB1ED',fmt='-', label="Forecasted")
-				ax.plot_date(forecastDates,forecastUpperError,linewidth = 3,color='#ff0066',fmt='--', label="Error")
-				ax.plot_date(forecastDates,forecastLowerError,linewidth = 3, color='#ff0066', fmt='--')
+				self.ax.plot_date(dates,y,linewidth = 3,color=colourString,fmt='-',label="Actual Data")
+				self.ax.plot_date(forecastDates,forcasted,linewidth = 3,color='#1AB1ED',fmt='-', label="Forecasted")
+				self.ax.plot_date(forecastDates,forecastUpperError,linewidth = 3,color='#ff0066',fmt='--', label="Error")
+				self.ax.plot_date(forecastDates,forecastLowerError,linewidth = 3, color='#ff0066', fmt='--')
 				plt.legend(loc="upper right")
-				ax.grid(linestyle="--")
-				ax.patch.set_facecolor('#282828')
-				fig.patch.set_facecolor("None")
+				self.ax.grid(linestyle="--")
+				self.ax.patch.set_facecolor('#282828')
+				self.fig.patch.set_facecolor("None")
 				#fig.patch.set_alpha(0.0)
 				#ax.patch.set_alpha(0.0)
-				ax.spines['bottom'].set_color('#ffffff')
-				ax.spines['top'].set_color('#ffffff')
-				ax.spines['right'].set_color('#ffffff')
-				ax.spines['left'].set_color('#ffffff')
-				ax.tick_params(axis='x', colors='#ffffff')
-				ax.tick_params(axis='y', colors='#ffffff')
-				ax.set_xlabel("Date",fontsize=15)
-				ax.set_ylabel(self.featuresListWidget.currentItem().text(),fontsize=15)
-				fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
-				ax.yaxis.label.set_color('white')
-				ax.xaxis.label.set_color('white')
+				self.ax.spines['bottom'].set_color('#ffffff')
+				self.ax.spines['top'].set_color('#ffffff')
+				self.ax.spines['right'].set_color('#ffffff')
+				self.ax.spines['left'].set_color('#ffffff')
+				self.ax.tick_params(axis='x', colors='#ffffff')
+				self.ax.tick_params(axis='y', colors='#ffffff')
+				self.ax.set_xlabel("Date",fontsize=15)
+				self.ax.set_ylabel(self.featuresListWidget.currentItem().text(),fontsize=15)
+				self.fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
+				self.ax.yaxis.label.set_color('white')
+				self.ax.xaxis.label.set_color('white')
 
 				#fig.savefig('temp.png', transparent=True)
 
-				self.plotWidget = FigureCanvas(fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
+				self.plotWidget = FigureCanvas(self.fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
 				self.plotWidget.setStyleSheet("background-color:transparent;")
 				self.rightFrameGridLayout.addWidget(self.plotWidget)
 
@@ -1307,6 +1345,74 @@ class Register(QMainWindow):
 		self.next.showMaximized()
 		self.close()
 
+class AboutPage(QMainWindow):
+
+	def __init__(self):
+		
+		super().__init__()
+		self.setWindowIcon(QIcon("Logo.ico"))
+		
+		self.initUi()
+
+	def initUi(self) :
+
+		mainWidget=QtWidgets.QWidget()
+		mainLayout= QHBoxLayout()
+		mainWidget.setLayout(mainLayout)
+
+
+		self.featuresListWidget = QtWidgets.QListWidget()
+		self.featuresListWidget.setStyleSheet("""font-size: 15px;""")
+		self.featuresListWidget.setAlternatingRowColors(True)
+
+		for column in MyWindow.data1.columns[3:-2]:#For loop that iterates through all column names in data populating the featuresListWidget
+			#Still need to fix this so that it does not add the first 3 column names (namely DateStamps, Shares and Ticker) to the features list
+			self.featuresListWidget.addItem(column)
+
+
+
+		self.featuresListWidget.itemClicked.connect(self.featureClicked)
+		listWidgetGroupBox=QtWidgets.QGroupBox("Features")#Outer groupBox to house the features list widget
+		listWidgetGroupBox.setStyleSheet("""font-size:15px;""")
+		listWidgetGroupBoxLayout=QtWidgets.QVBoxLayout()
+		listWidgetGroupBox.setLayout(listWidgetGroupBoxLayout)
+		listWidgetGroupBoxLayout.addWidget(self.featuresListWidget)#featuresListWidget is first added to the groupbox
+
+
+		html = """\
+			<html>
+			  <body>
+			    <p>Hi there,<br><br>
+			       You have just successfully reset your password! You can now login in with your new password.<br> 
+			       If this was not you, please send an email to ScrapedThroughC2@gmail.com and we will get back <br>
+			       to you as soon as possible to review your account activity.<br><br>
+			       We hope that you are enjoying our product. If you should need any assistance, please either email <br>
+			       ScrapedThroughC2@gmail.com or call Nic (cell): 0832261920.<br><br>
+
+			       Kind regards,<br><br>
+			       The STC2 Team
+			    </p>
+			  </body>
+			</html>
+			"""
+		self.label=QtWidgets.QLabel(html)
+		self.label.setStyleSheet("""font-size: 15px;""")
+
+		mainLayout.addWidget(listWidgetGroupBox,1)
+		mainLayout.addWidget(self.label,2)
+
+		self.setCentralWidget(mainWidget)
+		#self.setGeometry(0,0,1500,900)
+		self.setMinimumSize(900, 400);
+		self.setWindowTitle("About")
+
+		self.show()
+
+	def featureClicked(self):
+
+		print(self.featuresListWidget.currentItem().text())
+		self.label.setText(self.featuresListWidget.currentItem().text())
+		print("Feature")
 
 
 class Login(QMainWindow):
@@ -2104,7 +2210,7 @@ def window() :
 	#dark_palette.setColor(QPalette.Link,QColor(135, 189, 216) )
 	dark_palette.setColor(QPalette.Highlight, QColor(135, 189, 216))
 	dark_palette.setColor(QPalette.HighlightedText,Qt.black )#Was initially Qt.Black
-
+#87bdd8
 	app.setPalette(dark_palette)
 	#light blue 
 	#button color orange QColor(228,107,60)
