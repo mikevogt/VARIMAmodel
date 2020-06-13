@@ -1642,13 +1642,13 @@ class Login(QMainWindow):
 
 	def loginButtonFunction(self):
 
-		if (True):
+		"""if (True):
 
 			self.next=MyWindow()
 			self.next.showMaximized()
 			self.close()
 			return
-
+		"""
 		inUserName= self.usernameLineEditLogin.text()
 		inUserPassword = self.passwordLineEditLogin.text()
 
