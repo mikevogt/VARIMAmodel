@@ -1008,7 +1008,7 @@ class Register(QMainWindow):
 									border-color: rgba(140,140,140,0);""")
 		logoLabelSizePolicy=QSizePolicy(QSizePolicy.Expanding,QSizePolicy.Minimum)#Horizontal,vertical
 		logoLabel.setSizePolicy(logoLabelSizePolicy)
-		pixmap = QPixmap("logotest.png")
+		pixmap = QPixmap("registerLogo.png")
 		logoLabel.setPixmap(pixmap)
 		logoLabel.setAlignment(Qt.AlignCenter)
 
@@ -1239,7 +1239,7 @@ class Register(QMainWindow):
 		innerFrameLayout.addWidget(formBlock)
 
 		
-		frameDoubleVLayout.addWidget(loginLabel,Qt.AlignCenter)
+		#frameDoubleVLayout.addWidget(loginLabel,Qt.AlignCenter)
 		frameDoubleVLayout.addWidget(innerFrame,Qt.AlignCenter)
 		outerFrameLayout.insertStretch(0,1)
 		outerFrameLayout.addWidget(frameDouble)
@@ -1484,7 +1484,7 @@ class Login(QMainWindow):
 									border-color: rgba(140,140,140,0);""")
 		logoLabelSizePolicy=QSizePolicy(QSizePolicy.Expanding,QSizePolicy.Minimum)#Horizontal,vertical
 		logoLabel.setSizePolicy(logoLabelSizePolicy)
-		pixmap = QPixmap("logotest.png")
+		pixmap = QPixmap("stc2.png")
 		logoLabel.setPixmap(pixmap)
 		logoLabel.setAlignment(Qt.AlignCenter)
 
@@ -1618,7 +1618,7 @@ class Login(QMainWindow):
 		innerFrameLayout.addWidget(logoLabel,Qt.AlignCenter)
 		innerFrameLayout.addWidget(formBlock)
 		
-		frameDoubleVLayout.addWidget(loginLabel,Qt.AlignCenter)
+		#frameDoubleVLayout.addWidget(loginLabel,Qt.AlignCenter)
 		frameDoubleVLayout.addWidget(innerFrame,Qt.AlignCenter)
 		outerFrameLayout.insertStretch(0,1)
 		outerFrameLayout.addWidget(frameDouble)
@@ -1822,7 +1822,7 @@ class ForgotPage(QMainWindow):
 									border-color: rgba(140,140,140,0);""")
 		logoLabelSizePolicy=QSizePolicy(QSizePolicy.Expanding,QSizePolicy.Minimum)#Horizontal,vertical
 		logoLabel.setSizePolicy(logoLabelSizePolicy)
-		pixmap = QPixmap("logotest.png")
+		pixmap = QPixmap("forgotLogo.png")
 		logoLabel.setPixmap(pixmap)
 		logoLabel.setAlignment(Qt.AlignCenter)
 
@@ -2001,7 +2001,7 @@ class ForgotPage(QMainWindow):
 		innerFrameLayout.addWidget(formBlock)
 
 		
-		frameDoubleVLayout.addWidget(loginLabel,Qt.AlignCenter)
+		#frameDoubleVLayout.addWidget(loginLabel,Qt.AlignCenter)
 		frameDoubleVLayout.addWidget(innerFrame,Qt.AlignCenter)
 		outerFrameLayout.insertStretch(0,1)
 		outerFrameLayout.addWidget(frameDouble)
