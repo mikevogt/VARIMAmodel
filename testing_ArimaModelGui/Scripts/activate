@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Mike\Desktop\VARIMAmodel\testing_ArimaModelGui"
+VIRTUAL_ENV="C:\Users\Mike\Desktop\testing_ArimaModelGui"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
