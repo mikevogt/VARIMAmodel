@@ -31,16 +31,427 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 #from sklearn.metrics import mean_squared_error
+htmlReturnonInvestment="""\
+			<html>
+    			<body>
+        			<p>
+            		Return on investment (ROI) is a ratio betweet net profit over a period<br>
+            		of time amd the cost of investment. This ratio is used to establish how<br>
+            		how efficient the investment is in terms of making a profit or comparing<br>
+            		the effficiency to other investments.<br><br>
+            		
+            		A High ROI is a good indicator of a good investment as the net profit is<br>
+            		favourable to the costs that you have invested.
 
+        			</p>
+    			</body>
+			</html"""
+
+htmlTotalAssetTurnover="""\
+			<html>
+    			<body>
+        			<p>
+            		Total Asset Turnover (ATO) is a financial indicator used to measure the efficiency<br>
+            		of how well the assets of the company are being used to generate sales revenue for the <br>
+            		company. Asset turnover can be further divided into fixed asset turnover as well as working <br>
+            		turnover. <br><br>
+
+            		The formula for Total Asset Turnover is:<br>
+            		Asset Turnover = Net Sales Revenue / Average Total Assets
+
+        			</p>
+    			</body>
+			</html>"""
+
+htmlBetatoMarket="""\
+			<html>
+    			<body>
+        			<p>
+            		The beta of an investment is a measure of the risk that arises from the exposure <br>
+            		to general market movements as opposed to the company specific risk. The market <br>
+            		portfolio of all investments has a beta = 1. If a company has a beta > 1, this company <br>
+            		would be considered to be more risky than the market as the price movements would <br>
+            		fluctuate more than the overall market.
+
+        			</p>
+    			</body>
+			</html>"""
+
+htmlBetatoUSDZAR="""\
+			<html>
+    			<body>
+        			<p>
+            		The beta of an investment is a measure of the risk that arises from the exposure <br>
+            		to general market movements as opposed to the company specific risk. This risk is<br>
+            		being compared to the USD/ZAR exchange rate. This compares the price movements of <br>
+            		the comany to the movements of the exchange. If the beta is > 1, the company would <br>
+            		seem to be risky/volatile to the USD.
+
+        			</p>
+    			</body>
+			</html>"""
+
+htmlNetProfitMargin="""\
+			<html>
+    			<body>
+        			<p>
+            		Net Profit Margin (NPM) is a measur of profitability of the company. NPM is used <br>
+            		for internal comparison, it is an idicator of the company's pricing strategies<br>
+            		and how well the company controls its costs. Differences in competetive strategy<br>
+            		will cause the NPM to vary across companies.<br><br>
+            		
+            		NPM is calculated by finding the net profit as a percentace of revenue.<br>
+            		Net Profit Margin = Net Profit / Revenue
+
+
+        			</p>
+    			</body>
+			</html>"""
+
+htmlCurrentRatio="""\
+			<html>
+    			<body>
+        			<p>
+            		The current ratio is a liquidity ratio that measures whether a firm has enough <br>
+            		resources to meet its short-term liabilities, This means that if a company goes <br>
+            		insolvent and has to sell all their assets, they will generate enough money to pay<br>
+            		off their short-term liabilities.<br><br>
+            		
+            		The Current Ratio is calculated with the following formula:<br>
+            		Current ratio = Current Assets / Current Lieabilities
+
+
+        			</p>
+    			</body>
+			</html>"""
+
+htmlVolatility="""\
+			<html>
+    			<body>
+        			<p>
+            		Volatility or Company-Specific Risk refers to the risk that a company has that<br>
+            		is unique to them and that can be mitigated through diversification. This risk<br>
+            		can impact negatively on a company and needs to be monitored carefully. A high<br>
+            		volatility can put the company at a disadvantage in the market as other companies<br>
+            		do not have to face this risk.
+
+        			</p>
+    			</body>
+			</html>"""
+
+
+htmlDebtToEquityR = """\
+			<html>
+				<body>
+			    	<p> 
+			   		The debt-to-equity (D/E) ratio is calculated by dividing a company’s total<br>
+			   		liabilities by its shareholder equity. These numbers are available on the<br>
+			   		balance sheet of a company’s financial statements. The ratio is used to<br>
+			   		evaluate a company's financial leverage. The D/E ratio is an important metric<br>
+			   		used in corporate finance.<br><br>
+
+			   		It is a measure of the degree to which a company is financing its operations<br>
+			   		through debt versus wholly-owned funds. More specifically, it reflects the<br>
+			   		ability of shareholder equity to cover all outstanding debts in the event<br>
+			   		of a business downturn.<br>		
+			       
+			    	</p>
+				</body>
+			</html>
+			"""
+htmlDebtToEquityT="""\
+			<html>
+				<body>
+			    	<p> 
+			   		The debt-to-equity (D/E) ratio is calculated by dividing a company’s total<br>
+			   		liabilities by its shareholder equity. These numbers are available on the<br>
+			   		balance sheet of a company’s financial statements. The ratio is used to<br>
+			   		evaluate a company's financial leverage. The D/E ratio is an important metric<br>
+			   		used in corporate finance.<br><br>
+
+			   		It is a measure of the degree to which a company is financing its operations<br>
+			   		through debt versus wholly-owned funds. More specifically, it reflects the<br>
+			   		ability of shareholder equity to cover all outstanding debts in the event<br>
+			   		of a business downturn. This feature provides the trend of the debt<br>
+			   		to equity ratio<br>		
+			       
+			    	</p>
+				</body>
+			</html>
+			"""
+
+htmlInterestCoverTrend="""\
+			<html>
+				<body>
+			    	<p> 
+			    	The interest coverage ratio is a debt ratio and profitability ratio used to determine<br>
+			    	how easily a company can pay interest on its outstanding debt. The interest coverage<br>
+			    	ratio may be calculated by dividing a company's earnings before interest and taxes<br>
+			    	(EBIT) during a given period by the company's interest payments due within the same<br>
+			    	period.<br><br>
+
+					The Interest coverage ratio is also called “times interest earned.” Lenders, investors,<br> 
+					and creditors often use this formula to determine a company's riskiness relative to its<br> 
+					current debt or for future borrowing.<br>		
+			       
+			    	</p>
+			  	</body>
+			</html>
+			"""
+htmlMarketCapitalization="""\
+			<html>
+			 	<body>
+			    	<p>
+			    	Market capitalization refers to the total dollar market value of a company's outstanding<br>
+			    	shares of stock. Commonly referred to as "market cap," it is calculated by multiplying the<br>
+			    	total number of a company's outstanding shares by the current market price of one share.<br><br>
+
+					As an example, a company with 10 million shares selling for $100 each would have a market<br>
+					cap of $1 billion. The investment community uses this figure to determine a company's size<br>
+					,as opposed to using sales or total asset figures. In an acquisition, the market cap is<br>
+					used to determine whether a takeover candidate represents a good value or not to the <br>
+					acquirer.<br>
+			    	</p>
+			 	</body>
+			</html>
+			"""
+htmlTradingVolume="""\
+			<html>
+			 	<body>
+			    	<p>
+			    	Volume of trade is the total quantity of shares or contracts traded for a specified<br> 
+			    	security. It can be measured on any type of security traded during a trading day.<br>
+			    	Volume of trade or trade volume is measured on stocks, bonds, options contracts,<br> 
+			    	futures contracts and all types of commodities.<br>
+			    	</p>
+			 	</body>
+			</html>
+			"""
+
+htmlEarningsYield = """\
+			<html>
+				<body>
+					<p>
+					The earnings yield refers to the earnings per share for the most recent 12-month period<br> 
+					divided by the current market price per share. The earnings yield (which is the inverse<br> 
+					of the P/E ratio) shows the percentage of how much a company earned per share.<br>
+					</p>
+				</body>
+			</html>"""
+
+htmlEarningsYieldTrend = """\
+			<html>
+				<body>
+					<p>
+					The earnings yield refers to the earnings per share for the most recent 12-month period<br> 
+					divided by the current market price per share. The earnings yield (which is the inverse<br> 
+					of the P/E ratio) shows the percentage of how much a company earned per share. This<br> 
+					feature provides the trend of the Earnings Yield<br>
+					</p>
+				</body>
+			</html>"""
+
+
+htmlBookValuetoPriceRatio = """\
+			<html>
+				<body>
+					<p>
+					The P/B ratio reflects the value that market participants attach to a company's equity relative<br> 
+					to the book value of its equity. A stock's market value is a forward-looking metric that<br> 
+					reflects a company's future cash flows. The book value of equity is an accounting measure<br> 
+					based on the historic cost principle and reflects past issuances of equity, augmented by any<br>
+					profits or losses, and reduced by dividends and share buybacks.<br>  
+					</p>
+				</body>
+			</html>"""
+
+htmlBookValuetoPriceRatioTrend = """\
+			<html>
+				<body>
+					<p>
+					The P/B ratio reflects the value that market participants attach to a company's equity relative<br> 
+					to the book value of its equity. A stock's market value is a forward-looking metric that reflects<br> 
+					a company's future cash flows.<br><br>  
+  					The book value of equity is an accounting measure based on the historic cost principle and <br> 
+  					reflects past issuances of equity, augmented by any profits or losses, and reduced by <br> 
+  					dividends and share buybacks. This feature provides the trend of the Book Value to Price Ratio<br>
+					</p>
+				</body>
+			</html>"""
+
+htmlSalesToPriceRatio = """\
+			<html>
+				<body>
+					<p>
+					The Sales to Price ratio is a ratio representing the sell/buy price of a share. The sell<br>  		
+					price of a share is the amount a share may be sold for, while the buy price of a<br>  			
+					share is the amount a share will cost a buyer. This ratio is used in computing<br>  			
+					profits and losses.<br> 
+					</p>
+				</body>
+			</html>"""
+
+htmlSalesToPriceRatioTrend = """\
+			<html>
+				<body>
+					<p>
+					The Sales to Price ratio trend is the pattern resulting for the Sales to Price Ratio.<br>  			
+					This is very useful for visualization and strategy planning. Plots and other statistical<br>  		
+					graphical methods may be used for visualizing this trend.  Often used as the "base"<br>  		
+					for decision making in the Stock Exchange.<br> 
+					</p>
+				</body>
+			</html>"""
+
+
+htmlProfitMargin = """\
+			<html>
+				<body>
+					<p>
+					Profit margin is one of the commonly used profitability ratios to gauge the degree<br>  			
+					to which a company or a business activity makes money. It represents what<br>  			
+					percentage of sales has turned into profits. Simply put, the percentage figure<br>  			
+					indicates how many cents of profit the business has generated for each dollar of<br>  			
+					sale. 
+					</p>
+				</body>
+			</html>"""
+
+
+
+htmlWorkingCapitalTurnover = """\
+			<html>
+				<body>
+					<p>
+					Working capital turnover is a ratio that measures how efficiently a company is<br>  			
+					using its working capital to support a given level of sales. Also referred to as net<br>  			
+					sales to working capital, work capital turnover shows the relationship between the <br> 		
+					funds used to finance a company's operations and the revenues a company<br>  			
+					generates as a result.<br> 
+					</p>
+				</body>
+			</html>"""
+
+
+htmlAssetTurnover = """\
+			<html>
+				<body>
+					<p>
+					The asset turnover ratio measures the value of a company's sales or revenues<br>  			
+					relative to the value of its assets. The asset turnover ratio can be used as an<br>  			
+					indicator of the efficiency with which a company is using its assets to generate<br>  			
+					revenue.<br> 
+					</p>
+				</body>
+			</html>"""
+
+
+
+
+htmlProfitMargin="""\
+			<html>
+				<body>
+					<p>
+					Profit margin is calculated with selling price (or revenue) taken as base times 100. It is<br>
+					the percentage of selling price that is turned into profit, whereas "profit percentage" or<br>
+					"markup" is the percentage of cost price that one gets as profit on top of cost price.<br>
+					While selling something one should know what percentage of profit one will get on a<br>
+					particular investment, so companies calculate profit percentage to find the ratio of<br>
+					profit to cost.<br><br>
+					The profit margin is used mostly for internal comparison.<br><br>
+					Individual businesses' operating and financing arrangements vary so much that different<br> 
+					entities are bound to have different levels of expenditure, so that comparison of one<br>
+					with another can have little meaning. A low profit margin indicates a low margin of safety:<br>
+					higher risk that a decline in sales will erase profits and result in a net loss, or a negative<br>
+					margin.<br><br>
+
+					</p>
+				</body>
+			</html>
+	"""
+
+htmlCapitalTurnover="""\
+			<html>
+				<body>
+					<p>
+					Capital turnover compares the annual sales of a business to the total amount of its stockholders'<br>
+					equity. The intent is to measure the proportion of revenue that a company can generate with a given<br>
+					amount of equity. It is also a general measure of the level of capital investment needed in a<br>
+					specific industry in order to generate sales.<br><br>
+
+					</p>
+				</body>
+			</html>
+	"""
+
+
+htmlCapitalTurnoverTrend="""\
+			<html>
+				<body>
+					<p>
+					Capital turnover compares the annual sales of a business to the total amount of its stockholders'<br>
+					equity. The intent is to measure the proportion of revenue that a company can generate with a given<br>
+					amount of equity. It is also a general measure of the level of capital investment needed in a<br>
+					specific industry in order to generate sales.This feature provides the trend of the Capital<br>
+					Turnover<br><br>
+
+					</p>
+				</body>
+			</html>
+	"""
+
+
+
+
+htmlReturnOnAssets="""\
+			<html>
+				<body>
+					<p>
+					Return on assets (ROA) is a financial ratio that shows the percentage of profit a company earns<br>
+					in relation to its overall resources. It is commonly defined as net income divided by total assets.<br> 
+					Net income is derived from the income statement of the company and is the profit after taxes. The<br>
+					assets are read from the balance sheet and include cash and cash-equivalent items such as receivables,<br>
+					inventories, land, capital equipment as depreciated, and the value of intellectual property such as<br> 
+					patents. Companies that have been acquired may also have a category called "good will" representing<br> 
+					the extra money paid for the company over and above its actual book value at the time of acquisition.<br> 
+					Because assets will tend to have swings over time, an average of assets over the period to be measured<br> 
+					should be used. Thus the ROA for a quarter should be based on net income for the quarter divided by average<br> 
+					assets in that quarter. ROA is a ratio but usually presented as a percentage.<br>
+
+
+					</p>
+				</body>
+			</html>
+	"""
+
+htmlReturnOnAssetsTrend="""\
+			<html>
+				<body>
+					<p>
+					Return on assets (ROA) is a financial ratio that shows the percentage of profit a company earns<br>
+					in relation to its overall resources. It is commonly defined as net income divided by total assets.<br> 
+					Net income is derived from the income statement of the company and is the profit after taxes. The<br>
+					assets are read from the balance sheet and include cash and cash-equivalent items such as receivables,<br>
+					inventories, land, capital equipment as depreciated, and the value of intellectual property such as<br> 
+					patents. Companies that have been acquired may also have a category called "good will" representing<br> 
+					the extra money paid for the company over and above its actual book value at the time of acquisition.<br> 
+					Because assets will tend to have swings over time, an average of assets over the period to be measured<br> 
+					should be used. Thus the ROA for a quarter should be based on net income for the quarter divided by average<br> 
+					assets in that quarter. ROA is a ratio but usually presented as a percentage.This feature provides the<br>
+					the trend of the return on assets<br><br>
+					</p>
+				</body>
+			</html>
+	"""
 
 class MyWindow(QMainWindow):
 	#MainWindow constructor. Most of the actual construction takes place in the function initUi(self) when it is called
-	data1 =pd.read_csv('ProcessedStandardised2.csv',';')
+	data1 =pd.read_csv('ProcessedStandardisedOG.csv',';')
 	def __init__(self):
 
 		super(MyWindow,self).__init__()#This can be written as super().__init__() i think which would make more sense but leave it as is for now
 		self.setWindowIcon(QIcon("Logo.ico"))
-		self.data =pd.read_csv('ProcessedStandardised2.csv',';')#Reads in the standardized data from ProcessedStandardised.csv. This file must be in the same directory as varimaGui.py
+		self.data =pd.read_csv('ProcessedStandardisedOG.csv',';')#Reads in the standardized data from ProcessedStandardised.csv. This file must be in the same directory as varimaGui.py
 		self.pVal=2
 		self.dVal=1
 		self.qVal=1
@@ -1411,10 +1822,117 @@ class AboutPage(QMainWindow):
 		self.show()
 
 	def featureClicked(self):
+		featureString = self.featuresListWidget.currentItem().text()
 
-		print(self.featuresListWidget.currentItem().text())
-		self.label.setText(self.featuresListWidget.currentItem().text())
+		print(featureString)
+		self.label.setText(featureString)
 		print("Feature")
+		
+
+		if (featureString=="Return on investment"):
+			
+			global htmlReturnonInvestment
+			self.label.setText(htmlReturnonInvestment)
+
+		elif (featureString=="Total Asset Turnover"):
+			
+			global htmlTotalAssetTurnover
+			self.label.setText(htmlTotalAssetTurnover)
+
+		elif (featureString=="Beta to Market"):
+			
+			global htmlBetatoMarket
+			self.label.setText(htmlBetatoMarket)
+
+		elif (featureString=="Beta to USD/ZAR"):
+			
+			global htmlBetatoUSDZAR
+			self.label.setText(htmlBetatoUSDZAR)
+
+		elif (featureString=="Net Profit Margin"):
+			
+			global htmlNetProfitMargin
+			self.label.setText(htmlNetProfitMargin)
+
+		elif (featureString=="Current Ratio"):
+			
+			global htmlCurrentRatio
+			self.label.setText(htmlCurrentRatio)
+
+		elif (featureString=="Volatility"):
+			
+			global htmlVolatility
+			self.label.setText(htmlVolatility)
+
+		elif (featureString=="Debt to Equity Ratio"):
+			
+			global htmlDebtToEquityR
+			self.label.setText(htmlDebtToEquityR)
+
+		elif(featureString=="Debt to Equity Ratio Trend"):
+
+			global htmlDebtToEquityT
+			self.label.setText(htmlDebtToEquityT)
+
+		elif (featureString=="Interest Cover Trend"):
+			
+			global htmlInterestCoverTrend
+			self.label.setText(htmlInterestCoverTrend)
+
+		elif (featureString=="Market Capitalization (Log)"):
+
+			global htmlMarketCapitalization
+			self.label.setText(htmlMarketCapitalization)
+
+
+		elif(featureString=="Trading Volume (Log)"):
+			global htmlTradingVolume
+			self.label.setText(htmlTradingVolume)
+
+		elif(featureString=="Earnings Yield"):
+			
+			global htmlEarningsYield
+			self.label.setText(htmlEarningsYield)
+
+		elif(featureString=="Earnings Yield Trend"):
+			
+			global htmlEarningsYieldTrend
+			self.label.setText(htmlEarningsYieldTrend)
+
+		elif(featureString=="Book Value to Price Ratio"):
+			
+			global htmlBookValuetoPriceRatio
+			self.label.setText(htmlBookValuetoPriceRatio)
+
+		elif(featureString=="Book Value to Price Ratio Trend"):
+			
+			global htmlBookValuetoPriceRatioTrend
+			self.label.setText(htmlBookValuetoPriceRatioTrend)
+		
+		elif(featureString=="Profit Margin"):
+			
+			global htmlProfitMargin
+			self.label.setText(htmlProfitMargin)
+
+		elif(featureString=="Capital Turnover"):
+			
+			global htmlCapitalTurnover
+			self.label.setText(htmlCapitalTurnover)
+
+		elif(featureString=="Capital Turnover Trend"):
+			
+			global htmlCapitalTurnoverTrend
+			self.label.setText(htmlCapitalTurnoverTrend)
+
+		elif(featureString=="Return on Assets"):
+			
+			global htmlReturnOnAssets
+			self.label.setText(htmlReturnOnAssets)
+
+		elif(featureString=="Return on Assets Trend"):
+			
+			global htmlReturnOnAssetsTrend
+			self.label.setText(htmlReturnOnAssetsTrend)
 
 
 class Login(QMainWindow):
