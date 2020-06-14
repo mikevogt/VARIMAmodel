@@ -30,7 +30,7 @@ def test_loginForgotButton(login, qtbot):
 #def test_loginQuitButton(login, qtbot):
 #    qtbot.mouseClick(login.quitButton, QtCore.Qt.LeftButton)
 
-# REGISTER
+# REGISTERed
 @pytest.fixture
 def register(qtbot):
     test_Arima = ArimaModelGui.Register()
