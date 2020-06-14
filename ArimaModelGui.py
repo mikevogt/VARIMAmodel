@@ -1688,6 +1688,7 @@ class Register(QMainWindow):
 		inUserName= self.usernameLineEdit.text()
 		inUserPassword = self.passwordLineEdit.text()
 		inUserEmail = self.emailAddressLineEdit.text()
+		inUserConfirm = self.confirmPasswordLineEdit.text()
 		hashUserPassword = bcrypt.hashpw(inUserPassword.encode('utf-8'), bcrypt.gensalt())
 
 		if(len(inUserPassword)==0 or len(inUserName)==0):
@@ -1695,6 +1696,16 @@ class Register(QMainWindow):
 			alertMessage=QMessageBox()
 			alertMessage.setWindowTitle("Registration Failed")
 			alertMessage.setText("Please enter a username, password and email address to register.")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("Logo.ico"))
+			x=alertMessage.exec_()
+			return
+
+		if(inUserPassword != inUserConfirm):
+
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Registration Failed")
+			alertMessage.setText("Your password and confirmation password do not match.")
 			alertMessage.setIcon(QMessageBox.Information)
 			alertMessage.setWindowIcon(QIcon("Logo.ico"))
 			x=alertMessage.exec_()
@@ -1734,6 +1745,54 @@ class Register(QMainWindow):
 			mydb.close()
 			print("got past mydb.close")
 			server.close()
+
+			sender_email = "scrapedthroughc2@gmail.com"
+			receiver_email = inUserEmail
+			password = "arimamodel1!"
+
+			message = MIMEMultipart("alternative")
+			message["Subject"] = "STC2 Registration"
+			message["From"] = sender_email
+			message["To"] = receiver_email
+
+			# Create the plain-text and HTML version of your message
+			text = """\
+			Hi there,
+			Thank you for using our product.
+			Please click this link to reset your password:
+			www.realpython.com"""
+			html = """\
+			<html>
+			  <body>
+			    <p>Hi there,<br><br>
+			       You have just successfully registered to STC2! You can now login in using your credentials. We hope that you enjoy our product and
+				   the power to predict the future! If you get stuck at any point, make sure to read the 'help' tab in the app.<br><br>
+			       If you should need any further assistance, please either email ScrapedThroughC2@gmail.com
+			       or call Nic (cell): 0832261920.<br><br>
+
+			       Kind regards,<br><br>
+			       The STC2 Team
+			    </p>
+			  </body>
+			</html>
+			"""
+
+			# Turn these into plain/html MIMEText objects
+			part1 = MIMEText(text, "plain")
+			part2 = MIMEText(html, "html")
+
+			# Add HTML/plain-text parts to MIMEMultipart message
+			# The email client will try to render the last part first
+			message.attach(part1)
+			message.attach(part2)
+
+			# Create secure connection with server and send email
+			context = ssl.create_default_context()
+			with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+			    server.login(sender_email, password)
+			    server.sendmail(
+			        sender_email, receiver_email, message.as_string()
+			    )
 
 
 			self.next=MyWindow()
@@ -2565,6 +2624,7 @@ class ForgotPage(QMainWindow):
 		inUserName = self.usernameLineEdit.text()
 		inUserPassword = self.passwordLineEdit.text()
 		inUserEmail = self.emailLineEdit.text()
+		inUserConfirm = self.confirmPasswordLineEdit.text()
 
 		if(len(inUserEmail)==0 or len(inUserName)==0):
 
@@ -2585,7 +2645,15 @@ class ForgotPage(QMainWindow):
 			alertMessage.setWindowIcon(QIcon("Logo.ico"))
 			x=alertMessage.exec_()
 			return
+		if(inUserPassword!=inUserConfirm):
 
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Password Reset Failed")
+			alertMessage.setText("Your password and confirmation password did not match.")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("Logo.ico"))
+			x=alertMessage.exec_()
+			return
 
 		server = SSHTunnelForwarder(
 			'146.141.21.92',
