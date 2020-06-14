@@ -36,7 +36,7 @@ htmlReturnonInvestment="""\
     			<body>
         			<p>
             		Return on investment (ROI) is a ratio betweet net profit over a period of time and the<br>
-            		cost of investment. This ratio is used to establish how how efficient the investment is<br> 
+            		cost of investment. This ratio is used to establish how how efficient the investment is<br>
             		in terms of making a profit or comparing the effficiency to other investments.<br><br>
 
             		A High ROI is a good indicator of a good investment as the net profit is favourable<br>
@@ -52,7 +52,7 @@ htmlTotalAssetTurnover="""\
         			<p>
             		Total Asset Turnover (ATO) is a financial indicator used to measure the efficiency of how<br>
             		well the assets of the company are being used to generate sales revenue for the <br>
-            		company. Asset turnover can be further divided into fixed asset turnover as well as<br> 
+            		company. Asset turnover can be further divided into fixed asset turnover as well as<br>
             		working turnover. <br><br>
 
             		The formula for Total Asset Turnover is:<br>
@@ -66,7 +66,7 @@ htmlBetatoMarket="""\
 			<html>
     			<body>
         			<p>
-            		The beta of an investment is a measure of the risk that arises from the exposure to<br> 
+            		The beta of an investment is a measure of the risk that arises from the exposure to<br>
             		general market movements as opposed to the company specific risk. The market <br>
             		portfolio of all investments has a beta = 1. If a company has a beta > 1, this company <br>
             		would be considered to be more risky than the market as the price movements would <br>
@@ -80,7 +80,7 @@ htmlBetatoUSDZAR="""\
 			<html>
     			<body>
         			<p>
-            		The beta of an investment is a measure of the risk that arises from the exposure to<br> 
+            		The beta of an investment is a measure of the risk that arises from the exposure to<br>
             		general market movements as opposed to the company specific risk. This risk is<br>
             		being compared to the USD/ZAR exchange rate. This compares the price movements of <br>
             		the comany to the movements of the exchange. If the beta is > 1, the company would <br>
@@ -94,7 +94,7 @@ htmlNetProfitMargin="""\
 			<html>
     			<body>
         			<p>
-            		Net Profit Margin (NPM) is a measur of profitability of the company. NPM is used for<br> 
+            		Net Profit Margin (NPM) is a measur of profitability of the company. NPM is used for<br>
             		internal comparison, it is an idicator of the company's pricing strategies and how <br>
             		well the company controls its costs. Differences in competetive strategy will cause <br>
             		the NPM to vary across companies.<br><br>
@@ -129,8 +129,8 @@ htmlVolatility="""\
     			<body>
         			<p>
             		Volatility or Company-Specific Risk refers to the risk that a company has that is unique to<br>
-            		them and that can be mitigated through diversification. This riskcan impact negatively<br> 
-            		on a company and needs to be monitored carefully. A high volatility can put the company<br> 
+            		them and that can be mitigated through diversification. This riskcan impact negatively<br>
+            		on a company and needs to be monitored carefully. A high volatility can put the company<br>
             		at a disadvantage in the market as other companies do not have to face this risk.<br>
 
         			</p>
@@ -188,7 +188,7 @@ htmlInterestCoverTrend="""\
 			    	(EBIT) during a given period by the company's interest payments due within the same<br>
 			    	period.<br><br>
 
-					The Interest coverage ratio is also called “times interest earned.” Lenders, investors,<br> 
+					The Interest coverage ratio is also called “times interest earned.” Lenders, investors,<br>
 					and creditors often use this formula to determine a company's riskiness relative to its<br>
 					current debt or for future borrowing.<br>
 
@@ -202,12 +202,12 @@ htmlMarketCapitalization="""\
 			    	<p>
 			    	Market capitalization refers to the total dollar market value of a company's outstanding<br>
 			    	shares of stock. Commonly referred to as "market cap," it is calculated by multiplying the<br>
-			    	total number of a company's outstanding shares by the current market price of one<br> 
+			    	total number of a company's outstanding shares by the current market price of one<br>
 			    	share.<br><br>
 
-					As an example, a company with 10 million shares selling for $100 each would have a<br> 
-					market cap of $1 billion. The investment community uses this figure to determine a<br> 
-					company's size,as opposed to using sales or total asset figures. In an acquisition,<br> 
+					As an example, a company with 10 million shares selling for $100 each would have a<br>
+					market cap of $1 billion. The investment community uses this figure to determine a<br>
+					company's size,as opposed to using sales or total asset figures. In an acquisition,<br>
 					the market cap is used to determine whether a takeover candidate represents a good <br>
 					value or not to the acquirer.<br>
 			    	</p>
@@ -231,7 +231,7 @@ htmlEarningsYield = """\
 			<html>
 				<body>
 					<p>
-					The earnings yield refers to the earnings per share for the most recent 12-month period<br> 
+					The earnings yield refers to the earnings per share for the most recent 12-month period<br>
 					divided by the current market price per share. The earnings yield (which is the inverse<br>
 					of the P/E ratio) shows the percentage of how much a company earned per share.<br>
 					</p>
@@ -242,7 +242,7 @@ htmlEarningsYieldTrend = """\
 			<html>
 				<body>
 					<p>
-					The earnings yield refers to the earnings per share for the most recent 12-month period<br> 
+					The earnings yield refers to the earnings per share for the most recent 12-month period<br>
 					divided by the current market price per share. The earnings yield (which is the inverse<br>
 					of the P/E ratio) shows the percentage of how much a company earned per share. This<br>
 					feature provides the trend of the Earnings Yield<br>
@@ -255,10 +255,10 @@ htmlBookValuetoPriceRatio = """\
 			<html>
 				<body>
 					<p>
-					The P/B ratio reflects the value that market participants attach to a company's equity<br> 
-					relative to the book value of its equity. A stock's market value is a forward-looking<br> 
-					metric that reflects a company's future cash flows. The book value of equity is an<br> 
-					accounting measure based on the historic cost principle and reflects past issuances<br> 
+					The P/B ratio reflects the value that market participants attach to a company's equity<br>
+					relative to the book value of its equity. A stock's market value is a forward-looking<br>
+					metric that reflects a company's future cash flows. The book value of equity is an<br>
+					accounting measure based on the historic cost principle and reflects past issuances<br>
 					of equity, augmented by any profits or losses, and reduced by dividends and share <br>
 					buybacks.<br>
 					</p>
@@ -269,10 +269,10 @@ htmlBookValuetoPriceRatioTrend = """\
 			<html>
 				<body>
 					<p>
-					The P/B ratio reflects the value that market participants attach to a company's equity<br> 
-					relative to the book value of its equity. A stock's market value is a forward-looking<br> 
-					metric that reflects a company's future cash flows. The book value of equity is an<br> 
-					accounting measure based on the historic cost principle and reflects past issuances<br> 
+					The P/B ratio reflects the value that market participants attach to a company's equity<br>
+					relative to the book value of its equity. A stock's market value is a forward-looking<br>
+					metric that reflects a company's future cash flows. The book value of equity is an<br>
+					accounting measure based on the historic cost principle and reflects past issuances<br>
 					of equity, augmented by any profits or losses, and reduced by dividends and share <br>
 					buybacks.<br><br>
 					This feature provides the trend of the Book Value to Price Ratio<br>
@@ -285,10 +285,10 @@ htmlDividendYield = """\
 			<html>
 				<body>
 					<p>
-					The dividend yield, expressed as a percentage, is a financial ratio that shows how much a<br> 
+					The dividend yield, expressed as a percentage, is a financial ratio that shows how much a<br>
 					company pays out in dividends each year relative to its stock price.<br>
-					The reciprocal of the dividend yield is the dividend payout ratio.<br> 
-					The dividend payout ratio is the ratio of the total amount of dividends paid out to<br> 
+					The reciprocal of the dividend yield is the dividend payout ratio.<br>
+					The dividend payout ratio is the ratio of the total amount of dividends paid out to<br>
 					shareholders relative to the net income of the company.<br>
 					</p>
 				</body>
@@ -299,7 +299,7 @@ htmlDividentYieldTrend = """\
 			<html>
 				<body>
 					<p>
-					The divident yield trend is the pattern resulting from the dividend yield, which is<br> 
+					The divident yield trend is the pattern resulting from the dividend yield, which is<br>
 					expressed as a percentage. This helps in visualizing the financial ration that shows how <br>
 					much a company pays out in its divends.<br>
 					</p>
@@ -311,8 +311,8 @@ htmlCashflowToPriceRatio = """\
 				<body>
 					<p>
 					The price-to-cash flow (P/CF) ratio is a stock valuation indicator or multiple that measures<br>
-					the value of a stock's price relative to its operating cash flow per share. The ratio uses<br> 
-					operating cash flow which adds back non-cash expenses such as depreciation<br> 
+					the value of a stock's price relative to its operating cash flow per share. The ratio uses<br>
+					operating cash flow which adds back non-cash expenses such as depreciation<br>
 					and amortization to net income.<br>
 					</p>
 				</body>
@@ -323,10 +323,10 @@ htmlCashflowToPriceRatioTrend = """\
 				<body>
 					<p>
 					The price-to-cash flow (P/CF) ratio is a stock valuation indicator or multiple that measures<br>
-					the value of a stock's price relative to its operating cash flow per share. The ratio uses<br> 
-					operating cash flow which adds back non-cash expenses such as depreciation and <br> 
+					the value of a stock's price relative to its operating cash flow per share. The ratio uses<br>
+					operating cash flow which adds back non-cash expenses such as depreciation and <br>
 					amortization to net income.<br><br>
-					This feature, however shows the trend of the Cashflow to Price ratio and is good for <br> 
+					This feature, however shows the trend of the Cashflow to Price ratio and is good for <br>
 					visualization.<br>
 					</p>
 				</body>
@@ -336,9 +336,9 @@ htmlSalesToPriceRatio = """\
 			<html>
 				<body>
 					<p>
-					The Sales to Price ratio is a ratio representing the sell/buy price of a share. The sell<br> 		
-					price of a share is the amount a share may be sold for, while the buy price of a<br> 			
-					share is the amount a share will cost a buyer. This ratio is used in computing<br> 			
+					The Sales to Price ratio is a ratio representing the sell/buy price of a share. The sell<br>
+					price of a share is the amount a share may be sold for, while the buy price of a<br>
+					share is the amount a share will cost a buyer. This ratio is used in computing<br>
 					profits and losses.<br>
 					</p>
 				</body>
@@ -348,9 +348,9 @@ htmlSalesToPriceRatioTrend = """\
 			<html>
 				<body>
 					<p>
-					The Sales to Price ratio trend is the pattern resulting for the Sales to Price Ratio.<br> 			
-					This is very useful for visualization and strategy planning. Plots and other statistical<br> 		
-					graphical methods may be used for visualizing this trend.  Often used as the "base" <br>		
+					The Sales to Price ratio trend is the pattern resulting for the Sales to Price Ratio.<br>
+					This is very useful for visualization and strategy planning. Plots and other statistical<br>
+					graphical methods may be used for visualizing this trend.  Often used as the "base" <br>
 					for decision making in the Stock Exchange.<br>
 					</p>
 				</body>
@@ -384,9 +384,9 @@ htmlCapitalTurnover="""\
 			<html>
 				<body>
 					<p>
-					Capital turnover compares the annual sales of a business to the total amount of its<br> 
-					stockholders' equity. The intent is to measure the proportion of revenue that a<br> 
-					company can generate with a given amount of equity. It is also a general measure<br> 
+					Capital turnover compares the annual sales of a business to the total amount of its<br>
+					stockholders' equity. The intent is to measure the proportion of revenue that a<br>
+					company can generate with a given amount of equity. It is also a general measure<br>
 					of the level of capital investment needed in a specific industry in order to generate<br>
 					sales.<br>
 
@@ -400,9 +400,9 @@ htmlCapitalTurnoverTrend="""\
 			<html>
 				<body>
 					<p>
-					Capital turnover compares the annual sales of a business to the total amount of its<br> 
-					stockholders' equity. The intent is to measure the proportion of revenue that a<br> 
-					company can generate with a given amount of equity. It is also a general measure<br> 
+					Capital turnover compares the annual sales of a business to the total amount of its<br>
+					stockholders' equity. The intent is to measure the proportion of revenue that a<br>
+					company can generate with a given amount of equity. It is also a general measure<br>
 					of the level of capital investment needed in a specific industry in order to generate<br>
 					sales.<br><br>
 					This feature provides the trend of the Capital Turnover<br>
@@ -419,17 +419,17 @@ htmlReturnOnAssets="""\
 			<html>
 				<body>
 					<p>
-					Return on assets (ROA) is a financial ratio that shows the percentage of profit a<br> 
+					Return on assets (ROA) is a financial ratio that shows the percentage of profit a<br>
 					company earns in relation to its overall resources. It is commonly defined as net<br>
 					income divided by total assets. Net income is derived from the income statement of <br>
-					the company and is the profit after taxes. The assets are read from the balance<br> 
-					sheet and include cash and cash-equivalent items such as receivables, inventories,<br> 
+					the company and is the profit after taxes. The assets are read from the balance<br>
+					sheet and include cash and cash-equivalent items such as receivables, inventories,<br>
 					land, capital equipment as depreciated, and the value of intellectual property such as<br>
-					patents.<br><br> 
-					Companies that have been acquired may also have a category called "good will"<br> 
+					patents.<br><br>
+					Companies that have been acquired may also have a category called "good will"<br>
 					representing the extra money paid for the company over and above its actual book value<br>
-					at the time of acquisition. Because assets will tend to have swings over time, an<br> 
-					average of assets over the period to be measured should be used. Thus the ROA for a<br> 
+					at the time of acquisition. Because assets will tend to have swings over time, an<br>
+					average of assets over the period to be measured should be used. Thus the ROA for a<br>
 					quarter should be based on net income for the quarter divided by average<br>
 					assets in that quarter. ROA is a ratio but usually presented as a percentage.<br>
 
@@ -443,17 +443,17 @@ htmlReturnOnAssetsTrend="""\
 			<html>
 				<body>
 					<p>
-					Return on assets (ROA) is a financial ratio that shows the percentage of profit a<br> 
+					Return on assets (ROA) is a financial ratio that shows the percentage of profit a<br>
 					company earns in relation to its overall resources. It is commonly defined as net<br>
 					income divided by total assets. Net income is derived from the income statement of <br>
-					the company and is the profit after taxes. The assets are read from the balance<br> 
-					sheet and include cash and cash-equivalent items such as receivables, inventories,<br> 
+					the company and is the profit after taxes. The assets are read from the balance<br>
+					sheet and include cash and cash-equivalent items such as receivables, inventories,<br>
 					land, capital equipment as depreciated, and the value of intellectual property such as<br>
-					patents.<br><br> 
-					Companies that have been acquired may also have a category called "good will"<br> 
+					patents.<br><br>
+					Companies that have been acquired may also have a category called "good will"<br>
 					representing the extra money paid for the company over and above its actual book value<br>
-					at the time of acquisition. Because assets will tend to have swings over time, an<br> 
-					average of assets over the period to be measured should be used. Thus the ROA for a<br> 
+					at the time of acquisition. Because assets will tend to have swings over time, an<br>
+					average of assets over the period to be measured should be used. Thus the ROA for a<br>
 					quarter should be based on net income for the quarter divided by average<br>
 					assets in that quarter. ROA is a ratio but usually presented as a percentage.<br>
 					This feature provides the trend of the return on assets<br>
@@ -630,7 +630,7 @@ class MyWindow(QMainWindow):
 		self.radioButtonPurple = QtWidgets.QRadioButton("Purple")
 		self.radioButtonPurple.setStyleSheet("""font-size: 13px""")
 		self.radioButtonPurple.setStyle(QStyleFactory.create('windows'))
-		
+
 		"""
 		buttonPlot = QtWidgets.QPushButton("Plot Data")
 		buttonPlot.clicked.connect(self.plotDataClicked)"""
@@ -715,7 +715,7 @@ class MyWindow(QMainWindow):
 		self.dial.valueChanged.connect(self.dialValueChanged)
 
 		self.buttonArima = QtWidgets.QPushButton("Estimate Using ARIMA",objectName="button")
-		
+
 		self.buttonArima.clicked.connect(self.varButtonClicker)
 
 		logoutButton = QtWidgets.QPushButton("Logout",objectName="button")
@@ -839,7 +839,7 @@ class MyWindow(QMainWindow):
 
 		self.rightFrameGridLayout.addWidget(self.plotWidget)
 
-	
+
 	def dialSpinBoxValueChanged(self):
 
 		self.dial.setValue(self.dialSpinBox.value())
@@ -1268,7 +1268,7 @@ class Register(QMainWindow):
 		registerButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
 		self.registerButton.setSizePolicy(registerButtonSizePolicy)
 		#max-height:35px;
-		
+
 		bodyShadow4 = QtWidgets.QGraphicsDropShadowEffect()
 		bodyShadow4.setBlurRadius(9.0)
 		bodyShadow4.setColor(QColor(0, 0, 0, 160))
@@ -1279,7 +1279,7 @@ class Register(QMainWindow):
 		returnButton = QtWidgets.QPushButton("Return to Mainpage",objectName="button")
 		returnButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
 		returnButton.setSizePolicy(returnButtonSizePolicy)
-		
+
 		bodyShadow5 = QtWidgets.QGraphicsDropShadowEffect()
 		bodyShadow5.setBlurRadius(9.0)
 		bodyShadow5.setColor(QColor(0, 0, 0, 160))
@@ -1343,6 +1343,7 @@ class Register(QMainWindow):
 		inUserName= self.usernameLineEdit.text()
 		inUserPassword = self.passwordLineEdit.text()
 		inUserEmail = self.emailAddressLineEdit.text()
+		inUserConfirm = self.confirmPasswordLineEdit.text()
 		hashUserPassword = bcrypt.hashpw(inUserPassword.encode('utf-8'), bcrypt.gensalt())
 
 		if(len(inUserPassword)==0 or len(inUserName)==0):
@@ -1350,6 +1351,16 @@ class Register(QMainWindow):
 			alertMessage=QMessageBox()
 			alertMessage.setWindowTitle("Registration Failed")
 			alertMessage.setText("Please enter a username, password and email address to register.")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("Logo.ico"))
+			x=alertMessage.exec_()
+			return
+
+		if(inUserPassword != inUserConfirm):
+
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Registration Failed")
+			alertMessage.setText("Your password and confirmation password do not match.")
 			alertMessage.setIcon(QMessageBox.Information)
 			alertMessage.setWindowIcon(QIcon("Logo.ico"))
 			x=alertMessage.exec_()
@@ -1389,6 +1400,54 @@ class Register(QMainWindow):
 			mydb.close()
 			print("got past mydb.close")
 			server.close()
+
+			sender_email = "scrapedthroughc2@gmail.com"
+			receiver_email = inUserEmail
+			password = "arimamodel1!"
+
+			message = MIMEMultipart("alternative")
+			message["Subject"] = "STC2 Registration"
+			message["From"] = sender_email
+			message["To"] = receiver_email
+
+			# Create the plain-text and HTML version of your message
+			text = """\
+			Hi there,
+			Thank you for using our product.
+			Please click this link to reset your password:
+			www.realpython.com"""
+			html = """\
+			<html>
+			  <body>
+			    <p>Hi there,<br><br>
+			       You have just successfully registered to STC2! You can now login in using your credentials. We hope that you enjoy our product and
+				   the power to predict the future! If you get stuck at any point, make sure to read the 'help' tab in the app.<br><br>
+			       If you should need any further assistance, please either email ScrapedThroughC2@gmail.com
+			       or call Nic (cell): 0832261920.<br><br>
+
+			       Kind regards,<br><br>
+			       The STC2 Team
+			    </p>
+			  </body>
+			</html>
+			"""
+
+			# Turn these into plain/html MIMEText objects
+			part1 = MIMEText(text, "plain")
+			part2 = MIMEText(html, "html")
+
+			# Add HTML/plain-text parts to MIMEMultipart message
+			# The email client will try to render the last part first
+			message.attach(part1)
+			message.attach(part2)
+
+			# Create secure connection with server and send email
+			context = ssl.create_default_context()
+			with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+			    server.login(sender_email, password)
+			    server.sendmail(
+			        sender_email, receiver_email, message.as_string()
+			    )
 
 
 			self.next=MyWindow()
@@ -1451,12 +1510,12 @@ class AboutPage(QMainWindow):
 			<html>
 			  <body>
 			    <p>
-			    	
+
 			    Select a feature from the list on the left to view a brief description of the feature. This<br>
-			    will help you make sound investment decisions that require prior knowledge of financial<br> 
+			    will help you make sound investment decisions that require prior knowledge of financial<br>
 			    concepts and jargon.<br><br>
 			    The STC2 Team
-			    
+
 			    </p>
 			  </body>
 			</html>
@@ -1959,7 +2018,7 @@ class Login(QMainWindow):
 
 	def quitButtonFunction(self):
 		sys.exit()
-		
+
 
 
 class ForgotPage(QMainWindow):
@@ -2241,6 +2300,7 @@ class ForgotPage(QMainWindow):
 		inUserName = self.usernameLineEdit.text()
 		inUserPassword = self.passwordLineEdit.text()
 		inUserEmail = self.emailLineEdit.text()
+		inUserConfirm = self.confirmPasswordLineEdit.text()
 
 		if(len(inUserEmail)==0 or len(inUserName)==0):
 
@@ -2257,6 +2317,16 @@ class ForgotPage(QMainWindow):
 			alertMessage=QMessageBox()
 			alertMessage.setWindowTitle("Password Reset Failed")
 			alertMessage.setText("Please enter a new password.")
+			alertMessage.setIcon(QMessageBox.Information)
+			alertMessage.setWindowIcon(QIcon("Logo.ico"))
+			x=alertMessage.exec_()
+			return
+
+		if(inUserPassword!=inUserConfirm):
+
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Password Reset Failed")
+			alertMessage.setText("Your password and confirmation password did not match.")
 			alertMessage.setIcon(QMessageBox.Information)
 			alertMessage.setWindowIcon(QIcon("Logo.ico"))
 			x=alertMessage.exec_()
@@ -2505,7 +2575,7 @@ if __name__ == '__main__':
 							outline: none;
 
 						}
-						
+
 						QLineEdit{
 						color: rgba(255,255,255,255);
 						background:rgba(69, 83, 105,0);
