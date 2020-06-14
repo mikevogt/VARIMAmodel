@@ -35,13 +35,12 @@ htmlReturnonInvestment="""\
 			<html>
     			<body>
         			<p>
-            		Return on investment (ROI) is a ratio betweet net profit over a period<br>
-            		of time amd the cost of investment. This ratio is used to establish how<br>
-            		how efficient the investment is in terms of making a profit or comparing<br>
-            		the effficiency to other investments.<br><br>
+            		Return on investment (ROI) is a ratio betweet net profit over a period of time and the<br>
+            		cost of investment. This ratio is used to establish how how efficient the investment is<br> 
+            		in terms of making a profit or comparing the effficiency to other investments.<br><br>
 
-            		A High ROI is a good indicator of a good investment as the net profit is<br>
-            		favourable to the costs that you have invested.
+            		A High ROI is a good indicator of a good investment as the net profit is favourable<br>
+            		to the costs that you have invested.
 
         			</p>
     			</body>
@@ -51,10 +50,10 @@ htmlTotalAssetTurnover="""\
 			<html>
     			<body>
         			<p>
-            		Total Asset Turnover (ATO) is a financial indicator used to measure the efficiency<br>
-            		of how well the assets of the company are being used to generate sales revenue for the <br>
-            		company. Asset turnover can be further divided into fixed asset turnover as well as working <br>
-            		turnover. <br><br>
+            		Total Asset Turnover (ATO) is a financial indicator used to measure the efficiency of how<br>
+            		well the assets of the company are being used to generate sales revenue for the <br>
+            		company. Asset turnover can be further divided into fixed asset turnover as well as<br> 
+            		working turnover. <br><br>
 
             		The formula for Total Asset Turnover is:<br>
             		Asset Turnover = Net Sales Revenue / Average Total Assets
@@ -67,8 +66,8 @@ htmlBetatoMarket="""\
 			<html>
     			<body>
         			<p>
-            		The beta of an investment is a measure of the risk that arises from the exposure <br>
-            		to general market movements as opposed to the company specific risk. The market <br>
+            		The beta of an investment is a measure of the risk that arises from the exposure to<br> 
+            		general market movements as opposed to the company specific risk. The market <br>
             		portfolio of all investments has a beta = 1. If a company has a beta > 1, this company <br>
             		would be considered to be more risky than the market as the price movements would <br>
             		fluctuate more than the overall market.
@@ -81,8 +80,8 @@ htmlBetatoUSDZAR="""\
 			<html>
     			<body>
         			<p>
-            		The beta of an investment is a measure of the risk that arises from the exposure <br>
-            		to general market movements as opposed to the company specific risk. This risk is<br>
+            		The beta of an investment is a measure of the risk that arises from the exposure to<br> 
+            		general market movements as opposed to the company specific risk. This risk is<br>
             		being compared to the USD/ZAR exchange rate. This compares the price movements of <br>
             		the comany to the movements of the exchange. If the beta is > 1, the company would <br>
             		seem to be risky/volatile to the USD.
@@ -95,10 +94,10 @@ htmlNetProfitMargin="""\
 			<html>
     			<body>
         			<p>
-            		Net Profit Margin (NPM) is a measur of profitability of the company. NPM is used <br>
-            		for internal comparison, it is an idicator of the company's pricing strategies<br>
-            		and how well the company controls its costs. Differences in competetive strategy<br>
-            		will cause the NPM to vary across companies.<br><br>
+            		Net Profit Margin (NPM) is a measur of profitability of the company. NPM is used for<br> 
+            		internal comparison, it is an idicator of the company's pricing strategies and how <br>
+            		well the company controls its costs. Differences in competetive strategy will cause <br>
+            		the NPM to vary across companies.<br><br>
 
             		NPM is calculated by finding the net profit as a percentace of revenue.<br>
             		Net Profit Margin = Net Profit / Revenue
@@ -112,8 +111,8 @@ htmlCurrentRatio="""\
 			<html>
     			<body>
         			<p>
-            		The current ratio is a liquidity ratio that measures whether a firm has enough <br>
-            		resources to meet its short-term liabilities, This means that if a company goes <br>
+            		The current ratio is a liquidity ratio that measures whether a firm has enough resources<br>
+            		to meet its short-term liabilities, This means that if a company goes <br>
             		insolvent and has to sell all their assets, they will generate enough money to pay<br>
             		off their short-term liabilities.<br><br>
 
@@ -129,11 +128,10 @@ htmlVolatility="""\
 			<html>
     			<body>
         			<p>
-            		Volatility or Company-Specific Risk refers to the risk that a company has that<br>
-            		is unique to them and that can be mitigated through diversification. This risk<br>
-            		can impact negatively on a company and needs to be monitored carefully. A high<br>
-            		volatility can put the company at a disadvantage in the market as other companies<br>
-            		do not have to face this risk.
+            		Volatility or Company-Specific Risk refers to the risk that a company has that is unique to<br>
+            		them and that can be mitigated through diversification. This riskcan impact negatively<br> 
+            		on a company and needs to be monitored carefully. A high volatility can put the company<br> 
+            		at a disadvantage in the market as other companies do not have to face this risk.<br>
 
         			</p>
     			</body>
@@ -144,8 +142,8 @@ htmlDebtToEquityR = """\
 			<html>
 				<body>
 			    	<p>
-			   		The debt-to-equity (D/E) ratio is calculated by dividing a company’s total<br>
-			   		liabilities by its shareholder equity. These numbers are available on the<br>
+			   		The debt-to-equity (D/E) ratio is calculated by dividing a company’s total liabilities by its<br>
+			   		shareholder equity. These numbers are available on the<br>
 			   		balance sheet of a company’s financial statements. The ratio is used to<br>
 			   		evaluate a company's financial leverage. The D/E ratio is an important metric<br>
 			   		used in corporate finance.<br><br>
@@ -163,8 +161,8 @@ htmlDebtToEquityT="""\
 			<html>
 				<body>
 			    	<p>
-			   		The debt-to-equity (D/E) ratio is calculated by dividing a company’s total<br>
-			   		liabilities by its shareholder equity. These numbers are available on the<br>
+			   		The debt-to-equity (D/E) ratio is calculated by dividing a company’s total liabilities by its<br>
+			   		shareholder equity. These numbers are available on the<br>
 			   		balance sheet of a company’s financial statements. The ratio is used to<br>
 			   		evaluate a company's financial leverage. The D/E ratio is an important metric<br>
 			   		used in corporate finance.<br><br>
@@ -184,13 +182,13 @@ htmlInterestCoverTrend="""\
 			<html>
 				<body>
 			    	<p>
-			    	The interest coverage ratio is a debt ratio and profitability ratio used to determine<br>
-			    	how easily a company can pay interest on its outstanding debt. The interest coverage<br>
+			    	The interest coverage ratio is a debt ratio and profitability ratio used to determine how<br>
+			    	easily a company can pay interest on its outstanding debt. The interest coverage<br>
 			    	ratio may be calculated by dividing a company's earnings before interest and taxes<br>
 			    	(EBIT) during a given period by the company's interest payments due within the same<br>
 			    	period.<br><br>
 
-					The Interest coverage ratio is also called “times interest earned.” Lenders, investors,<br>
+					The Interest coverage ratio is also called “times interest earned.” Lenders, investors,<br> 
 					and creditors often use this formula to determine a company's riskiness relative to its<br>
 					current debt or for future borrowing.<br>
 
@@ -204,13 +202,14 @@ htmlMarketCapitalization="""\
 			    	<p>
 			    	Market capitalization refers to the total dollar market value of a company's outstanding<br>
 			    	shares of stock. Commonly referred to as "market cap," it is calculated by multiplying the<br>
-			    	total number of a company's outstanding shares by the current market price of one share.<br><br>
+			    	total number of a company's outstanding shares by the current market price of one<br> 
+			    	share.<br><br>
 
-					As an example, a company with 10 million shares selling for $100 each would have a market<br>
-					cap of $1 billion. The investment community uses this figure to determine a company's size<br>
-					,as opposed to using sales or total asset figures. In an acquisition, the market cap is<br>
-					used to determine whether a takeover candidate represents a good value or not to the <br>
-					acquirer.<br>
+					As an example, a company with 10 million shares selling for $100 each would have a<br> 
+					market cap of $1 billion. The investment community uses this figure to determine a<br> 
+					company's size,as opposed to using sales or total asset figures. In an acquisition,<br> 
+					the market cap is used to determine whether a takeover candidate represents a good <br>
+					value or not to the acquirer.<br>
 			    	</p>
 			 	</body>
 			</html>
@@ -219,8 +218,8 @@ htmlTradingVolume="""\
 			<html>
 			 	<body>
 			    	<p>
-			    	Volume of trade is the total quantity of shares or contracts traded for a specified<br>
-			    	security. It can be measured on any type of security traded during a trading day.<br>
+			    	Volume of trade is the total quantity of shares or contracts traded for a specified security.<br>
+			    	It can be measured on any type of security traded during a trading day.<br>
 			    	Volume of trade or trade volume is measured on stocks, bonds, options contracts,<br>
 			    	futures contracts and all types of commodities.<br>
 			    	</p>
@@ -232,7 +231,7 @@ htmlEarningsYield = """\
 			<html>
 				<body>
 					<p>
-					The earnings yield refers to the earnings per share for the most recent 12-month period<br>
+					The earnings yield refers to the earnings per share for the most recent 12-month period<br> 
 					divided by the current market price per share. The earnings yield (which is the inverse<br>
 					of the P/E ratio) shows the percentage of how much a company earned per share.<br>
 					</p>
@@ -243,7 +242,7 @@ htmlEarningsYieldTrend = """\
 			<html>
 				<body>
 					<p>
-					The earnings yield refers to the earnings per share for the most recent 12-month period<br>
+					The earnings yield refers to the earnings per share for the most recent 12-month period<br> 
 					divided by the current market price per share. The earnings yield (which is the inverse<br>
 					of the P/E ratio) shows the percentage of how much a company earned per share. This<br>
 					feature provides the trend of the Earnings Yield<br>
@@ -256,11 +255,12 @@ htmlBookValuetoPriceRatio = """\
 			<html>
 				<body>
 					<p>
-					The P/B ratio reflects the value that market participants attach to a company's equity relative<br>
-					to the book value of its equity. A stock's market value is a forward-looking metric that<br>
-					reflects a company's future cash flows. The book value of equity is an accounting measure<br>
-					based on the historic cost principle and reflects past issuances of equity, augmented by any<br>
-					profits or losses, and reduced by dividends and share buybacks.<br>
+					The P/B ratio reflects the value that market participants attach to a company's equity<br> 
+					relative to the book value of its equity. A stock's market value is a forward-looking<br> 
+					metric that reflects a company's future cash flows. The book value of equity is an<br> 
+					accounting measure based on the historic cost principle and reflects past issuances<br> 
+					of equity, augmented by any profits or losses, and reduced by dividends and share <br>
+					buybacks.<br>
 					</p>
 				</body>
 			</html>"""
@@ -269,12 +269,65 @@ htmlBookValuetoPriceRatioTrend = """\
 			<html>
 				<body>
 					<p>
-					The P/B ratio reflects the value that market participants attach to a company's equity relative<br>
-					to the book value of its equity. A stock's market value is a forward-looking metric that reflects<br>
-					a company's future cash flows.<br><br>
-  					The book value of equity is an accounting measure based on the historic cost principle and <br>
-  					reflects past issuances of equity, augmented by any profits or losses, and reduced by <br>
-  					dividends and share buybacks. This feature provides the trend of the Book Value to Price Ratio<br>
+					The P/B ratio reflects the value that market participants attach to a company's equity<br> 
+					relative to the book value of its equity. A stock's market value is a forward-looking<br> 
+					metric that reflects a company's future cash flows. The book value of equity is an<br> 
+					accounting measure based on the historic cost principle and reflects past issuances<br> 
+					of equity, augmented by any profits or losses, and reduced by dividends and share <br>
+					buybacks.<br><br>
+					This feature provides the trend of the Book Value to Price Ratio<br>
+					</p>
+				</body>
+			</html>"""
+
+
+htmlDividendYield = """\
+			<html>
+				<body>
+					<p>
+					The dividend yield, expressed as a percentage, is a financial ratio that shows how much a<br> 
+					company pays out in dividends each year relative to its stock price.<br>
+					The reciprocal of the dividend yield is the dividend payout ratio.<br> 
+					The dividend payout ratio is the ratio of the total amount of dividends paid out to<br> 
+					shareholders relative to the net income of the company.<br>
+					</p>
+				</body>
+			</html>"""
+
+
+htmlDividentYieldTrend = """\
+			<html>
+				<body>
+					<p>
+					The divident yield trend is the pattern resulting from the dividend yield, which is<br> 
+					expressed as a percentage. This helps in visualizing the financial ration that shows how <br>
+					much a company pays out in its divends.<br>
+					</p>
+				</body>
+			</html>"""
+
+htmlCashflowToPriceRatio = """\
+			<html>
+				<body>
+					<p>
+					The price-to-cash flow (P/CF) ratio is a stock valuation indicator or multiple that measures<br>
+					the value of a stock's price relative to its operating cash flow per share. The ratio uses<br> 
+					operating cash flow which adds back non-cash expenses such as depreciation<br> 
+					and amortization to net income.<br>
+					</p>
+				</body>
+			</html>"""
+
+htmlCashflowToPriceRatioTrend = """\
+			<html>
+				<body>
+					<p>
+					The price-to-cash flow (P/CF) ratio is a stock valuation indicator or multiple that measures<br>
+					the value of a stock's price relative to its operating cash flow per share. The ratio uses<br> 
+					operating cash flow which adds back non-cash expenses such as depreciation and <br> 
+					amortization to net income.<br><br>
+					This feature, however shows the trend of the Cashflow to Price ratio and is good for <br> 
+					visualization.<br>
 					</p>
 				</body>
 			</html>"""
@@ -283,9 +336,9 @@ htmlSalesToPriceRatio = """\
 			<html>
 				<body>
 					<p>
-					The Sales to Price ratio is a ratio representing the sell/buy price of a share. The sell<br>
-					price of a share is the amount a share may be sold for, while the buy price of a<br>
-					share is the amount a share will cost a buyer. This ratio is used in computing<br>
+					The Sales to Price ratio is a ratio representing the sell/buy price of a share. The sell<br> 		
+					price of a share is the amount a share may be sold for, while the buy price of a<br> 			
+					share is the amount a share will cost a buyer. This ratio is used in computing<br> 			
 					profits and losses.<br>
 					</p>
 				</body>
@@ -295,52 +348,10 @@ htmlSalesToPriceRatioTrend = """\
 			<html>
 				<body>
 					<p>
-					The Sales to Price ratio trend is the pattern resulting for the Sales to Price Ratio.<br>
-					This is very useful for visualization and strategy planning. Plots and other statistical<br>
-					graphical methods may be used for visualizing this trend.  Often used as the "base"<br>
+					The Sales to Price ratio trend is the pattern resulting for the Sales to Price Ratio.<br> 			
+					This is very useful for visualization and strategy planning. Plots and other statistical<br> 		
+					graphical methods may be used for visualizing this trend.  Often used as the "base" <br>		
 					for decision making in the Stock Exchange.<br>
-					</p>
-				</body>
-			</html>"""
-
-
-htmlProfitMargin = """\
-			<html>
-				<body>
-					<p>
-					Profit margin is one of the commonly used profitability ratios to gauge the degree<br>
-					to which a company or a business activity makes money. It represents what<br>
-					percentage of sales has turned into profits. Simply put, the percentage figure<br>
-					indicates how many cents of profit the business has generated for each dollar of<br>
-					sale.
-					</p>
-				</body>
-			</html>"""
-
-
-
-htmlWorkingCapitalTurnover = """\
-			<html>
-				<body>
-					<p>
-					Working capital turnover is a ratio that measures how efficiently a company is<br>
-					using its working capital to support a given level of sales. Also referred to as net<br>
-					sales to working capital, work capital turnover shows the relationship between the <br>
-					funds used to finance a company's operations and the revenues a company<br>
-					generates as a result.<br>
-					</p>
-				</body>
-			</html>"""
-
-
-htmlAssetTurnover = """\
-			<html>
-				<body>
-					<p>
-					The asset turnover ratio measures the value of a company's sales or revenues<br>
-					relative to the value of its assets. The asset turnover ratio can be used as an<br>
-					indicator of the efficiency with which a company is using its assets to generate<br>
-					revenue.<br>
 					</p>
 				</body>
 			</html>"""
@@ -357,8 +368,7 @@ htmlProfitMargin="""\
 					"markup" is the percentage of cost price that one gets as profit on top of cost price.<br>
 					While selling something one should know what percentage of profit one will get on a<br>
 					particular investment, so companies calculate profit percentage to find the ratio of<br>
-					profit to cost.<br><br>
-					The profit margin is used mostly for internal comparison.<br><br>
+					profit to cost. The profit margin is used mostly for internal comparison.<br><br>
 					Individual businesses' operating and financing arrangements vary so much that different<br>
 					entities are bound to have different levels of expenditure, so that comparison of one<br>
 					with another can have little meaning. A low profit margin indicates a low margin of safety:<br>
@@ -374,10 +384,11 @@ htmlCapitalTurnover="""\
 			<html>
 				<body>
 					<p>
-					Capital turnover compares the annual sales of a business to the total amount of its stockholders'<br>
-					equity. The intent is to measure the proportion of revenue that a company can generate with a given<br>
-					amount of equity. It is also a general measure of the level of capital investment needed in a<br>
-					specific industry in order to generate sales.<br><br>
+					Capital turnover compares the annual sales of a business to the total amount of its<br> 
+					stockholders' equity. The intent is to measure the proportion of revenue that a<br> 
+					company can generate with a given amount of equity. It is also a general measure<br> 
+					of the level of capital investment needed in a specific industry in order to generate<br>
+					sales.<br>
 
 					</p>
 				</body>
@@ -389,11 +400,12 @@ htmlCapitalTurnoverTrend="""\
 			<html>
 				<body>
 					<p>
-					Capital turnover compares the annual sales of a business to the total amount of its stockholders'<br>
-					equity. The intent is to measure the proportion of revenue that a company can generate with a given<br>
-					amount of equity. It is also a general measure of the level of capital investment needed in a<br>
-					specific industry in order to generate sales.This feature provides the trend of the Capital<br>
-					Turnover<br><br>
+					Capital turnover compares the annual sales of a business to the total amount of its<br> 
+					stockholders' equity. The intent is to measure the proportion of revenue that a<br> 
+					company can generate with a given amount of equity. It is also a general measure<br> 
+					of the level of capital investment needed in a specific industry in order to generate<br>
+					sales.<br><br>
+					This feature provides the trend of the Capital Turnover<br>
 
 					</p>
 				</body>
@@ -407,15 +419,18 @@ htmlReturnOnAssets="""\
 			<html>
 				<body>
 					<p>
-					Return on assets (ROA) is a financial ratio that shows the percentage of profit a company earns<br>
-					in relation to its overall resources. It is commonly defined as net income divided by total assets.<br>
-					Net income is derived from the income statement of the company and is the profit after taxes. The<br>
-					assets are read from the balance sheet and include cash and cash-equivalent items such as receivables,<br>
-					inventories, land, capital equipment as depreciated, and the value of intellectual property such as<br>
-					patents. Companies that have been acquired may also have a category called "good will" representing<br>
-					the extra money paid for the company over and above its actual book value at the time of acquisition.<br>
-					Because assets will tend to have swings over time, an average of assets over the period to be measured<br>
-					should be used. Thus the ROA for a quarter should be based on net income for the quarter divided by average<br>
+					Return on assets (ROA) is a financial ratio that shows the percentage of profit a<br> 
+					company earns in relation to its overall resources. It is commonly defined as net<br>
+					income divided by total assets. Net income is derived from the income statement of <br>
+					the company and is the profit after taxes. The assets are read from the balance<br> 
+					sheet and include cash and cash-equivalent items such as receivables, inventories,<br> 
+					land, capital equipment as depreciated, and the value of intellectual property such as<br>
+					patents.<br><br> 
+					Companies that have been acquired may also have a category called "good will"<br> 
+					representing the extra money paid for the company over and above its actual book value<br>
+					at the time of acquisition. Because assets will tend to have swings over time, an<br> 
+					average of assets over the period to be measured should be used. Thus the ROA for a<br> 
+					quarter should be based on net income for the quarter divided by average<br>
 					assets in that quarter. ROA is a ratio but usually presented as a percentage.<br>
 
 
@@ -428,17 +443,20 @@ htmlReturnOnAssetsTrend="""\
 			<html>
 				<body>
 					<p>
-					Return on assets (ROA) is a financial ratio that shows the percentage of profit a company earns<br>
-					in relation to its overall resources. It is commonly defined as net income divided by total assets.<br>
-					Net income is derived from the income statement of the company and is the profit after taxes. The<br>
-					assets are read from the balance sheet and include cash and cash-equivalent items such as receivables,<br>
-					inventories, land, capital equipment as depreciated, and the value of intellectual property such as<br>
-					patents. Companies that have been acquired may also have a category called "good will" representing<br>
-					the extra money paid for the company over and above its actual book value at the time of acquisition.<br>
-					Because assets will tend to have swings over time, an average of assets over the period to be measured<br>
-					should be used. Thus the ROA for a quarter should be based on net income for the quarter divided by average<br>
-					assets in that quarter. ROA is a ratio but usually presented as a percentage.This feature provides the<br>
-					the trend of the return on assets<br><br>
+					Return on assets (ROA) is a financial ratio that shows the percentage of profit a<br> 
+					company earns in relation to its overall resources. It is commonly defined as net<br>
+					income divided by total assets. Net income is derived from the income statement of <br>
+					the company and is the profit after taxes. The assets are read from the balance<br> 
+					sheet and include cash and cash-equivalent items such as receivables, inventories,<br> 
+					land, capital equipment as depreciated, and the value of intellectual property such as<br>
+					patents.<br><br> 
+					Companies that have been acquired may also have a category called "good will"<br> 
+					representing the extra money paid for the company over and above its actual book value<br>
+					at the time of acquisition. Because assets will tend to have swings over time, an<br> 
+					average of assets over the period to be measured should be used. Thus the ROA for a<br> 
+					quarter should be based on net income for the quarter divided by average<br>
+					assets in that quarter. ROA is a ratio but usually presented as a percentage.<br>
+					This feature provides the trend of the return on assets<br>
 					</p>
 				</body>
 			</html>
@@ -485,7 +503,7 @@ class MyWindow(QMainWindow):
 		file.addAction(logout)
 		logout.triggered.connect(self.logoutButtonClicked)
 
-		quit = QAction("Quit",self)
+		quit = QAction("Exit Program",self)
 		file.addAction(quit)
 		quit.triggered.connect(self.quitTriggered)
 
@@ -525,18 +543,13 @@ class MyWindow(QMainWindow):
 		topLeft.setLayout(gridTopLeft)
 
 		#Widgets to be added to top left are made
-		#import button made
-		buttonImport= QtWidgets.QPushButton("Click herer",objectName="button")
-		buttonImport.setText("Import Data")
-		buttonImport.clicked.connect(self.buttonImportFunction)
-
-
 		#Shares label is now made
 
-		self.sharesLabel = QtWidgets.QLabel("Shares")
+		self.sharesLabel = QtWidgets.QLabel(" Shares")
 		self.sharesLabel.setStyleSheet("""font-size: 15px;""")
 		sharesLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
 		self.sharesLabel.setSizePolicy(sharesLabelSizePolicy)
+
 
 		#comboBox is now made
 		"""
@@ -549,57 +562,15 @@ class MyWindow(QMainWindow):
 		self.comboBox.setStyleSheet("""
 									QComboBox{
 									font-size:13px;
+									}""")
 
-
-									}
-
-
-										""")
-
-		"""self.comboBox.setStyleSheet(
-						border-radius:16px;
-						font-size: 15px;
-
-						color: rgba(60,70,89,225);
-						background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-						stop:0 rgba(178, 182, 194,200), stop:1 rgba(215,218,230,225));
-						border-width: 1px;
-						border-style: outset;
-						border-color: rgba(240,240,240,200);)
-"""
 		for share in self.data.Ticker.unique():#For loop that iterates through the unique values in the column called  "Ticker" of self.data
 			#Still need to fix this so that it does not add appostrophes around each share name
 			self.comboBox.addItem(share)
 
 
 		#self.comboBox.setItemData(0, QColor(Qt.black), Qt.ForegroundRole);
-		self.comboBox.setMaxVisibleItems(50)
-		#Ignore the block of commets below here
-		#Features scroll area is now made
-		#innerGroupBox is made first. This will have a VBoxLayout containing list of hello worlds.
-		#it will then be added to a scrollarea via setWidget
-		'''innerGroupBox=QtWidgets.QGroupBox(objectName="featureBox")
-
-		scrollVLayout=QVBoxLayout()
-		featureList=[]
-
-		for i in range(0,35):
-
-			featureList.append(QtWidgets.QLabel("Hello World "+str(i)))
-			scrollVLayout.addWidget(featureList[i])
-
-
-		innerGroupBox.setLayout(scrollVLayout)
-		#Scroll area made and its widget is set to group box
-		scrollArea=QtWidgets.QScrollArea()
-		scrollArea.setWidget(innerGroupBox)
-		#OUter group made and layout set for it so scor
-		groupBoxOuterScroll=QtWidgets.QGroupBox("Features")
-		outerGroupBoxLayout=QtWidgets.QVBoxLayout()
-		outerGroupBoxLayout.addWidget(scrollArea)
-		groupBoxOuterScroll.setLayout(outerGroupBoxLayout)
-'''			
-
+		#self.comboBox.setMaxVisibleItems(50)
 
 		#Next, the features scroll list (called featuresListWidget) is made using a QListWidget() within a QGroupBox()
 
@@ -649,16 +620,17 @@ class MyWindow(QMainWindow):
 		#layout1.addWidget(self.labelPlotCustomize,Qt.AlignCenter)
 
 		self.labelPlotColour = QtWidgets.QLabel("Plot line colour:")
-
+		self.radioButtonOrange = QtWidgets.QRadioButton("Orange")
+		self.radioButtonOrange.setStyleSheet("""font-size: 13px""")
+		self.radioButtonOrange.setStyle(QStyleFactory.create('windows'))
+		self.radioButtonOrange.setChecked(True)
 		self.radioButtonGreen = QtWidgets.QRadioButton("Green")
 		self.radioButtonGreen.setStyleSheet("""font-size: 13px""")
 		self.radioButtonGreen.setStyle(QStyleFactory.create('windows'))
 		self.radioButtonPurple = QtWidgets.QRadioButton("Purple")
 		self.radioButtonPurple.setStyleSheet("""font-size: 13px""")
 		self.radioButtonPurple.setStyle(QStyleFactory.create('windows'))
-		self.radioButtonOrange = QtWidgets.QRadioButton("Orange")
-		self.radioButtonOrange.setStyleSheet("""font-size: 13px""")
-		self.radioButtonOrange.setStyle(QStyleFactory.create('windows'))
+		
 		"""
 		buttonPlot = QtWidgets.QPushButton("Plot Data")
 		buttonPlot.clicked.connect(self.plotDataClicked)"""
@@ -742,9 +714,8 @@ class MyWindow(QMainWindow):
 		self.dial.setStyle(QStyleFactory.create('Plastique'))
 		self.dial.valueChanged.connect(self.dialValueChanged)
 
-		"""optimizeButton=QtWidgets.QPushButton("Optimize Model Order")
-		optimizeButton.clicked.connect(self.optimizeModelOrder)"""
-		self.buttonArima = QtWidgets.QPushButton("Estimate using ARIMA",objectName="button")
+		self.buttonArima = QtWidgets.QPushButton("Estimate Using ARIMA",objectName="button")
+		
 		self.buttonArima.clicked.connect(self.varButtonClicker)
 
 		logoutButton = QtWidgets.QPushButton("Logout",objectName="button")
@@ -756,9 +727,9 @@ class MyWindow(QMainWindow):
 		bottomLeftGridLayout.addWidget(self.labelPlotCustomize,0,0,1,7,Qt.AlignCenter)
 
 		#bottomLeftGridLayout.addWidget(self.labelPlotColour,1,0,1,1)
-		bottomLeftGridLayout.addWidget(self.radioButtonPurple,1,0,1,3,Qt.AlignCenter)
+		bottomLeftGridLayout.addWidget(self.radioButtonOrange,1,0,1,3,Qt.AlignCenter)
 		bottomLeftGridLayout.addWidget(self.radioButtonGreen,1,3,1,1,Qt.AlignCenter)
-		bottomLeftGridLayout.addWidget(self.radioButtonOrange,1,4,1,3,Qt.AlignCenter)
+		bottomLeftGridLayout.addWidget(self.radioButtonPurple ,1,4,1,3,Qt.AlignCenter)
 
 		#bottomLeftGridLayout.addWidget(buttonPlot,2,0,1,7)
 
@@ -816,7 +787,7 @@ class MyWindow(QMainWindow):
 	def quitTriggered(self):
 
 		print("quit triggered worked")
-
+		sys.exit()
 
 	def aboutTriggered(self):
 
@@ -868,50 +839,7 @@ class MyWindow(QMainWindow):
 
 		self.rightFrameGridLayout.addWidget(self.plotWidget)
 
-	def optimizeModelOrder(self):
-
-
-		if(self.featuresListWidget.currentItem() == None):
-			#Makes sure a feature is selected. should maybe have this open an alert box instead of printing to the console
-			#If this removed, program will crash if no item is selected
-			print("No feature selected, please select one above")
-			return
-
-
-		shareData = self.data[self.data.Ticker == self.comboBox.currentText()] #Stores a dataFrame of all shares with the selected ticker
-		featureColumnName =self.featuresListWidget.currentItem().text()
-		data= shareData[featureColumnName]
-		pVal = 0
-		dVal = 0  # should not be more then 2
-		qVal = 0
-		count1 = 0
-		count2 = 0
-		check = 0
-		acfArray = acf(data, nlags=30)
-		pacfArray = pacf(data, nlags=30)
-
-		for i in range(0, 30):
-
-			if acfArray[i] >= 0.24 and acfArray[i] <= 0.25:
-				count = i + 1
-				print(acfArray[count - 1])
-				pVal = count
-
-		while check != -1:
-
-			for i in range(0, 30):
-
-				if pacfArray[i] < 0:
-					count2 = i
-					check = -1
-					qVal = count2
-					break
-
-		values = [pVal, dVal, qVal]
-		print(values)
-		#return values
-
-
+	
 	def dialSpinBoxValueChanged(self):
 
 		self.dial.setValue(self.dialSpinBox.value())
@@ -977,376 +905,166 @@ class MyWindow(QMainWindow):
 		return (1.01)**(inVal)-1
 
 
-	def plotDataClicked(self):
-
-		#Determine the colour of the plot bases on user preference
-
-		colourString = "#BF1AED" #Default purple
-		if self.radioButtonPurple.isChecked():
-
-			colourString = "#BF1AED"
-		elif self.radioButtonGreen.isChecked():
-			colourString = "#00E600"
-
-		elif self.radioButtonOrange.isChecked():
-
-			colourString = "#E46B3C"
-
-		#If no feature has been select then return and display message box
-		if(self.featuresListWidget.currentItem() == None):
-			#Makes sure a feature is selected. should maybe have this open an alert box instead of printing to the console
-			#If this removed, program will crash if no item is selected
-			print("No feature selected, please select one above")
-
-			alertMessage=QMessageBox()
-			alertMessage.setWindowTitle("No Feature Selected.")
-			alertMessage.setText("You have not selected a feature to plot. Please select a feature from the side bar before plotting")
-			alertMessage.setIcon(QMessageBox.Info)
-			alertMessage.setWindowIcon(QIcon("Logo.ico"))
-			x=alertMessage.exec_()
-
-			self.plotEmptyAxis()
-			return
-
-
-		plt.clf()
-		self.plotWidget.deleteLater()#Not fully sure if this is neccessary however we should only potentially remove it during polishing
-
-		shareData = self.data[self.data.Ticker == self.comboBox.currentText()] #Stores a dataFrame of all shares with the selected ticker
-
-
-		dateColumn = shareData['DateStamps']# takes and stores all the required date stamps
-
-		pythonDateList =[] #This will store all the date stamps from dateColumn in python datetime format
-
-		for i in range (0,len(dateColumn)) :
-
-			pythonDateList.append(datetime.datetime.strptime(str(dateColumn.iloc[i]),"%Y%m%d"))
-
-
-		#Now we convert all the python datetime objects into matplotlib date format
-		dates = matplotlib.dates.date2num(pythonDateList)
-
-		#We then access the selected feature column and copy its entire column into y.
-		featureColumnName =self.featuresListWidget.currentItem().text()
-		y= shareData[featureColumnName]
-
-		print(self.comboBox.currentText())
-		print(self.featuresListWidget.currentItem().text())
-
-		#Plot of y vs dates is now created below
-		fig, ax =plt.subplots()
-		#color='#1AB1ED' for blue
-		#ax.plot(y,linewidth=3,color='#BF1AED')
-		ax.plot_date(dates,y,linewidth = 3,color=colourString,fmt='-', label ="Actual")
-		plt.legend(loc="upper right")
-		ax.grid(linestyle="--")
-		ax.patch.set_facecolor('#282828')
-		fig.patch.set_facecolor("None")
-		#fig.patch.set_alpha(0.0)
-		#ax.patch.set_alpha(0.0)
-
-		ax.spines['bottom'].set_color('#ffffff')
-		ax.spines['top'].set_color('#ffffff')
-		ax.spines['right'].set_color('#ffffff')
-		ax.spines['left'].set_color('#ffffff')
-		ax.tick_params(axis='x', colors='#ffffff')
-		ax.tick_params(axis='y', colors='#ffffff')
-		ax.set_xlabel("Date",fontsize=15)
-		ax.set_ylabel(self.featuresListWidget.currentItem().text(),fontsize=15)
-		ax.yaxis.label.set_color('white')
-		ax.xaxis.label.set_color('white')
-		fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
-
-		self.plotWidget = FigureCanvas(fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
-		self.plotWidget.setStyleSheet("background-color:transparent;")
-		self.rightFrameGridLayout.addWidget(self.plotWidget)
-
-
-
-
 	#Currently, this function does not perform a varima model on the selected stock and feature but rather plots the selected stock and feature
 	def varButtonClicker(self):
 
 		#self.featuresListWidget.currentItem().text() is the text of the item selected in the featuresList widget
 		#self.comboBox.currentText() is the text of the item selected in the drop down list. namely the share
-
+		#"#00E600"
 		colourString = "#E46B3C" #Default Orange
 		if self.radioButtonPurple.isChecked():
 
 			colourString = "#BF1AED"
 		elif self.radioButtonGreen.isChecked():
-			colourString = "#00E600"
+			colourString =  "#17e8a7"
 
 		elif self.radioButtonOrange.isChecked():
 
 			colourString = "#E46B3C"
 
 
-		if(self.featuresListWidget.currentItem() == None):
-			#Makes sure a feature is selected. should maybe have this open an alert box instead of printing to the console
-			#If this removed, program will crash if no item is selected
-			print("No feature selected, please select one above")
-			alertMessage=QMessageBox()
-			alertMessage.setWindowTitle("No Feature Selected.")
-			alertMessage.setText("You have not selected a feature to plot. Please select a feature from the side bar before plotting")
-			alertMessage.setIcon(QMessageBox.Information)
-			alertMessage.setWindowIcon(QIcon("Logo.ico"))
-			x=alertMessage.exec_()
+
+		plt.close(self.fig)
+		self.plotWidget.deleteLater() #existing plot widget is initially deleted. not sure if this actually works or not. TEst later. Also, the
+											#existing figure should be deleted here as well. Not quite sure how to do this though but i think making
+											#ax and fig into class variables and then calling plt.clf() should do it.
+
+
+		#Stores a dataFrame of all shares with the selected ticker
+		shareData = self.data[self.data.Ticker == self.comboBox.currentText()]
+
+		# takes and stores all the required date stamps
+		dateColumn = shareData['DateStamps']
+
+		#This will store all the date stamps from dateColumn in python datetime format
+		pythonDateList =[]
+		for i in range (0,len(dateColumn)) :
+
+			pythonDateList.append(datetime.datetime.strptime(str(dateColumn.iloc[i]),"%Y%m%d"))
+
+
+		dateDelta = pythonDateList[len(pythonDateList)-1]-pythonDateList[len(pythonDateList)-2]# this date difference varies throughout each share date set and hence
+																									#may lead to problems
+
+		pythonDateListFuture =[]
+		pythonDateListLast7 =pythonDateList[-7:]
+
+		inDate = pythonDateList[len(pythonDateList)-1]
+		print("self.forecast Length-7")
+		print(self.forecastLength-7)
+		for i in range(0,self.forecastLength-7):
+
+			pythonDateListFuture.append(inDate)
+			inDate=inDate+dateDelta
+
+		pythonForecastDateList = pythonDateListLast7+pythonDateListFuture
+		print("pythonForecastDateList")
+		print(pythonForecastDateList)
+		#Now we convert all the python datetime objects into matplotlib date format
+		dates = matplotlib.dates.date2num(pythonDateList)
+		forecastDates = matplotlib.dates.date2num(pythonForecastDateList)
+
+
+
+		#We then access the selected feature column and copy its entire row into y.
+		string =self.featuresListWidget.currentItem().text()
+		y= shareData[string]
+
+		xValArray = shareData[string].values
+		print(xValArray)
+		train = xValArray[0:len(xValArray)-7]#This may yield an array index out of bounds error if xValArray is size<5 so try fix it later
+		#test= xValArray[26:]
 
 
 
 
-			return
-
-
-
-		if self.rightFrameGridLayout.itemAt(0) == None : #Checks if there is a plot already there
-
-			plt.clf()
-			shareData = self.data[self.data.Ticker == self.comboBox.currentText()] #Stores a dataFrame of all shares with the selected ticker
-
-
-			dateColumn = shareData['DateStamps']# takes and stores all the required date stamps
-
-			pythonDateList =[] #This will store all the date stamps from dateColumn in python datetime format
-
-			for i in range (0,len(dateColumn)) :
-
-				pythonDateList.append(datetime.datetime.strptime(str(dateColumn.iloc[i]),"%Y%m%d"))
-
-			#Now we create a date list called pythonForecastDatelist which will contain the last 7 dates plus 20 future dates
-			#in increments of length dateDelta
-			dateDelta = pythonDateList[len(pythonDateList)-1]-pythonDateList[len(pythonDateList)-2]# this date difference varies throughout each share date set and hence may lead to problems
-			pythonDateListLast7 =pythonDateList[-7:]
-			pythonDateListFuture =[]
-			inDate = pythonDateList[len(pythonDateList)-1]#Start date for all future dates
-
-			for i in range(0,20):
-
-				pythonDateListFuture.append(inDate)
-				inDate=inDate+dateDelta
-
-			pythonForecastDateList = pythonDateListLast7+pythonDateListFuture
-
-			print("python last 7:")
-			print(pythonDateListLast7)
-			print("DateDelta:")
-			print(dateDelta)
-			print("dateList original")
-			print(pythonDateList)
-			print("datelist future")
-			print(pythonDateListFuture)
-
-
-
-			#Now we convert all the python datetime objects into matplotlib date format
-			dates = matplotlib.dates.date2num(pythonDateList)
-			datesInFuture = matplotlib.dates.date2num(pythonDateListFuture)
-			forcastDates = matplotlib.dates.date2num(pythonForecastDateList)
-			#We then access the selected feature column and copy its entire column into y.
-			string =self.featuresListWidget.currentItem().text()
-			y= shareData[string]
-
-			xValArray = shareData[string].values
-			print(xValArray)
-			train = xValArray[0:len(xValArray)-7]#This may yield an array index out of bounds error if xValArray is size<5 so try fix it later
-			#test= xValArray[26:]
-
-			print(self.comboBox.currentText())
-			print(self.featuresListWidget.currentItem().text())
+		print(self.comboBox.currentText())
+		print(self.featuresListWidget.currentItem().text())
+		try:
 
 			model_arima = ARIMA(train,order=(self.pVal,self.dVal,self.qVal))
 			print("got past Arima(train,order=(2,1,1))")
 			model_arima_fit = model_arima.fit()
 			print("got past model_arima.fit()")
+
 			forcasted=[]
-			forcasted= model_arima_fit.forecast(steps=27)[0]           #What is this zero here meant to signify
+			forcasted= model_arima_fit.forecast(steps=self.forecastLength)[0]           #What is this zero here meant to signify
 			print("got past forecast")
+
 			rmse = self.rootMeanSquareError(forcasted,xValArray)
 			print("RMSE calculated:")
 			print(rmse)
+
+			forecastUpperError=[]
+			forecastLowerError=[]
+
+
+			for i in range(0,len(forcasted)):
+
+
+				forecastUpperError.append(forcasted[i] + rmse + self.exponentiate(i))
+				forecastLowerError.append(forcasted[i] - rmse - self.exponentiate(i))
+
+
+
+			print("after")
+			print(forecastUpperError)
 			#Plot of y vs dates is now created below
-			fig, ax =plt.subplots()
+			self.fig, self.ax =plt.subplots()#Fig must be deleted  later so as not consume memory
 			#color='#1AB1ED' for blue
-			#ax.plot(y,linewidth=3,color='#BF1AED')
-			forecastUpperError = forcasted + rmse
-			forecastLowerError = forcasted - rmse
-			ax.plot_date(dates,y,linewidth = 3,color=colourString,fmt='-', label ="Actual")
-			ax.plot_date(forcastDates,forcasted,linewidth = 3,color='#1AB1ED',fmt='-', label="Forecasted")
-			ax.plot_date(forcastDates,forecastUpperError,linewidth = 2,color='#ff0066',fmt='--', label="Error")
-			ax.plot_date(forcastDates,forecastLowerError,linewidth = 2, color='#ff0066', fmt='--')
+			#ax.plot(y,linewidth=4,color='#BF1AED')
+			self.ax.plot_date(dates,y,linewidth = 3,color=colourString,fmt='-',label="Actual Data")
+			self.ax.plot_date(forecastDates,forcasted,linewidth = 3,color='#1AB1ED',fmt='-', label="Forecasted")
+			self.ax.plot_date(forecastDates,forecastUpperError,linewidth = 3,color='#ff0066',fmt='--', label="Error")
+			self.ax.plot_date(forecastDates,forecastLowerError,linewidth = 3, color='#ff0066', fmt='--')
 			plt.legend(loc="upper right")
-			ax.grid(linestyle="--")
-			ax.patch.set_facecolor('#323232')
-			fig.patch.set_facecolor('#191919')
+			self.ax.grid(linestyle="--")
+			self.ax.patch.set_facecolor('#282828')
+			self.fig.patch.set_facecolor("None")
 			#fig.patch.set_alpha(0.0)
 			#ax.patch.set_alpha(0.0)
+			self.ax.spines['bottom'].set_color('#ffffff')
+			self.ax.spines['top'].set_color('#ffffff')
+			self.ax.spines['right'].set_color('#ffffff')
+			self.ax.spines['left'].set_color('#ffffff')
+			self.ax.tick_params(axis='x', colors='#ffffff')
+			self.ax.tick_params(axis='y', colors='#ffffff')
+			self.ax.set_xlabel("Date",fontsize=15)
+			self.ax.set_ylabel(self.featuresListWidget.currentItem().text(),fontsize=15)
+			self.fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
+			self.ax.yaxis.label.set_color('white')
+			self.ax.xaxis.label.set_color('white')
 
-			ax.spines['bottom'].set_color('#ffffff')
-			ax.spines['top'].set_color('#ffffff')
-			ax.spines['right'].set_color('#ffffff')
-			ax.spines['left'].set_color('#ffffff')
-			ax.tick_params(axis='x', colors='#ffffff')
-			ax.tick_params(axis='y', colors='#ffffff')
-			ax.set_xlabel("Date",fontsize=15)
-			ax.set_ylabel(self.featuresListWidget.currentItem().text(),fontsize=15)
-			ax.yaxis.label.set_color('white')
-			ax.xaxis.label.set_color('white')
-			fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
 			#fig.savefig('temp.png', transparent=True)
 
-			self.plotWidget = FigureCanvas(fig) #FigureCanvas is an matplotlib object that can act as a pyqt5 widget
+			self.plotWidget = FigureCanvas(self.fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
+			self.plotWidget.setStyleSheet("background-color:transparent;")
 			self.rightFrameGridLayout.addWidget(self.plotWidget)
 
-		else :# This is entered if there is a plot already in the frame
+		except LinAlgError as err:
 
+			print(err)
 
-			plt.close(self.fig)
-			#plt.clf()
-			#plt.cla()
-			self.plotWidget.deleteLater() #existing plot widget is initially deleted. not sure if this actually works or not. TEst later. Also, the
-											#existing figure should be deleted here as well. Not quite sure how to do this though but i think making
-											#ax and fig into class variables and then calling plt.clf() should do it.
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Data Invalid")
+			alertMessage.setText("The Singular Value Decomposition(SVG) did not converge.\nPlease choose a different model order or data set")
+			alertMessage.setIcon(QMessageBox.Warning)
+			alertMessage.setWindowIcon(QIcon("Logo.ico"))
+			x=alertMessage.exec_()
 
+			self.plotEmptyAxis()
 
-			#Stores a dataFrame of all shares with the selected ticker
-			shareData = self.data[self.data.Ticker == self.comboBox.currentText()]
+		except ValueError as err:
 
-			# takes and stores all the required date stamps
-			dateColumn = shareData['DateStamps']
+			alertMessage=QMessageBox()
+			alertMessage.setWindowTitle("Data Invalid")
+			alertMessage.setText("The Singular Value Decomposition(SVG) did not converge.\nPlease choose a different model order or data set")
+			alertMessage.setIcon(QMessageBox.Warning)
+			alertMessage.setWindowIcon(QIcon("Logo.ico"))
+			x=alertMessage.exec_()
 
-			#This will store all the date stamps from dateColumn in python datetime format
-			pythonDateList =[]
-			for i in range (0,len(dateColumn)) :
-
-				pythonDateList.append(datetime.datetime.strptime(str(dateColumn.iloc[i]),"%Y%m%d"))
-
-
-			dateDelta = pythonDateList[len(pythonDateList)-1]-pythonDateList[len(pythonDateList)-2]# this date difference varies throughout each share date set and hence
-																									#may lead to problems
-
-			pythonDateListFuture =[]
-			pythonDateListLast7 =pythonDateList[-7:]
-
-			inDate = pythonDateList[len(pythonDateList)-1]
-			print("self.forecast Length-7")
-			print(self.forecastLength-7)
-			for i in range(0,self.forecastLength-7):
-
-				pythonDateListFuture.append(inDate)
-				inDate=inDate+dateDelta
-
-			pythonForecastDateList = pythonDateListLast7+pythonDateListFuture
-			print("pythonForecastDateList")
-			print(pythonForecastDateList)
-			#Now we convert all the python datetime objects into matplotlib date format
-			dates = matplotlib.dates.date2num(pythonDateList)
-			forecastDates = matplotlib.dates.date2num(pythonForecastDateList)
-
-
-
-			#We then access the selected feature column and copy its entire row into y.
-			string =self.featuresListWidget.currentItem().text()
-			y= shareData[string]
-
-			xValArray = shareData[string].values
-			print(xValArray)
-			train = xValArray[0:len(xValArray)-7]#This may yield an array index out of bounds error if xValArray is size<5 so try fix it later
-			#test= xValArray[26:]
-
-
-
-
-			print(self.comboBox.currentText())
-			print(self.featuresListWidget.currentItem().text())
-			try:
-
-				model_arima = ARIMA(train,order=(self.pVal,self.dVal,self.qVal))
-				print("got past Arima(train,order=(2,1,1))")
-				model_arima_fit = model_arima.fit()
-				print("got past model_arima.fit()")
-
-				forcasted=[]
-				forcasted= model_arima_fit.forecast(steps=self.forecastLength)[0]           #What is this zero here meant to signify
-				print("got past forecast")
-
-				rmse = self.rootMeanSquareError(forcasted,xValArray)
-				print("RMSE calculated:")
-				print(rmse)
-
-				forecastUpperError=[]
-				forecastLowerError=[]
-
-
-				for i in range(0,len(forcasted)):
-
-
-					forecastUpperError.append(forcasted[i] + rmse + self.exponentiate(i))
-					forecastLowerError.append(forcasted[i] - rmse - self.exponentiate(i))
-
-
-
-				print("after")
-				print(forecastUpperError)
-				#Plot of y vs dates is now created below
-				self.fig, self.ax =plt.subplots()#Fig must be deleted  later so as not consume memory
-				#color='#1AB1ED' for blue
-				#ax.plot(y,linewidth=4,color='#BF1AED')
-				self.ax.plot_date(dates,y,linewidth = 3,color=colourString,fmt='-',label="Actual Data")
-				self.ax.plot_date(forecastDates,forcasted,linewidth = 3,color='#1AB1ED',fmt='-', label="Forecasted")
-				self.ax.plot_date(forecastDates,forecastUpperError,linewidth = 3,color='#ff0066',fmt='--', label="Error")
-				self.ax.plot_date(forecastDates,forecastLowerError,linewidth = 3, color='#ff0066', fmt='--')
-				plt.legend(loc="upper right")
-				self.ax.grid(linestyle="--")
-				self.ax.patch.set_facecolor('#282828')
-				self.fig.patch.set_facecolor("None")
-				#fig.patch.set_alpha(0.0)
-				#ax.patch.set_alpha(0.0)
-				self.ax.spines['bottom'].set_color('#ffffff')
-				self.ax.spines['top'].set_color('#ffffff')
-				self.ax.spines['right'].set_color('#ffffff')
-				self.ax.spines['left'].set_color('#ffffff')
-				self.ax.tick_params(axis='x', colors='#ffffff')
-				self.ax.tick_params(axis='y', colors='#ffffff')
-				self.ax.set_xlabel("Date",fontsize=15)
-				self.ax.set_ylabel(self.featuresListWidget.currentItem().text(),fontsize=15)
-				self.fig.suptitle(self.comboBox.currentText(),fontsize=20,color='white')
-				self.ax.yaxis.label.set_color('white')
-				self.ax.xaxis.label.set_color('white')
-
-				#fig.savefig('temp.png', transparent=True)
-
-				self.plotWidget = FigureCanvas(self.fig)#FigureCanvas is an matplotlib object that can act as a pyqt5 widget
-				self.plotWidget.setStyleSheet("background-color:transparent;")
-				self.rightFrameGridLayout.addWidget(self.plotWidget)
-
-			except LinAlgError as err:
-
-				print(err)
-
-				alertMessage=QMessageBox()
-				alertMessage.setWindowTitle("Data Invalid")
-				alertMessage.setText("The Singular Value Decomposition(SVG) did not converge.\nPlease choose a different model order or data set")
-				alertMessage.setIcon(QMessageBox.Warning)
-				alertMessage.setWindowIcon(QIcon("Logo.ico"))
-				x=alertMessage.exec_()
-
-				self.plotEmptyAxis()
-
-			except ValueError as err:
-
-				alertMessage=QMessageBox()
-				alertMessage.setWindowTitle("Data Invalid")
-				alertMessage.setText("The Singular Value Decomposition(SVG) did not converge.\nPlease choose a different model order or data set")
-				alertMessage.setIcon(QMessageBox.Warning)
-				alertMessage.setWindowIcon(QIcon("Logo.ico"))
-				x=alertMessage.exec_()
-
-				self.plotEmptyAxis()
-				print(err)
-			#right.setLayout(self.rightFrameGridLayout)
-
+			self.plotEmptyAxis()
+			print(err)
 
 
 	def logoutButtonClicked (self):
@@ -1360,11 +1078,7 @@ class Register(QMainWindow):
 	def __init__(self):
 		super().__init__()
 		self.setWindowIcon(QIcon("Logo.ico"))
-		self.setStyleSheet('''
-						 QLabel{
-						 font-size: 20px;
-						 }
-						''')
+		#self.setStyleSheet('''QLabel{font-size: 20px;}''')
 		self.initUi()
 
 	def initUi(self):
@@ -1550,40 +1264,11 @@ class Register(QMainWindow):
 		self.showPasswordCheck.stateChanged.connect(self.showPasswordChecked)
 
 
-		self.registerButton = QtWidgets.QPushButton("Register")
+		self.registerButton = QtWidgets.QPushButton("Register",objectName="button")
 		registerButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
 		self.registerButton.setSizePolicy(registerButtonSizePolicy)
 		#max-height:35px;
-		self.registerButton.setStyleSheet("""	QPushButton{font-size: 15px;
-										color: rgba(60,70,89,225);
-										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-										stop:0 rgba(188, 192, 204,200), stop:1 rgba(205,208,220,225));
-										border-width: 1px;
-										border-style: outset;
-										border-color: rgba(240,240,240,200);
-										border-radius: 16px;
-										min-height:30px;
-										}
-										QPushButton:hover {
-    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-										stop:0 rgba(205,208,220,225), stop:1 rgba(188, 192, 204,200));
-											}
-										QPushButton:pressed {
-    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-										stop:0 rgba(185,188,200,225), stop:1 rgba(168, 172, 184,200));
-										border-style: inset;
-											}
-										QPushButton:focus {
-
-
-											background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-											stop:0 rgba(175,178,190,225), stop:1 rgba(158, 162, 174,200));
-											border-style: inset;
-											border-color: rgba(255,255,255,255);
-											outline: none;
-
-										}
-										""")
+		
 		bodyShadow4 = QtWidgets.QGraphicsDropShadowEffect()
 		bodyShadow4.setBlurRadius(9.0)
 		bodyShadow4.setColor(QColor(0, 0, 0, 160))
@@ -1591,40 +1276,10 @@ class Register(QMainWindow):
 		self.registerButton.setGraphicsEffect(bodyShadow4)
 		self.registerButton.clicked.connect(self.registerButtonClicked)
 
-		returnButton = QtWidgets.QPushButton("Return to Mainpage")
+		returnButton = QtWidgets.QPushButton("Return to Mainpage",objectName="button")
 		returnButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
 		returnButton.setSizePolicy(returnButtonSizePolicy)
-		returnButton.setStyleSheet("""	QPushButton{font-size: 15px;
-										color: rgba(60,70,89,225);
-										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-										stop:0 rgba(188, 192, 204,200), stop:1 rgba(205,208,220,225));
-										border-width: 1px;
-										border-style: outset;
-										border-color: rgba(240,240,240,200);
-										border-radius: 16px;
-										min-height:30px;
-										}
-										QPushButton:hover {
-    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-										stop:0 rgba(205,208,220,225), stop:1 rgba(188, 192, 204,200));
-											}
-										QPushButton:pressed {
-    									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-										stop:0 rgba(185,188,200,225), stop:1 rgba(168, 172, 184,200));
-										border-style: inset;
-
-											}
-										QPushButton:focus {
-
-
-											background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-											stop:0 rgba(175,178,190,225), stop:1 rgba(158, 162, 174,200));
-											border-style: inset;
-											border-color: rgba(255,255,255,255);
-											outline: none;
-
-										}
-										""")
+		
 		bodyShadow5 = QtWidgets.QGraphicsDropShadowEffect()
 		bodyShadow5.setBlurRadius(9.0)
 		bodyShadow5.setColor(QColor(0, 0, 0, 160))
@@ -1795,20 +1450,19 @@ class AboutPage(QMainWindow):
 		html = """\
 			<html>
 			  <body>
-			    <p>Hi there,<br><br>
-			       You have just successfully reset your password! You can now login in with your new password.<br>
-			       If this was not you, please send an email to ScrapedThroughC2@gmail.com and we will get back <br>
-			       to you as soon as possible to review your account activity.<br><br>
-			       We hope that you are enjoying our product. If you should need any assistance, please either email <br>
-			       ScrapedThroughC2@gmail.com or call Nic (cell): 0832261920.<br><br>
-
-			       Kind regards,<br><br>
-			       The STC2 Team
+			    <p>
+			    	
+			    Select a feature from the list on the left to view a brief description of the feature. This<br>
+			    will help you make sound investment decisions that require prior knowledge of financial<br> 
+			    concepts and jargon.<br><br>
+			    The STC2 Team
+			    
 			    </p>
 			  </body>
 			</html>
 			"""
 		self.label=QtWidgets.QLabel(html)
+		self.label.setAlignment(Qt.AlignCenter)
 		self.label.setStyleSheet("""font-size: 15px;""")
 
 		mainLayout.addWidget(listWidgetGroupBox,1)
@@ -1829,7 +1483,7 @@ class AboutPage(QMainWindow):
 		print("Feature")
 
 
-		if (featureString=="Return on investment"):
+		if (featureString=="Return on Investment"):
 
 			global htmlReturnonInvestment
 			self.label.setText(htmlReturnonInvestment)
@@ -1909,6 +1563,36 @@ class AboutPage(QMainWindow):
 			global htmlBookValuetoPriceRatioTrend
 			self.label.setText(htmlBookValuetoPriceRatioTrend)
 
+		elif(featureString=="Dividend Yield"):
+
+			global htmlDividendYield
+			self.label.setText(htmlDividendYield)
+
+		elif(featureString=="Dividend Yield Trend"):
+
+			global htmlDividentYieldTrend
+			self.label.setText(htmlDividentYieldTrend)
+
+		elif(featureString=="Cashflow to Price Ratio"):
+
+			global htmlCashflowToPriceRatio
+			self.label.setText(htmlCashflowToPriceRatio)
+
+		elif(featureString=="Cashflow to Price Ratio Trend"):
+
+			global htmlCashflowToPriceRatioTrend
+			self.label.setText(htmlCashflowToPriceRatioTrend)
+
+		elif(featureString=="Sales to Price Ratio"):
+
+			global htmlSalesToPriceRatio
+			self.label.setText(htmlSalesToPriceRatio)
+
+		elif(featureString=="Sales to Price Ratio Trend"):
+
+			global htmlSalesToPriceRatioTrend
+			self.label.setText(htmlSalesToPriceRatioTrend)
+
 		elif(featureString=="Profit Margin"):
 
 			global htmlProfitMargin
@@ -1943,11 +1627,7 @@ class Login(QMainWindow):
 		super().__init__()
 
 		self.setWindowIcon(QIcon("Logo.ico"))
-		self.setStyleSheet('''
-						QLabel{
-						font-size: 20px;
-						}
-						''')
+		#self.setStyleSheet('''QLabel{font-size: 20px;}''')
 		self.initUi()
 
 	def initUi(self) :
@@ -1996,8 +1676,6 @@ class Login(QMainWindow):
 		loginLabel.setStyleSheet("""font-size: 80px;""")
 		loginLabelSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)
 		loginLabel.setSizePolicy(loginLabelSizePolicy)
-
-
 
 		#Makes logo label and places logo image inside it
 		logoLabel = QtWidgets.QLabel()
@@ -2281,7 +1959,7 @@ class Login(QMainWindow):
 
 	def quitButtonFunction(self):
 		sys.exit()
-		print("quit clicked")
+		
 
 
 class ForgotPage(QMainWindow):
@@ -2289,11 +1967,7 @@ class ForgotPage(QMainWindow):
 	def __init__(self):
 		super().__init__()
 		self.setWindowIcon(QIcon("Logo.ico"))
-		self.setStyleSheet('''
-						 QLabel{
-						 font-size: 20px;
-						 }
-						''')
+		#self.setStyleSheet('''QLabel{font-size: 20px;}''')
 		self.initUi()
 
 	def initUi(self):
@@ -2364,8 +2038,10 @@ class ForgotPage(QMainWindow):
 													background:rgba(69, 83, 105,0);
 													border-color: rgba(14,14,14,0);
 													border-radius: 20px;
-													font-size: 15px;""")
-		explanationLayout.addWidget(explanationLabel)
+													font-size: 15px;
+													padding:5px;""")
+		explanationLabel.setMargin(20)
+		#explanationLayout.addWidget(explanationLabel)
 
 		widgetUsername = QtWidgets.QWidget(objectName="groupWidget")#below border-radius 35px works but onnly for username
 		widgetUsernameSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
@@ -2510,7 +2186,7 @@ class ForgotPage(QMainWindow):
 
 		returnButton.clicked.connect(self.returnButtonClicked)
 
-		formBlockLayout.addWidget(widgetExplanation,0,0,1,2)
+		formBlockLayout.addWidget(explanationLabel,0,0,1,2)
 		formBlockLayout.addWidget(widgetUsername,1,0,1,2)
 
 		formBlockLayout.addWidget(widgetEmail,2,0,1,2)
@@ -2731,7 +2407,7 @@ if __name__ == '__main__':
 	dark_palette.setColor(QPalette.ToolTipBase, Qt.white)
 	dark_palette.setColor(QPalette.ToolTipText, Qt.white)
 	dark_palette.setColor(QPalette.Text, Qt.white)
-	dark_palette.setColor(QPalette.Button, QColor(178, 182, 194))
+	dark_palette.setColor(QPalette.Button, QColor(168, 172, 184))
 	dark_palette.setColor(QPalette.ButtonText, Qt.white)
 	dark_palette.setColor(QPalette.BrightText, Qt.red)
 	#dark_palette.setColor(QPalette.Link,QColor(135, 189, 216) )
@@ -2801,9 +2477,9 @@ if __name__ == '__main__':
 						border-radius:16px;
 						font-size: 15px;
 
-						color: rgba(60,70,89,225);
+						color: rgba(60,70,89,255);
 						background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-						stop:0 rgba(178, 182, 194,200), stop:1 rgba(215,218,230,225));
+						stop:0 rgba(178, 182, 194,225), stop:1 rgba(215,218,230,225));
 						border-width: 1px;
 						border-style: outset;
 						border-color: rgba(240,240,240,200);
@@ -2811,11 +2487,11 @@ if __name__ == '__main__':
 						}
 						QPushButton#button:hover {
     									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-										stop:0 rgba(215,218,230,225), stop:1 rgba(178, 182, 194,200));
+										stop:0 rgba(215,218,230,225), stop:1 rgba(178, 182, 194,225));
 											}
 						QPushButton#button:pressed {
     									background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-										stop:0 rgba(175,178,190,225), stop:1 rgba(158, 162, 174,200));
+										stop:0 rgba(175,178,190,225), stop:1 rgba(158, 162, 174,225));
 										border-style: inset;
 											}
 
@@ -2823,15 +2499,13 @@ if __name__ == '__main__':
 
 
 							background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-										stop:0 rgba(175,178,190,225), stop:1 rgba(158, 162, 174,200));
+										stop:0 rgba(175,178,190,225), stop:1 rgba(158, 162, 174,225));
 							border-style: inset;
 							border-color: rgba(255,255,255,255);
 							outline: none;
 
 						}
-						QPushButton {
-							font-size: 15px
-						}
+						
 						QLineEdit{
 						color: rgba(255,255,255,255);
 						background:rgba(69, 83, 105,0);
@@ -2839,11 +2513,6 @@ if __name__ == '__main__':
 						border-radius: 20px;
 						font-size: 15px;
 						}
-						QLabel{
-							font-size: 12px
-						}
-
-
 						QMessageBox QPushButton{
 							background: rgba(55,55,55,255);
 						}
@@ -2854,20 +2523,6 @@ if __name__ == '__main__':
 	win.showMaximized()
 	sys.exit(app.exec_())#executes the main loop
 
-
-
-#This is the first line of code that is run by the interpreter and will initiate the execution of the program
-
-
-#Ignore this comment
-'''QCheckBox:indicator{
-
-							border-width: 1px;
-							border-style: ridge;
-							border-color: rgb(42,130,218);
-							border-radius: 4px;
-
-}'''
 
 """QPushButton#button:focus{
     					background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
