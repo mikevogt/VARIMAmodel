@@ -30,7 +30,7 @@ def test_loginForgotButton(login, qtbot):
 #def test_loginQuitButton(login, qtbot):
 #    qtbot.mouseClick(login.quitButton, QtCore.Qt.LeftButton)
 
-# REGISTERed
+# REGISTER
 @pytest.fixture
 def register(qtbot):
     test_Arima = ArimaModelGui.Register()
@@ -109,5 +109,5 @@ def test_sliderPVal(myWindow, qtbot):
     assert myWindow.dialSpinBox.value() == 27
     assert myWindow.dial.value() == 27
 
-def test_myWindowLogoout(myWindow, qtbot):
+def test_myWindowLogout(myWindow, qtbot):
     qtbot.mouseClick(myWindow.logoutButton, QtCore.Qt.LeftButton)
