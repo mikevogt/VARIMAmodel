@@ -29,6 +29,8 @@ class Testdb(unittest.TestCase):
 
         myresult=mycursor.fetchall()
         myresultusername = myresult[0][0]
+        mydb.close()
+        server.close()
         self.assertEqual(myresultusername, "nicci")
 
     def test_email(self):
@@ -51,6 +53,8 @@ class Testdb(unittest.TestCase):
 
         myresult=mycursor.fetchall()
         myresultemail = myresult[0][2]
+        mydb.close()
+        server.close()
         self.assertEqual(myresultemail, "nicholasbaard30@gmail.com")
 
     def test_password(self):
@@ -73,6 +77,8 @@ class Testdb(unittest.TestCase):
 
         myresult=mycursor.fetchall()
         myresultpassword = myresult[0][1]
+        mydb.close()
+        server.close()
         self.assertEqual(myresultpassword.encode('utf-8'), inUserPassword.encode('utf-8'))
 
     def test_connection(self):
@@ -94,6 +100,8 @@ class Testdb(unittest.TestCase):
 
 
         myresult=mycursor.fetchall()
+        mydb.close()
+        server.close()
         self.assertEqual(len(myresult[0]), 3)
 
 if __name__ == '__main__':
