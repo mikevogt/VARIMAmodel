@@ -39,7 +39,7 @@ htmlReturnonInvestment="""\
             		of time amd the cost of investment. This ratio is used to establish how<br>
             		how efficient the investment is in terms of making a profit or comparing<br>
             		the effficiency to other investments.<br><br>
-            		
+
             		A High ROI is a good indicator of a good investment as the net profit is<br>
             		favourable to the costs that you have invested.
 
@@ -99,7 +99,7 @@ htmlNetProfitMargin="""\
             		for internal comparison, it is an idicator of the company's pricing strategies<br>
             		and how well the company controls its costs. Differences in competetive strategy<br>
             		will cause the NPM to vary across companies.<br><br>
-            		
+
             		NPM is calculated by finding the net profit as a percentace of revenue.<br>
             		Net Profit Margin = Net Profit / Revenue
 
@@ -116,7 +116,7 @@ htmlCurrentRatio="""\
             		resources to meet its short-term liabilities, This means that if a company goes <br>
             		insolvent and has to sell all their assets, they will generate enough money to pay<br>
             		off their short-term liabilities.<br><br>
-            		
+
             		The Current Ratio is calculated with the following formula:<br>
             		Current ratio = Current Assets / Current Lieabilities
 
@@ -143,7 +143,7 @@ htmlVolatility="""\
 htmlDebtToEquityR = """\
 			<html>
 				<body>
-			    	<p> 
+			    	<p>
 			   		The debt-to-equity (D/E) ratio is calculated by dividing a company’s total<br>
 			   		liabilities by its shareholder equity. These numbers are available on the<br>
 			   		balance sheet of a company’s financial statements. The ratio is used to<br>
@@ -153,8 +153,8 @@ htmlDebtToEquityR = """\
 			   		It is a measure of the degree to which a company is financing its operations<br>
 			   		through debt versus wholly-owned funds. More specifically, it reflects the<br>
 			   		ability of shareholder equity to cover all outstanding debts in the event<br>
-			   		of a business downturn.<br>		
-			       
+			   		of a business downturn.<br>
+
 			    	</p>
 				</body>
 			</html>
@@ -162,7 +162,7 @@ htmlDebtToEquityR = """\
 htmlDebtToEquityT="""\
 			<html>
 				<body>
-			    	<p> 
+			    	<p>
 			   		The debt-to-equity (D/E) ratio is calculated by dividing a company’s total<br>
 			   		liabilities by its shareholder equity. These numbers are available on the<br>
 			   		balance sheet of a company’s financial statements. The ratio is used to<br>
@@ -173,8 +173,8 @@ htmlDebtToEquityT="""\
 			   		through debt versus wholly-owned funds. More specifically, it reflects the<br>
 			   		ability of shareholder equity to cover all outstanding debts in the event<br>
 			   		of a business downturn. This feature provides the trend of the debt<br>
-			   		to equity ratio<br>		
-			       
+			   		to equity ratio<br>
+
 			    	</p>
 				</body>
 			</html>
@@ -183,17 +183,17 @@ htmlDebtToEquityT="""\
 htmlInterestCoverTrend="""\
 			<html>
 				<body>
-			    	<p> 
+			    	<p>
 			    	The interest coverage ratio is a debt ratio and profitability ratio used to determine<br>
 			    	how easily a company can pay interest on its outstanding debt. The interest coverage<br>
 			    	ratio may be calculated by dividing a company's earnings before interest and taxes<br>
 			    	(EBIT) during a given period by the company's interest payments due within the same<br>
 			    	period.<br><br>
 
-					The Interest coverage ratio is also called “times interest earned.” Lenders, investors,<br> 
-					and creditors often use this formula to determine a company's riskiness relative to its<br> 
-					current debt or for future borrowing.<br>		
-			       
+					The Interest coverage ratio is also called “times interest earned.” Lenders, investors,<br>
+					and creditors often use this formula to determine a company's riskiness relative to its<br>
+					current debt or for future borrowing.<br>
+
 			    	</p>
 			  	</body>
 			</html>
@@ -219,9 +219,9 @@ htmlTradingVolume="""\
 			<html>
 			 	<body>
 			    	<p>
-			    	Volume of trade is the total quantity of shares or contracts traded for a specified<br> 
+			    	Volume of trade is the total quantity of shares or contracts traded for a specified<br>
 			    	security. It can be measured on any type of security traded during a trading day.<br>
-			    	Volume of trade or trade volume is measured on stocks, bonds, options contracts,<br> 
+			    	Volume of trade or trade volume is measured on stocks, bonds, options contracts,<br>
 			    	futures contracts and all types of commodities.<br>
 			    	</p>
 			 	</body>
@@ -232,8 +232,8 @@ htmlEarningsYield = """\
 			<html>
 				<body>
 					<p>
-					The earnings yield refers to the earnings per share for the most recent 12-month period<br> 
-					divided by the current market price per share. The earnings yield (which is the inverse<br> 
+					The earnings yield refers to the earnings per share for the most recent 12-month period<br>
+					divided by the current market price per share. The earnings yield (which is the inverse<br>
 					of the P/E ratio) shows the percentage of how much a company earned per share.<br>
 					</p>
 				</body>
@@ -243,9 +243,9 @@ htmlEarningsYieldTrend = """\
 			<html>
 				<body>
 					<p>
-					The earnings yield refers to the earnings per share for the most recent 12-month period<br> 
-					divided by the current market price per share. The earnings yield (which is the inverse<br> 
-					of the P/E ratio) shows the percentage of how much a company earned per share. This<br> 
+					The earnings yield refers to the earnings per share for the most recent 12-month period<br>
+					divided by the current market price per share. The earnings yield (which is the inverse<br>
+					of the P/E ratio) shows the percentage of how much a company earned per share. This<br>
 					feature provides the trend of the Earnings Yield<br>
 					</p>
 				</body>
@@ -256,11 +256,11 @@ htmlBookValuetoPriceRatio = """\
 			<html>
 				<body>
 					<p>
-					The P/B ratio reflects the value that market participants attach to a company's equity relative<br> 
-					to the book value of its equity. A stock's market value is a forward-looking metric that<br> 
-					reflects a company's future cash flows. The book value of equity is an accounting measure<br> 
+					The P/B ratio reflects the value that market participants attach to a company's equity relative<br>
+					to the book value of its equity. A stock's market value is a forward-looking metric that<br>
+					reflects a company's future cash flows. The book value of equity is an accounting measure<br>
 					based on the historic cost principle and reflects past issuances of equity, augmented by any<br>
-					profits or losses, and reduced by dividends and share buybacks.<br>  
+					profits or losses, and reduced by dividends and share buybacks.<br>
 					</p>
 				</body>
 			</html>"""
@@ -269,11 +269,11 @@ htmlBookValuetoPriceRatioTrend = """\
 			<html>
 				<body>
 					<p>
-					The P/B ratio reflects the value that market participants attach to a company's equity relative<br> 
-					to the book value of its equity. A stock's market value is a forward-looking metric that reflects<br> 
-					a company's future cash flows.<br><br>  
-  					The book value of equity is an accounting measure based on the historic cost principle and <br> 
-  					reflects past issuances of equity, augmented by any profits or losses, and reduced by <br> 
+					The P/B ratio reflects the value that market participants attach to a company's equity relative<br>
+					to the book value of its equity. A stock's market value is a forward-looking metric that reflects<br>
+					a company's future cash flows.<br><br>
+  					The book value of equity is an accounting measure based on the historic cost principle and <br>
+  					reflects past issuances of equity, augmented by any profits or losses, and reduced by <br>
   					dividends and share buybacks. This feature provides the trend of the Book Value to Price Ratio<br>
 					</p>
 				</body>
@@ -283,10 +283,10 @@ htmlSalesToPriceRatio = """\
 			<html>
 				<body>
 					<p>
-					The Sales to Price ratio is a ratio representing the sell/buy price of a share. The sell<br>  		
-					price of a share is the amount a share may be sold for, while the buy price of a<br>  			
-					share is the amount a share will cost a buyer. This ratio is used in computing<br>  			
-					profits and losses.<br> 
+					The Sales to Price ratio is a ratio representing the sell/buy price of a share. The sell<br>
+					price of a share is the amount a share may be sold for, while the buy price of a<br>
+					share is the amount a share will cost a buyer. This ratio is used in computing<br>
+					profits and losses.<br>
 					</p>
 				</body>
 			</html>"""
@@ -295,10 +295,10 @@ htmlSalesToPriceRatioTrend = """\
 			<html>
 				<body>
 					<p>
-					The Sales to Price ratio trend is the pattern resulting for the Sales to Price Ratio.<br>  			
-					This is very useful for visualization and strategy planning. Plots and other statistical<br>  		
-					graphical methods may be used for visualizing this trend.  Often used as the "base"<br>  		
-					for decision making in the Stock Exchange.<br> 
+					The Sales to Price ratio trend is the pattern resulting for the Sales to Price Ratio.<br>
+					This is very useful for visualization and strategy planning. Plots and other statistical<br>
+					graphical methods may be used for visualizing this trend.  Often used as the "base"<br>
+					for decision making in the Stock Exchange.<br>
 					</p>
 				</body>
 			</html>"""
@@ -308,11 +308,11 @@ htmlProfitMargin = """\
 			<html>
 				<body>
 					<p>
-					Profit margin is one of the commonly used profitability ratios to gauge the degree<br>  			
-					to which a company or a business activity makes money. It represents what<br>  			
-					percentage of sales has turned into profits. Simply put, the percentage figure<br>  			
-					indicates how many cents of profit the business has generated for each dollar of<br>  			
-					sale. 
+					Profit margin is one of the commonly used profitability ratios to gauge the degree<br>
+					to which a company or a business activity makes money. It represents what<br>
+					percentage of sales has turned into profits. Simply put, the percentage figure<br>
+					indicates how many cents of profit the business has generated for each dollar of<br>
+					sale.
 					</p>
 				</body>
 			</html>"""
@@ -323,11 +323,11 @@ htmlWorkingCapitalTurnover = """\
 			<html>
 				<body>
 					<p>
-					Working capital turnover is a ratio that measures how efficiently a company is<br>  			
-					using its working capital to support a given level of sales. Also referred to as net<br>  			
-					sales to working capital, work capital turnover shows the relationship between the <br> 		
-					funds used to finance a company's operations and the revenues a company<br>  			
-					generates as a result.<br> 
+					Working capital turnover is a ratio that measures how efficiently a company is<br>
+					using its working capital to support a given level of sales. Also referred to as net<br>
+					sales to working capital, work capital turnover shows the relationship between the <br>
+					funds used to finance a company's operations and the revenues a company<br>
+					generates as a result.<br>
 					</p>
 				</body>
 			</html>"""
@@ -337,10 +337,10 @@ htmlAssetTurnover = """\
 			<html>
 				<body>
 					<p>
-					The asset turnover ratio measures the value of a company's sales or revenues<br>  			
-					relative to the value of its assets. The asset turnover ratio can be used as an<br>  			
-					indicator of the efficiency with which a company is using its assets to generate<br>  			
-					revenue.<br> 
+					The asset turnover ratio measures the value of a company's sales or revenues<br>
+					relative to the value of its assets. The asset turnover ratio can be used as an<br>
+					indicator of the efficiency with which a company is using its assets to generate<br>
+					revenue.<br>
 					</p>
 				</body>
 			</html>"""
@@ -359,7 +359,7 @@ htmlProfitMargin="""\
 					particular investment, so companies calculate profit percentage to find the ratio of<br>
 					profit to cost.<br><br>
 					The profit margin is used mostly for internal comparison.<br><br>
-					Individual businesses' operating and financing arrangements vary so much that different<br> 
+					Individual businesses' operating and financing arrangements vary so much that different<br>
 					entities are bound to have different levels of expenditure, so that comparison of one<br>
 					with another can have little meaning. A low profit margin indicates a low margin of safety:<br>
 					higher risk that a decline in sales will erase profits and result in a net loss, or a negative<br>
@@ -408,14 +408,14 @@ htmlReturnOnAssets="""\
 				<body>
 					<p>
 					Return on assets (ROA) is a financial ratio that shows the percentage of profit a company earns<br>
-					in relation to its overall resources. It is commonly defined as net income divided by total assets.<br> 
+					in relation to its overall resources. It is commonly defined as net income divided by total assets.<br>
 					Net income is derived from the income statement of the company and is the profit after taxes. The<br>
 					assets are read from the balance sheet and include cash and cash-equivalent items such as receivables,<br>
-					inventories, land, capital equipment as depreciated, and the value of intellectual property such as<br> 
-					patents. Companies that have been acquired may also have a category called "good will" representing<br> 
-					the extra money paid for the company over and above its actual book value at the time of acquisition.<br> 
-					Because assets will tend to have swings over time, an average of assets over the period to be measured<br> 
-					should be used. Thus the ROA for a quarter should be based on net income for the quarter divided by average<br> 
+					inventories, land, capital equipment as depreciated, and the value of intellectual property such as<br>
+					patents. Companies that have been acquired may also have a category called "good will" representing<br>
+					the extra money paid for the company over and above its actual book value at the time of acquisition.<br>
+					Because assets will tend to have swings over time, an average of assets over the period to be measured<br>
+					should be used. Thus the ROA for a quarter should be based on net income for the quarter divided by average<br>
 					assets in that quarter. ROA is a ratio but usually presented as a percentage.<br>
 
 
@@ -429,14 +429,14 @@ htmlReturnOnAssetsTrend="""\
 				<body>
 					<p>
 					Return on assets (ROA) is a financial ratio that shows the percentage of profit a company earns<br>
-					in relation to its overall resources. It is commonly defined as net income divided by total assets.<br> 
+					in relation to its overall resources. It is commonly defined as net income divided by total assets.<br>
 					Net income is derived from the income statement of the company and is the profit after taxes. The<br>
 					assets are read from the balance sheet and include cash and cash-equivalent items such as receivables,<br>
-					inventories, land, capital equipment as depreciated, and the value of intellectual property such as<br> 
-					patents. Companies that have been acquired may also have a category called "good will" representing<br> 
-					the extra money paid for the company over and above its actual book value at the time of acquisition.<br> 
-					Because assets will tend to have swings over time, an average of assets over the period to be measured<br> 
-					should be used. Thus the ROA for a quarter should be based on net income for the quarter divided by average<br> 
+					inventories, land, capital equipment as depreciated, and the value of intellectual property such as<br>
+					patents. Companies that have been acquired may also have a category called "good will" representing<br>
+					the extra money paid for the company over and above its actual book value at the time of acquisition.<br>
+					Because assets will tend to have swings over time, an average of assets over the period to be measured<br>
+					should be used. Thus the ROA for a quarter should be based on net income for the quarter divided by average<br>
 					assets in that quarter. ROA is a ratio but usually presented as a percentage.This feature provides the<br>
 					the trend of the return on assets<br><br>
 					</p>
@@ -612,7 +612,7 @@ class MyWindow(QMainWindow):
 			self.featuresListWidget.addItem(column)
 
 
-
+		self.featuresListWidget.setCurrentRow(0)
 		listWidgetGroupBox=QtWidgets.QGroupBox("Features")#Outer groupBox to house the features list widget
 		listWidgetGroupBox.setStyleSheet("""font-size:15px;
 											""")
@@ -1591,10 +1591,10 @@ class Register(QMainWindow):
 		self.registerButton.setGraphicsEffect(bodyShadow4)
 		self.registerButton.clicked.connect(self.registerButtonClicked)
 
-		self.returnButton = QtWidgets.QPushButton("Return to Mainpage")
+		returnButton = QtWidgets.QPushButton("Return to Mainpage")
 		returnButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
-		self.returnButton.setSizePolicy(returnButtonSizePolicy)
-		self.returnButton.setStyleSheet("""	QPushButton{font-size: 15px;
+		returnButton.setSizePolicy(returnButtonSizePolicy)
+		returnButton.setStyleSheet("""	QPushButton{font-size: 15px;
 										color: rgba(60,70,89,225);
 										background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
 										stop:0 rgba(188, 192, 204,200), stop:1 rgba(205,208,220,225));
@@ -1629,8 +1629,8 @@ class Register(QMainWindow):
 		bodyShadow5.setBlurRadius(9.0)
 		bodyShadow5.setColor(QColor(0, 0, 0, 160))
 		bodyShadow5.setOffset(-2)
-		self.returnButton.setGraphicsEffect(bodyShadow5)
-		self.returnButton.clicked.connect(self.returnButtonClicked)
+		returnButton.setGraphicsEffect(bodyShadow5)
+		returnButton.clicked.connect(self.returnButtonClicked)
 
 
 		formBlockLayout.addWidget(widgetUsername,0,0,1,2)
@@ -1643,7 +1643,7 @@ class Register(QMainWindow):
 
 		formBlockLayout.addWidget(self.showPasswordCheck,4,0,1,2,Qt.AlignRight)
 		formBlockLayout.addWidget(self.registerButton,5,0,1,1)
-		formBlockLayout.addWidget(self.returnButton,5,1,1,1)
+		formBlockLayout.addWidget(returnButton,5,1,1,1)
 
 
 		innerFrameLayout.addWidget(logoLabel,Qt.AlignCenter)
@@ -1827,45 +1827,45 @@ class AboutPage(QMainWindow):
 		print(featureString)
 		self.label.setText(featureString)
 		print("Feature")
-		
+
 
 		if (featureString=="Return on investment"):
-			
+
 			global htmlReturnonInvestment
 			self.label.setText(htmlReturnonInvestment)
 
 		elif (featureString=="Total Asset Turnover"):
-			
+
 			global htmlTotalAssetTurnover
 			self.label.setText(htmlTotalAssetTurnover)
 
 		elif (featureString=="Beta to Market"):
-			
+
 			global htmlBetatoMarket
 			self.label.setText(htmlBetatoMarket)
 
 		elif (featureString=="Beta to USD/ZAR"):
-			
+
 			global htmlBetatoUSDZAR
 			self.label.setText(htmlBetatoUSDZAR)
 
 		elif (featureString=="Net Profit Margin"):
-			
+
 			global htmlNetProfitMargin
 			self.label.setText(htmlNetProfitMargin)
 
 		elif (featureString=="Current Ratio"):
-			
+
 			global htmlCurrentRatio
 			self.label.setText(htmlCurrentRatio)
 
 		elif (featureString=="Volatility"):
-			
+
 			global htmlVolatility
 			self.label.setText(htmlVolatility)
 
 		elif (featureString=="Debt to Equity Ratio"):
-			
+
 			global htmlDebtToEquityR
 			self.label.setText(htmlDebtToEquityR)
 
@@ -1875,7 +1875,7 @@ class AboutPage(QMainWindow):
 			self.label.setText(htmlDebtToEquityT)
 
 		elif (featureString=="Interest Cover Trend"):
-			
+
 			global htmlInterestCoverTrend
 			self.label.setText(htmlInterestCoverTrend)
 
@@ -1890,47 +1890,47 @@ class AboutPage(QMainWindow):
 			self.label.setText(htmlTradingVolume)
 
 		elif(featureString=="Earnings Yield"):
-			
+
 			global htmlEarningsYield
 			self.label.setText(htmlEarningsYield)
 
 		elif(featureString=="Earnings Yield Trend"):
-			
+
 			global htmlEarningsYieldTrend
 			self.label.setText(htmlEarningsYieldTrend)
 
 		elif(featureString=="Book Value to Price Ratio"):
-			
+
 			global htmlBookValuetoPriceRatio
 			self.label.setText(htmlBookValuetoPriceRatio)
 
 		elif(featureString=="Book Value to Price Ratio Trend"):
-			
+
 			global htmlBookValuetoPriceRatioTrend
 			self.label.setText(htmlBookValuetoPriceRatioTrend)
-		
+
 		elif(featureString=="Profit Margin"):
-			
+
 			global htmlProfitMargin
 			self.label.setText(htmlProfitMargin)
 
 		elif(featureString=="Capital Turnover"):
-			
+
 			global htmlCapitalTurnover
 			self.label.setText(htmlCapitalTurnover)
 
 		elif(featureString=="Capital Turnover Trend"):
-			
+
 			global htmlCapitalTurnoverTrend
 			self.label.setText(htmlCapitalTurnoverTrend)
 
 		elif(featureString=="Return on Assets"):
-			
+
 			global htmlReturnOnAssets
 			self.label.setText(htmlReturnOnAssets)
 
 		elif(featureString=="Return on Assets Trend"):
-			
+
 			global htmlReturnOnAssetsTrend
 			self.label.setText(htmlReturnOnAssetsTrend)
 
@@ -2115,15 +2115,15 @@ class Login(QMainWindow):
 		self.registerButton.setGraphicsEffect(bodyShadow5)
 		self.registerButton.clicked.connect(self.goRegisterButtonFunction)
 
-		self.quitButton = QtWidgets.QPushButton("Quit Program",objectName="button")
+		quitButton = QtWidgets.QPushButton("Quit Program",objectName="button")
 		quitButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
-		self.quitButton.setSizePolicy(quitButtonSizePolicy)
+		quitButton.setSizePolicy(quitButtonSizePolicy)
 		bodyShadow6 = QtWidgets.QGraphicsDropShadowEffect()
 		bodyShadow6.setBlurRadius(9.0)
 		bodyShadow6.setColor(QColor(0, 0, 0, 160))
 		bodyShadow6.setOffset(-2)
-		self.quitButton.setGraphicsEffect(bodyShadow6)
-		self.quitButton.clicked.connect(self.quitButtonFunction)
+		quitButton.setGraphicsEffect(bodyShadow6)
+		quitButton.clicked.connect(self.quitButtonFunction)
 
 
 		formBlockLayout.addWidget(widgetUsername,0,0,1,2)
@@ -2134,7 +2134,7 @@ class Login(QMainWindow):
 		formBlockLayout.addWidget(self.loginButton,3,0,1,2)
 		formBlockLayout.addWidget(self.forgotButton,4,0,1,1)
 		formBlockLayout.addWidget(self.registerButton,4,1,1,1)
-		formBlockLayout.addWidget(self.quitButton,5,0,1,2)
+		formBlockLayout.addWidget(quitButton,5,0,1,2)
 
 		innerFrameLayout.addWidget(logoLabel,Qt.AlignCenter)
 		innerFrameLayout.addWidget(formBlock)
@@ -2489,26 +2489,26 @@ class ForgotPage(QMainWindow):
 		self.showPasswordCheck.stateChanged.connect(self.showPasswordChecked)
 
 
-		self.resetButton = QtWidgets.QPushButton("Reset Password",objectName="button")
+		resetButton = QtWidgets.QPushButton("Reset Password",objectName="button")
 		resetButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
-		self.resetButton.setSizePolicy(resetButtonSizePolicy)
+		resetButton.setSizePolicy(resetButtonSizePolicy)
 		bodyShadow4 = QtWidgets.QGraphicsDropShadowEffect()
 		bodyShadow4.setBlurRadius(9.0)
 		bodyShadow4.setColor(QColor(0, 0, 0, 160))
 		bodyShadow4.setOffset(-2)
-		self.resetButton.setGraphicsEffect(bodyShadow4)
-		self.resetButton.clicked.connect(self.resetButtonClicked)
+		resetButton.setGraphicsEffect(bodyShadow4)
+		resetButton.clicked.connect(self.resetButtonClicked)
 
-		self.returnButton = QtWidgets.QPushButton("Return to Mainpage",objectName="button")
+		returnButton = QtWidgets.QPushButton("Return to Mainpage",objectName="button")
 		returnButtonSizePolicy=QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Maximum)#Horizontal,vertical
-		self.returnButton.setSizePolicy(returnButtonSizePolicy)
+		returnButton.setSizePolicy(returnButtonSizePolicy)
 		bodyShadow5 = QtWidgets.QGraphicsDropShadowEffect()
 		bodyShadow5.setBlurRadius(9.0)
 		bodyShadow5.setColor(QColor(0, 0, 0, 160))
 		bodyShadow5.setOffset(-2)
-		self.returnButton.setGraphicsEffect(bodyShadow5)
+		returnButton.setGraphicsEffect(bodyShadow5)
 
-		self.returnButton.clicked.connect(self.returnButtonClicked)
+		returnButton.clicked.connect(self.returnButtonClicked)
 
 		formBlockLayout.addWidget(widgetExplanation,0,0,1,2)
 		formBlockLayout.addWidget(widgetUsername,1,0,1,2)
@@ -2520,8 +2520,8 @@ class ForgotPage(QMainWindow):
 		formBlockLayout.addWidget(widgetConfirmPassword,4,0,1,2)
 
 		formBlockLayout.addWidget(self.showPasswordCheck,5,0,1,2,Qt.AlignRight)
-		formBlockLayout.addWidget(self.resetButton,6,0,1,1)
-		formBlockLayout.addWidget(self.returnButton,6,1,1,1)
+		formBlockLayout.addWidget(resetButton,6,0,1,1)
+		formBlockLayout.addWidget(returnButton,6,1,1,1)
 
 
 		innerFrameLayout.addWidget(logoLabel,Qt.AlignCenter)

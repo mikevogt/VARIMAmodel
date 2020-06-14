@@ -13,21 +13,19 @@ def login(qtbot):
 
 def test_login_Edit(login, qtbot):
     login.usernameLineEditLogin.clear()
+    login.passwordLineEditLogin.clear()
     qtbot.keyClicks(login.usernameLineEditLogin, "encrypt")
     qtbot.keyClicks(login.passwordLineEditLogin, "encryptp")
     qtbot.mouseClick(login.loginButton, QtCore.Qt.LeftButton)
+    #assert True
 
 def test_loginRegisterButton_clicked(login, qtbot):
     qtbot.mouseClick(login.registerButton, QtCore.Qt.LeftButton)
-    assert True
+    #assert True
 
-def test_loginButton_clicked(login, qtbot):
-    qtbot.mouseClick(login.loginButton, QtCore.Qt.LeftButton)
-    assert True
-
-def test_forgotButton_clicked(login, qtbot):
+def test_loginForgotButton_clicked(login, qtbot):
     qtbot.mouseClick(login.forgotButton, QtCore.Qt.LeftButton)
-    assert True
+    #assert True
 
 # REGISTER
 @pytest.fixture
@@ -59,7 +57,7 @@ def test_myWindow_labels(myWindow):
 
 def test_sliderVal(myWindow, qtbot):
     myWindow.sliderPval.setValue(2)
-    myWindow.sliderDval.setValue(2)
+    myWindow.sliderDval.setValue(1)
     myWindow.sliderQval.setValue(2)
-    qtbot.mouseClick(myWindow.buttonArima, QtCor.Qt.LeftButton)
+    qtbot.mouseClick(myWindow.buttonArima, QtCore.Qt.LeftButton)
     # continue until you press Arima button and compare RMSE to expected FUCKING RMSE
