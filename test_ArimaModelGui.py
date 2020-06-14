@@ -1,5 +1,5 @@
 import pytest
-
+from pytestqt import qtbot
 from PyQt5 import QtCore
 
 import ArimaModelGui
