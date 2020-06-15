@@ -1227,7 +1227,7 @@ class instructions(QMainWindow):
         self.headingLabel.setStyleSheet("""font-size: 20px;""")
         self.headingLabel.setAlignment(Qt.AlignCenter)
 
-        self.step1 = QtWidgets.QLabel("Step 1 :")
+        self.step1 = QtWidgets.QLabel("Step 1 ")
         self.step1.setStyleSheet("""font-size: 20px;""")
         self.step1.setAlignment(Qt.AlignCenter)
         self.htmlstep1 = QtWidgets.QLabel(htmlstep1)
