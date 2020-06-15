@@ -683,8 +683,8 @@ class MyWindow(QMainWindow):
 
         self.buttonArima.clicked.connect(self.varButtonClicker)
 
-        logoutButton = QtWidgets.QPushButton("Logout", objectName="button")
-        logoutButton.clicked.connect(self.logoutButtonClicked)
+        self.logoutButton = QtWidgets.QPushButton("Logout", objectName="button")
+        self.logoutButton.clicked.connect(self.logoutButtonClicked)
 
         # Now each item created above is added to the grid layout for the bottom left frame
 
@@ -718,7 +718,7 @@ class MyWindow(QMainWindow):
         # bottomLeftGridLayout.addWidget(optimizeButton,,0,1,7)
         bottomLeftGridLayout.addWidget(self.buttonArima, 7, 0, 1, 7)
 
-        bottomLeftGridLayout.addWidget(logoutButton, 8, 0, 1, 7)
+        bottomLeftGridLayout.addWidget(self.logoutButton, 8, 0, 1, 7)
 
         ############################################################################################################################################
         ################################################# Right frame is now built and populated ###################################################
@@ -1666,16 +1666,16 @@ class Register(QMainWindow):
         self.registerButton.setGraphicsEffect(bodyShadow4)
         self.registerButton.clicked.connect(self.registerButtonClicked)
 
-        returnButton = QtWidgets.QPushButton("Return to Mainpage", objectName="button")
+        self.returnButton = QtWidgets.QPushButton("Return to Mainpage", objectName="button")
         returnButtonSizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Maximum)  # Horizontal,vertical
-        returnButton.setSizePolicy(returnButtonSizePolicy)
+        self.returnButton.setSizePolicy(returnButtonSizePolicy)
 
         bodyShadow5 = QtWidgets.QGraphicsDropShadowEffect()
         bodyShadow5.setBlurRadius(9.0)
         bodyShadow5.setColor(QColor(0, 0, 0, 160))
         bodyShadow5.setOffset(-2)
-        returnButton.setGraphicsEffect(bodyShadow5)
-        returnButton.clicked.connect(self.returnButtonClicked)
+        self.returnButton.setGraphicsEffect(bodyShadow5)
+        self.returnButton.clicked.connect(self.returnButtonClicked)
 
         formBlockLayout.addWidget(widgetUsername, 0, 0, 1, 2)
 
@@ -1687,7 +1687,7 @@ class Register(QMainWindow):
 
         formBlockLayout.addWidget(self.showPasswordCheck, 4, 0, 1, 2, Qt.AlignRight)
         formBlockLayout.addWidget(self.registerButton, 5, 0, 1, 1)
-        formBlockLayout.addWidget(returnButton, 5, 1, 1, 1)
+        formBlockLayout.addWidget(self.returnButton, 5, 1, 1, 1)
 
         innerFrameLayout.addWidget(logoLabel, Qt.AlignCenter)
         innerFrameLayout.addWidget(formBlock)
@@ -2378,26 +2378,26 @@ class ForgotPage(QMainWindow):
         self.showPasswordCheck = QtWidgets.QCheckBox("Show Password")
         self.showPasswordCheck.stateChanged.connect(self.showPasswordChecked)
 
-        resetButton = QtWidgets.QPushButton("Reset Password", objectName="button")
+        self.resetButton = QtWidgets.QPushButton("Reset Password", objectName="button")
         resetButtonSizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Maximum)  # Horizontal,vertical
-        resetButton.setSizePolicy(resetButtonSizePolicy)
+        self.resetButton.setSizePolicy(resetButtonSizePolicy)
         bodyShadow4 = QtWidgets.QGraphicsDropShadowEffect()
         bodyShadow4.setBlurRadius(9.0)
         bodyShadow4.setColor(QColor(0, 0, 0, 160))
         bodyShadow4.setOffset(-2)
-        resetButton.setGraphicsEffect(bodyShadow4)
-        resetButton.clicked.connect(self.resetButtonClicked)
+        self.resetButton.setGraphicsEffect(bodyShadow4)
+        self.resetButton.clicked.connect(self.resetButtonClicked)
 
-        returnButton = QtWidgets.QPushButton("Return to Mainpage", objectName="button")
+        self.returnButton = QtWidgets.QPushButton("Return to Mainpage", objectName="button")
         returnButtonSizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Maximum)  # Horizontal,vertical
-        returnButton.setSizePolicy(returnButtonSizePolicy)
+        self.returnButton.setSizePolicy(returnButtonSizePolicy)
         bodyShadow5 = QtWidgets.QGraphicsDropShadowEffect()
         bodyShadow5.setBlurRadius(9.0)
         bodyShadow5.setColor(QColor(0, 0, 0, 160))
         bodyShadow5.setOffset(-2)
-        returnButton.setGraphicsEffect(bodyShadow5)
+        self.returnButton.setGraphicsEffect(bodyShadow5)
 
-        returnButton.clicked.connect(self.returnButtonClicked)
+        self.returnButton.clicked.connect(self.returnButtonClicked)
 
         formBlockLayout.addWidget(explanationLabel, 0, 0, 1, 2)
         formBlockLayout.addWidget(widgetUsername, 1, 0, 1, 2)
@@ -2409,8 +2409,8 @@ class ForgotPage(QMainWindow):
         formBlockLayout.addWidget(widgetConfirmPassword, 4, 0, 1, 2)
 
         formBlockLayout.addWidget(self.showPasswordCheck, 5, 0, 1, 2, Qt.AlignRight)
-        formBlockLayout.addWidget(resetButton, 6, 0, 1, 1)
-        formBlockLayout.addWidget(returnButton, 6, 1, 1, 1)
+        formBlockLayout.addWidget(self.resetButton, 6, 0, 1, 1)
+        formBlockLayout.addWidget(self.returnButton, 6, 1, 1, 1)
 
         innerFrameLayout.addWidget(logoLabel, Qt.AlignCenter)
         innerFrameLayout.addWidget(formBlock)
