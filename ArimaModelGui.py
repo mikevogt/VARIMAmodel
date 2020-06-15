@@ -432,11 +432,9 @@ class MyWindow(QMainWindow):
 
     def __init__(self):
 
-        super(MyWindow,
-              self).__init__()  # This can be written as super().__init__() i think which would make more sense but leave it as is for now
+        super(MyWindow,self).__init__()  # This can be written as super().__init__() i think which would make more sense but leave it as is for now
         self.setWindowIcon(QIcon("Logo.ico"))
-        self.data = pd.read_csv('ProcessedStandardisedOG.csv',
-                                ';')  # Reads in the standardized data from ProcessedStandardised.csv. This file must be in the same directory as varimaGui.py
+        self.data = pd.read_csv('ProcessedStandardisedOG.csv',';')  # Reads in the standardized data from ProcessedStandardised.csv. This file must be in the same directory as varimaGui.py
         self.pVal = 2
         self.dVal = 1
         self.qVal = 1
@@ -1073,16 +1071,21 @@ class arimaInfo(QMainWindow):
 
         self.headingLabel = QtWidgets.QLabel("What is ARIMA ?")
         self.headingLabel.setStyleSheet("""font-size: 20px;""")
+        self.headingLabel.setAlignment(Qt.AlignCenter)
 
         self.arimInfo = QtWidgets.QLabel(htmlinfo)
         self.arimInfo.setStyleSheet("""font-size: 14px;""")
+        #self.arimInfo.setAlignment(Qt.AlignCenter)
 
         self.pdq = QtWidgets.QLabel("What are 'p,d,q' values ?")
         self.pdq.setStyleSheet("""font-size: 20px;""")
+        self.pdq.setAlignment(Qt.AlignCenter)
 
         self.pdqInfo = QtWidgets.QLabel(htmlpdq)
         self.pdqInfo.setStyleSheet("""font-size: 14px;""")
+        #self.pdqInfo.setAlignment(Qt.AlignCenter)
         self.empty = QtWidgets.QLabel(" ")
+
 
         mainLayout.addWidget(self.headingLabel, 0, 0, 1, 1)
         mainLayout.addWidget(self.arimInfo, 1, 0, 1, 1)
@@ -1278,7 +1281,6 @@ class featureInfo(QMainWindow):
 
         super().__init__()
         self.setWindowIcon(QIcon("Logo.ico"))
-
         self.initUi()
 
     def initUi(self):
@@ -1291,8 +1293,7 @@ class featureInfo(QMainWindow):
         self.featuresListWidget.setStyleSheet("""font-size: 15px;""")
         self.featuresListWidget.setAlternatingRowColors(True)
 
-        for column in MyWindow.data1.columns[
-                      3:-2]:  # For loop that iterates through all column names in data populating the featuresListWidget
+        for column in MyWindow.data1.columns[3:-2]:  # For loop that iterates through all column names in data populating the featuresListWidget
             # Still need to fix this so that it does not add the first 3 column names (namely DateStamps, Shares and Ticker) to the features list
             self.featuresListWidget.addItem(column)
 
@@ -1327,7 +1328,7 @@ class featureInfo(QMainWindow):
         self.setCentralWidget(mainWidget)
         # self.setGeometry(0,0,1500,900)
         self.setMinimumSize(900, 400);
-        self.setWindowTitle("About")
+        self.setWindowTitle("Feature Infromation")
 
         self.show()
 
@@ -1716,10 +1717,12 @@ class Register(QMainWindow):
         if (self.showPasswordCheck.isChecked()):
 
             self.passwordLineEdit.setEchoMode(0)
+            self.confirmPasswordLineEdit.setEchoMode(0)
 
         else:
 
             self.passwordLineEdit.setEchoMode(2)
+            self.confirmPasswordLineEdit.setEchoMode(2)
 
     def registerButtonClicked(self):
         self.x = 5
@@ -2434,10 +2437,12 @@ class ForgotPage(QMainWindow):
         if (self.showPasswordCheck.isChecked()):
 
             self.passwordLineEdit.setEchoMode(0)
+            self.confirmPasswordLineEdit.setEchoMode(0)
 
         else:
 
             self.passwordLineEdit.setEchoMode(2)
+            self.confirmPasswordLineEdit.setEchoMode(2)
 
     def resetButtonClicked(self):
 
